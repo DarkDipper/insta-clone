@@ -57,7 +57,7 @@
         }
       }
       .login-btn {
-        margin-block:calc-to-rem(30) calc-to-rem(46);
+        margin-block: calc-to-rem(30) calc-to-rem(46);
         padding: calc-to-rem(5) calc-to-rem(10);
         border: none;
         border-radius: 6px;
@@ -76,6 +76,10 @@
         }
       }
     }
+    a {
+      font-size: calc-to-rem(14);
+      color: $color-link;
+    }
   }
   .login-container__botom {
     border: 1px solid gray;
@@ -87,6 +91,7 @@
     text-align: center;
     a {
       font-weight: bold;
+      color: $color-link;
     }
   }
 }

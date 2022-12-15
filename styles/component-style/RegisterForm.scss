@@ -97,9 +97,7 @@
     text-align: center;
     a {
       font-weight: bold;
+      color: $color-link;
     }
   }
-}
-.flip-register{
-  transform: rotateY(-180deg);
 }

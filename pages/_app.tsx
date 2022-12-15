@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import useLoading from "../hooks/useLoading";
 export default function App({ Component, pageProps }: AppProps) {
-  const loading = useLoading();
+  const loading:boolean = useLoading();
   return (
     <>
       <Head>
@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/instagram.ico" />
         <title>Insta clone</title>
       </Head>
-      {loading ? <h1>Loading...</h1> : <Component {...pageProps} />}
+			<Component {...pageProps} />
     </>
   );
 }
