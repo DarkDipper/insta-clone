@@ -1,0 +1,49 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  margin-block-start: calc-to-rem(32);
+
+  .hide {
+    opacity: 0;
+    -webkit-transition: opacity 1.5s ease-out;
+    transition: opacity 1.5s ease-out;
+    visibility: visible;
+  }
+
+  .show {
+    opacity: 1;
+    -webkit-transition: opacity 1.5s ease-in;
+    transition: opacity 1.5s ease-in;
+    z-index: 2;
+  }
+
+  &__left {
+    .image-login {
+      position: relative;
+      min-height: calc-to-rem(635);
+      min-width: calc-to-rem(465);
+      background-image: url("https://i.ibb.co/JCVy7Nb/login-Page.png");
+      background-repeat: no-repeat;
+      background-position: center;
+
+      img {
+        position: absolute;
+        top: calc-to-rem(26);
+        right: calc-to-rem(60);
+      }
+    }
+  }
+
+  &__right {
+    // background: $color-test;
+    position: relative;
+    width: calc-to-rem(392);
+    height: calc-to-rem(635);
+    transition: transform 0.6s;
+		transform-style: preserve-3d;
+		backface-visibility: hidden;
+  }
+	.flip{
+		transform: rotateY(180deg);
+	}
+}

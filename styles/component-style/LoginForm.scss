@@ -1,0 +1,92 @@
+.login-container {
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+  .login-container__top {
+    border: 1px solid gray;
+    border-radius: 6px;
+    height: calc-to-rem(345);
+    width: calc-to-rem(310);
+    margin-block-start: calc-to-rem(12);
+    padding: calc-to-rem(30) calc-to-rem(40);
+    .name-app {
+      font-family: "Dancing Script", cursive;
+      text-align: center;
+      font-size: calc-to-rem(56);
+      margin-block-start: 0;
+    }
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .username-input,
+      .password-input {
+        position: relative;
+        margin-block-end: calc-to-rem(10);
+        display: flex;
+        align-items: center;
+        // width: calc-to-rem(200);
+        width: 100%;
+        font-size: calc-to-rem(20);
+        input {
+          width: 100%;
+          padding: calc-to-rem(5) calc-to-rem(10);
+          &:focus {
+            outline: none;
+          }
+        }
+        button {
+          margin-inline-end: calc-to-rem(5);
+          padding: calc-to-rem(5);
+          position: absolute;
+          right: 0;
+          border: none;
+          background: transparent;
+          // background: $color-test;
+          width: calc-to-rem(25);
+          height: calc-to-rem(25);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          :hover {
+            cursor: pointer;
+            border-radius: 50%;
+            background: gainsboro;
+          }
+        }
+      }
+      .login-btn {
+        margin-block:calc-to-rem(30) calc-to-rem(46);
+        padding: calc-to-rem(5) calc-to-rem(10);
+        border: none;
+        border-radius: 6px;
+        background: #0095f6;
+        width: 100%;
+        color: white;
+        font-weight: bold;
+        font-size: calc-to-rem(20);
+        &:hover {
+          cursor: pointer;
+          background: #0095f6;
+        }
+        &:disabled {
+          background: #b2dffc;
+          color: #fdfeff;
+        }
+      }
+    }
+  }
+  .login-container__botom {
+    border: 1px solid gray;
+    border-radius: 6px;
+    height: max-content;
+    margin-block-start: calc-to-rem(30);
+    width: calc-to-rem(310);
+    padding: calc-to-rem(20) calc-to-rem(40);
+    text-align: center;
+    a {
+      font-weight: bold;
+    }
+  }
+}

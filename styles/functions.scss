@@ -1,0 +1,20 @@
+@use 'sass:math';
+$browser-context: 16;
+
+@function calc-to-rem($size: null) {
+  @if $size {
+    $val: math.div($size, 16) * 1rem;
+    @return $val;
+  } @else {
+    @return 0;
+  }
+}
+
+@function calc-to-em($size: null, $context: $browser-context) {
+  @if $size {
+    $val: math.div($size, $context) * 1em;
+    @return $val;
+  } @else {
+    @return 0;
+  }
+}
