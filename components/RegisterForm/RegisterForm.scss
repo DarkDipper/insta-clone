@@ -1,7 +1,11 @@
-.login-container {
+.register-container {
+  position: absolute;
+  top: 0;
   backface-visibility: hidden;
   transition: transform 0.6s;
-  .login-container__top {
+  transform: rotateY(180deg);
+  .register-container__top {
+    position: relative;
     border: 1px solid gray;
     border-radius: 6px;
     height: calc-to-rem(345);
@@ -14,7 +18,12 @@
       font-size: calc-to-rem(56);
       margin-block-start: 0;
     }
-    .login-form {
+    .btn-toggle-mode{
+      position: absolute;
+      top: 2%;
+      right: 2%;
+    }
+    .register-form {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -25,7 +34,6 @@
         margin-block-end: calc-to-rem(10);
         display: flex;
         align-items: center;
-        // width: calc-to-rem(200);
         width: 100%;
         font-size: calc-to-rem(20);
         input {
@@ -42,9 +50,8 @@
           right: 0;
           border: none;
           background: transparent;
-          // background: $color-test;
-          width: calc-to-rem(25);
-          height: calc-to-rem(25);
+          width: calc-to-rem(34);
+          height: calc-to-rem(34);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -56,8 +63,8 @@
           }
         }
       }
-      .login-btn {
-        margin-block: calc-to-rem(30) calc-to-rem(46);
+      .register-btn {
+        margin-block: calc-to-rem(10) calc-to-rem(20);
         padding: calc-to-rem(5) calc-to-rem(10);
         border: none;
         border-radius: 6px;
@@ -68,20 +75,25 @@
         font-size: calc-to-rem(20);
         &:hover {
           cursor: pointer;
-          background: #0095f6;
+          background: rgba(0, 148, 246, 0.8);
+        }
+        &:active{
+          background: rgb(0, 114, 189);
         }
         &:disabled {
-          background: #b2dffc;
+          background: rgb(178, 223, 252);
           color: #fdfeff;
         }
       }
-    }
-    a {
-      font-size: calc-to-rem(14);
-      color: $color-link;
+      p{
+        font-size: calc-to-rem(12);
+        margin-block-start: calc-to-rem(10);
+        margin-block-end: calc-to-rem(10);
+        text-align: center;
+      }
     }
   }
-  .login-container__botom {
+  .register-container__botom {
     border: 1px solid gray;
     border-radius: 6px;
     height: max-content;

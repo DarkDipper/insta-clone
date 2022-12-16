@@ -1,7 +1,8 @@
 .login-page {
   display: flex;
+  height: calc(100vh - 2rem);
   justify-content: center;
-  margin-block-start: calc-to-rem(32);
+  padding-block-start: calc-to-rem(32);
 
   .hide {
     opacity: 0;
@@ -46,4 +47,12 @@
 	.flip{
 		transform: rotateY(180deg);
 	}
+}
+.dark .login-page{
+  background: #1a1a1a;
+  color: white;
+}
+.light .login-page{
+  background: white;
+  color: black;
 }

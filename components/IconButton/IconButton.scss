@@ -1,0 +1,28 @@
+.icon-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc-to-rem(34);
+  height: calc-to-rem(34);
+  border-radius: calc-to-rem(6);
+  border: none;
+  background: transparent;
+}
+.light .icon-button{
+  color: black;
+  &:hover {
+    background: rgba(210, 210, 210, 0.3);
+  }
+  &:active{
+    background: rgba(210, 210, 210, 0.6);
+  }
+}
+.dark .icon-button{
+  color: white;
+  &:hover {
+    background: rgba(210, 210, 210, 0.2);
+  }
+  &:active{
+    background: rgba(210, 210, 210, 0.3);
+  }
+}

@@ -1,21 +1,31 @@
 import Link from "next/link";
-import { useState,MouseEvent } from "react";
+import { useState, MouseEvent,useContext } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-
+import { FaRegMoon, FaSun } from "react-icons/fa";
+import IconButton from "../IconButton";
+import { ThemeContext } from "../../theme";
 type Props = {
   setShowRegister: (value: boolean) => void;
-}
+};
 
-export default function LoginForm({setShowRegister}:Props): JSX.Element {
+export default function LoginForm({ setShowRegister }: Props): JSX.Element {
   const [showPassword, setShowPassword] = useState(false);
-  const handleShowRegister = (e:MouseEvent) => {
+  const {mode,toggleMode} = useContext(ThemeContext);
+  const handleShowRegister = (e: MouseEvent) => {
     e.preventDefault();
     setShowRegister(true);
-  }
+  };
   return (
     <div className={"login-container"}>
       <div className="login-container__top">
         <h1 className="name-app">Instagram</h1>
+        <IconButton className="btn-toggle-mode" onClick={toggleMode}>
+          {mode === "light" ? (
+            <FaRegMoon style={{ height: "100%", width: "100%" }} />
+          ) : (
+            <FaSun style={{ height: "100%", width: "100%" }} />
+          )}
+        </IconButton>
         <form action="post" className="login-form">
           <div className="username-input">
             <input
@@ -39,13 +49,19 @@ export default function LoginForm({setShowRegister}:Props): JSX.Element {
               }}
             >
               {showPassword ? (
-                <AiFillEye style={{ height: "100%", width: "100%" }} />
-              ) : (
                 <AiFillEyeInvisible style={{ height: "100%", width: "100%" }} />
+              ) : (
+                <AiFillEye style={{ height: "100%", width: "100%" }} />
               )}
             </button>
           </div>
-          <button type="submit" className="login-btn">
+          <button
+            type="submit"
+            className="login-btn"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
             Log in
           </button>
           <Link href="#">Forgot password ?</Link>
@@ -53,7 +69,11 @@ export default function LoginForm({setShowRegister}:Props): JSX.Element {
       </div>
       <div className="login-container__botom">
         <p>
-          Don&lsquo;t have an account ?<Link onClick={handleShowRegister} href="#" > Sign up</Link>
+          Don&lsquo;t have an account ?
+          <Link onClick={handleShowRegister} href="#">
+            {" "}
+            Sign up
+          </Link>
         </p>
       </div>
     </div>

@@ -1,9 +1,8 @@
 import "../styles/globals.scss";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import useLoading from "../hooks/useLoading";
+import ThemeProvider  from "../theme";
 export default function App({ Component, pageProps }: AppProps) {
-  const loading:boolean = useLoading();
   return (
     <>
       <Head>
@@ -12,7 +11,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/instagram.ico" />
         <title>Insta clone</title>
       </Head>
-			<Component {...pageProps} />
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }

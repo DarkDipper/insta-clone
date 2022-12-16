@@ -1,13 +1,10 @@
-.register-container {
-  position: absolute;
-  top: 0;
+.login-container {
   backface-visibility: hidden;
   transition: transform 0.6s;
-  transform: rotateY(180deg);
-  .register-container__top {
+  .login-container__top {
+    position: relative;
     border: 1px solid gray;
     border-radius: 6px;
-    // height: max-content;
     height: calc-to-rem(345);
     width: calc-to-rem(310);
     margin-block-start: calc-to-rem(12);
@@ -18,7 +15,12 @@
       font-size: calc-to-rem(56);
       margin-block-start: 0;
     }
-    .register-form {
+    .btn-toggle-mode{
+      position: absolute;
+      top: 2%;
+      right: 2%;
+    }
+    .login-form {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -46,9 +48,8 @@
           right: 0;
           border: none;
           background: transparent;
-          // background: $color-test;
-          width: calc-to-rem(25);
-          height: calc-to-rem(25);
+          width: calc-to-rem(34);
+          height: calc-to-rem(34);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -60,8 +61,8 @@
           }
         }
       }
-      .register-btn {
-        margin-block: calc-to-rem(10) calc-to-rem(20);
+      .login-btn {
+        margin-block: calc-to-rem(30) calc-to-rem(46);
         padding: calc-to-rem(5) calc-to-rem(10);
         border: none;
         border-radius: 6px;
@@ -70,24 +71,26 @@
         color: white;
         font-weight: bold;
         font-size: calc-to-rem(20);
+        transition: all 0.1s ease-in-out;
         &:hover {
           cursor: pointer;
-          background: #0095f6;
+          background: rgba(0, 148, 246, 0.8);
+        }
+        &:active{
+          background: rgb(0, 114, 189);
         }
         &:disabled {
-          background: #b2dffc;
+          background: rgb(178, 223, 252);
           color: #fdfeff;
         }
       }
-      p{
-        font-size: calc-to-rem(12);
-        margin-block-start: calc-to-rem(10);
-        margin-block-end: calc-to-rem(10);
-        text-align: center;
-      }
+    }
+    a {
+      font-size: calc-to-rem(14);
+      color: $color-link;
     }
   }
-  .register-container__botom {
+  .login-container__botom {
     border: 1px solid gray;
     border-radius: 6px;
     height: max-content;
