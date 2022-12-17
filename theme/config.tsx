@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
 export const configTheme = {
-  mode: "light",
+  mode: "dark",
   toggleMode: () => {},
 };

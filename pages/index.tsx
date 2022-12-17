@@ -6,7 +6,7 @@ import { ThemeContext } from '../theme';
 export default function Home() {
   return (
     <div className='main-page'>
-      <p>Index page</p>
+      Index page
     </div>
   )
 }
