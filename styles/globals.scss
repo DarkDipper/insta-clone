@@ -9,19 +9,18 @@
 @import "components/LoginForm/LoginForm.scss";
 @import "components/RegisterForm/RegisterForm.scss";
 @import "components/IconButton/IconButton.scss";
-
+@import "components/SideBar/SideBar.scss";
+@import "components/SideBar/SideBarItem/SideBarItem.scss";
 // Pages
-@import "checkin";
+@import "./styles/style-pages/CheckinPage.scss";
+@import "./style-pages/HomePage.scss";
 // Global
 body {
   font-family: "Roboto", sans-serif;
+  height: 100vh;
+  width: 100vw;
 }
-.main-page {
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
-.dark .main-page {
-  background: #1a1a1a;
-  color: white;
+#__next{
+  height: 100%;
+  width: 100%;
 }

@@ -1,0 +1,30 @@
+.side-bar {
+  position: sticky;
+  background: #222831;
+  width: calc-to-rem(220);
+  height: calc(100% - calc-to-rem(16));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc-to-rem(8) calc-to-rem(12);
+  &__top {
+    display: flex;
+    flex-direction: column;
+    gap: calc-to-rem(20);
+    &__title {
+      display: block;
+      font-family: "Dancing Script", cursive;
+      padding: calc-to-rem(25) calc-to-rem(12) calc-to-rem(16);
+      font-size: calc-to-rem(35);
+      text-decoration: none;
+      .dark & {
+        color: white;
+      }
+    }
+    &__menu{
+      display: flex;
+      flex-direction: column;
+      gap: calc-to-rem(30);
+    }
+  }
+}

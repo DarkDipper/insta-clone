@@ -1,0 +1,16 @@
+.side-bar__item{
+  background: transparent;
+  width: 100%;
+  border: none;
+  font-size: calc-to-rem(24);
+  text-decoration: none;
+  padding-block: calc-to-rem(4);
+  &__wrapper{
+    display: flex;
+    align-items: center;
+    gap: calc-to-rem(16);
+  }
+}
+.dark .side-bar__item{
+  color: white;
+}

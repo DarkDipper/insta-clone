@@ -1,6 +1,6 @@
 .login-page {
   display: flex;
-  min-height: calc(100vh - 2rem);
+  min-height: calc(100% - 2rem);
   justify-content: center;
   padding-block-start: calc-to-rem(32);
 
@@ -36,7 +36,6 @@
   }
 
   &__right {
-    // background: $color-test;
     position: relative;
     width: calc-to-rem(392);
     height: calc-to-rem(635);

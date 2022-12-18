@@ -1,12 +1,14 @@
-
-import Image from 'next/image'
-import Router from 'next/router'
 import { useEffect, useContext } from 'react';
 import { ThemeContext } from '../theme';
+import SideBar from '../components/SideBar';
 export default function Home() {
   return (
     <div className='main-page'>
-      <h1>Index page</h1>
+      {/* Sidebar */}
+      <SideBar />
+      {/* Widget */}
+      {/* Story */}
+      {/* Post */}
     </div>
   )
 }

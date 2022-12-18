@@ -39,6 +39,7 @@
         input {
           width: 100%;
           padding: calc-to-rem(5) calc-to-rem(10);
+          font-size: inherit;
           &:focus {
             outline: none;
           }
