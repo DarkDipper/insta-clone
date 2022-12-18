@@ -13,7 +13,7 @@
       font-family: "Dancing Script", cursive;
       text-align: center;
       font-size: calc-to-rem(56);
-      margin-block-start: 0;
+      margin-block: 0 0.67em;
     }
     .btn-toggle-mode{
       position: absolute;
@@ -31,12 +31,12 @@
         margin-block-end: calc-to-rem(10);
         display: flex;
         align-items: center;
-        // width: calc-to-rem(200);
         width: 100%;
         font-size: calc-to-rem(20);
         input {
           width: 100%;
           padding: calc-to-rem(5) calc-to-rem(10);
+          font-size: inherit;
           &:focus {
             outline: none;
           }

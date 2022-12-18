@@ -2,8 +2,8 @@
 @import "resetScss";
 @import "functions";
 @import "variables";
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 // Components
 @import "components/LoginForm/LoginForm.scss";
@@ -11,22 +11,17 @@
 @import "components/IconButton/IconButton.scss";
 
 // Pages
-.main-page{
-  width: 100%;
-  height: 100%;
-}
 @import "checkin";
-
 // Global
-body{
+body {
   font-family: "Roboto", sans-serif;
 }
-.main-page{
+.main-page {
   min-width: 100vw;
   min-height: 100vh;
 }
 
-.dark .main-page{
+.dark .main-page {
   background: #1a1a1a;
   color: white;
 }
