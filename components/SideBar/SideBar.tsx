@@ -1,10 +1,11 @@
+import Avatar from "../Avatar";
+import Link from "next/link";
 import SideBarItem from "./SideBarItem";
 import { AiOutlineHome } from "react-icons/ai";
 import { IoSearch, IoPaperPlane } from "react-icons/io5";
 import { ImCompass2 } from "react-icons/im";
 import { BsCollectionPlay, BsBellFill, BsPlusSquare } from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
-import Link from "next/link";
 const sideData = [
   {
     Icon: <AiOutlineHome />,
@@ -35,10 +36,11 @@ const sideData = [
     title: "Create",
   },
   {
-    Icon: <FaBars />,
-    title: "Menu",
-  }
+    Icon: <Avatar src="https://i.ibb.co/G3yfYFN/Monokuma.png " />,
+    title: "Profile",
+  },
 ];
+
 export default function SideBar() {
   return (
     <div className="side-bar">

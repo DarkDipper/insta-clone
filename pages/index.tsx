@@ -6,9 +6,9 @@ export default function Home() {
     <div className='main-page'>
       {/* Sidebar */}
       <SideBar />
-      {/* Widget */}
       {/* Story */}
       {/* Post */}
+      {/* Widget */}
     </div>
   )
 }

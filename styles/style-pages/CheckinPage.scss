@@ -19,14 +19,8 @@
   }
 
   &__left {
+    position: relative;
     .image-login {
-      position: relative;
-      min-height: calc-to-rem(635);
-      min-width: calc-to-rem(465);
-      background-image: url("https://i.ibb.co/JCVy7Nb/login-Page.png");
-      background-repeat: no-repeat;
-      background-position: center;
-
       img {
         position: absolute;
         top: calc-to-rem(26);
