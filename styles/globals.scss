@@ -16,12 +16,8 @@
 @import "./styles/style-pages/CheckinPage.scss";
 @import "./style-pages/HomePage.scss";
 // Global
+html,
 body {
   font-family: "Roboto", sans-serif;
-  height: 100vh;
-  width: 100vw;
-}
-#__next{
-  height: 100%;
-  width: 100%;
+  font-size: calc-to-rem(16);
 }

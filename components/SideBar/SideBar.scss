@@ -1,8 +1,8 @@
 .side-bar {
-  position: sticky;
+  position: fixed;
   background: #222831;
   width: calc-to-rem(220);
-  height: calc(100% - calc-to-rem(16));
+  height: calc(100vh - calc-to-rem(16));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -28,5 +28,6 @@
     }
   }
   &__bottom{
+    padding: calc-to-rem(16) calc-to-rem(12);
   }
 }

@@ -57,7 +57,7 @@ export default function SideBar() {
         </div>
       </div>
       <div className="side-bar__bottom">
-        <SideBarItem Icon={<FaBars />} title="Menu" />
+        <SideBarItem Icon={<FaBars />} title="More" />
       </div>
     </div>
   );

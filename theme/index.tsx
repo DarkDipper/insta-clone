@@ -14,7 +14,7 @@ export default function ThemeProvider({ children }: Props) {
   };
   return (
     <ThemeContext.Provider value={{ mode, toggleMode }}>
-      <div className={mode} style={{ height: "100%", width: "100%" }}>
+      <div className={mode}>
         {children}
       </div>
     </ThemeContext.Provider>
