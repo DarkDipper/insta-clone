@@ -18,7 +18,7 @@
       font-size: calc-to-rem(56);
       margin-block: 0 0.67em;
     }
-    .btn-toggle-mode{
+    .btn-toggle-mode {
       position: absolute;
       top: 2%;
       right: 2%;
@@ -27,8 +27,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-
       .username-input,
+      .email-input,
       .password-input {
         position: relative;
         margin-block-end: calc-to-rem(10);
@@ -38,13 +38,15 @@
         font-size: calc-to-rem(20);
         input {
           width: 100%;
-          padding: calc-to-rem(5) calc-to-rem(10);
+          padding-block: calc-to-rem(5);
+          padding-inline: calc-to-rem(10) calc-to-rem(40);
           font-size: inherit;
           &:focus {
             outline: none;
           }
         }
         button {
+          margin-block-start: calc-to-rem(5);
           margin-inline-end: calc-to-rem(5);
           padding: calc-to-rem(5);
           position: absolute;
@@ -65,7 +67,7 @@
         }
       }
       .register-btn {
-        margin-block: calc-to-rem(10) calc-to-rem(20);
+        margin-block: calc-to-rem(10) calc-to-rem(4);
         padding: calc-to-rem(5) calc-to-rem(10);
         border: none;
         border-radius: 6px;
@@ -78,7 +80,7 @@
           cursor: pointer;
           background: rgba(0, 148, 246, 0.8);
         }
-        &:active{
+        &:active {
           background: rgb(0, 114, 189);
         }
         &:disabled {
@@ -86,7 +88,7 @@
           color: #fdfeff;
         }
       }
-      p{
+      p {
         font-size: calc-to-rem(12);
         margin-block-start: calc-to-rem(10);
         margin-block-end: calc-to-rem(10);

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, MouseEvent, useContext } from "react";
+import { useState, MouseEvent, useContext, FormEvent, useReducer } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaRegMoon, FaSun } from "react-icons/fa";
 import IconButton from "../IconButton";
@@ -8,12 +8,56 @@ type Props = {
   setShowRegister: (value: boolean) => void;
 };
 
+type userState = {
+  username?: string;
+  email?: string;
+  password?: string;
+};
+type userAction = {
+  type: string;
+  payload: userState;
+};
+
+function reducer(state: userState, action: userAction) {
+  const { type, payload } = action;
+  switch (type) {
+    case "username":
+      return { ...state, username: payload.username };
+    case "password":
+      return { ...state, password: payload.password };
+    case "email":
+      return { ...state, email: payload.email };
+    default:
+      throw new Error("Cannot change user state");
+  }
+}
+
 export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
   const [showPassword, setShowPassword] = useState(false);
   const { mode, toggleMode } = useContext(ThemeContext);
+  const [uState, dispatch] = useReducer(reducer, {
+    username: "",
+    email: "",
+    password: "",
+  });
   const handleShowRegister = (e: MouseEvent) => {
     e.preventDefault();
     setShowRegister(false);
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    // console.log(JSON.stringify(uState));
+    const respone = await fetch("http://localhost:5000/api/v1/user/register", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(uState),
+    });
+    const json = await respone.json();
+    console.log(json);
   };
   return (
     <div className={"register-container"}>
@@ -26,13 +70,35 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
             <FaSun style={{ height: "100%", width: "100%" }} />
           )}
         </IconButton>
-        <form action="post" className="register-form">
+        <form className="register-form" onSubmit={handleSubmit}>
           <div className="username-input">
             <input
               type="text"
               name="username"
               id="username"
               placeholder="Username"
+              value={uState.username}
+              onChange={(e) => {
+                dispatch({
+                  type: "username",
+                  payload: { username: e.target.value },
+                });
+              }}
+            />
+          </div>
+          <div className="email-input">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              value={uState.email}
+              onChange={(e) => {
+                dispatch({
+                  type: "email",
+                  payload: { email: e.target.value },
+                });
+              }}
             />
           </div>
           <div className="password-input">
@@ -41,6 +107,13 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
               name="password"
               id="password"
               placeholder="Password"
+              value={uState.password}
+              onChange={(e) => {
+                dispatch({
+                  type: "password",
+                  payload: { password: e.target.value },
+                });
+              }}
             />
             <button
               onClick={(e) => {

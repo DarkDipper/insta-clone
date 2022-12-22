@@ -35,7 +35,8 @@
         font-size: calc-to-rem(20);
         input {
           width: 100%;
-          padding: calc-to-rem(5) calc-to-rem(10);
+          padding-block: calc-to-rem(5);
+          padding-inline: calc-to-rem(10) calc-to-rem(40);
           font-size: inherit;
           &:focus {
             outline: none;
