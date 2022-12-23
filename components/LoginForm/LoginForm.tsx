@@ -1,20 +1,41 @@
 import Link from "next/link";
-import { useState, MouseEvent, useContext } from "react";
+import { useState, MouseEvent, useContext, FormEvent, useEffect } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaRegMoon, FaSun } from "react-icons/fa";
 import IconButton from "../IconButton";
 import { ThemeContext } from "../../theme";
+import useAuth from "../../hooks/useAuth";
+import { useRouter } from "next/router";
 type Props = {
   setShowRegister: (value: boolean) => void;
 };
 
 export default function LoginForm({ setShowRegister }: Props): JSX.Element {
+  const { auth, initializing, getRedirect, clearRedirect, user, error } =
+    useAuth();
+  const [userName, setUsername] = useState("");
+  const [passWord, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { mode, toggleMode } = useContext(ThemeContext);
+  const router = useRouter();
   const handleShowRegister = (e: MouseEvent) => {
     e.preventDefault();
     setShowRegister(true);
   };
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    await auth.signIn(userName, passWord);
+  };
+  useEffect(() => {
+    if (!initializing && user) {
+      const redirect = getRedirect();
+      if (redirect) {
+        router.push(redirect);
+      } else {
+        router.push("/");
+      }
+    }
+  });
   return (
     <div className={"login-container"}>
       <div className="login-container__top">
@@ -33,6 +54,10 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
               name="username"
               id="username"
               placeholder="Username"
+              value={userName}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
             />
           </div>
           <div className="password-input">
@@ -41,6 +66,10 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
               name="password"
               id="password"
               placeholder="Password"
+              value={passWord}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <button
               onClick={(e) => {
@@ -58,9 +87,7 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
           <button
             type="submit"
             className="login-btn"
-            onClick={(e) => {
-              e.preventDefault();
-            }}
+            onClick={handleSubmit}
           >
             Log in
           </button>
@@ -71,7 +98,6 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
         <p>
           Don&lsquo;t have an account ?
           <Link onClick={handleShowRegister} href="#">
-            {" "}
             Sign up
           </Link>
         </p>

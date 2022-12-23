@@ -16,6 +16,8 @@ export default function Checkin() {
     }, 3000);
     return () => clearInterval(interval);
   }, [imgTransition]);
+
+  
   return (
     <div className="login-page">
       <div className="login-page__left">

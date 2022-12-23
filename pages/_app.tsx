@@ -1,7 +1,9 @@
 import "../styles/globals.scss";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import ThemeProvider  from "../theme";
+import ThemeProvider from "../theme";
+import { AuthProvider } from "../Auth/AuthProvider";
+import { AuthGuard } from "../Auth/AuthGuard";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -10,9 +12,17 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/instagram.ico" />
         <title>Insta clone</title>
       </Head>
-      <ThemeProvider>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          {pageProps.requireAuth ? (
+            <AuthGuard>
+              <Component {...pageProps} />
+            </AuthGuard>
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </ThemeProvider>
+      </AuthProvider>
     </>
   );
 }
