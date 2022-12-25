@@ -1,7 +1,7 @@
-import useAuth from "../hooks/useAuth";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-
+import useAuth from "../hooks/useAuth";
+import Loading from "../components/Loading";
 function AuthGuard({ children }: { children: JSX.Element }) {
   const { user, initializing, setRedirect } = useAuth();
   const router = useRouter();
@@ -15,7 +15,7 @@ function AuthGuard({ children }: { children: JSX.Element }) {
     }
   }, [initializing, router, user, setRedirect]);
   if (initializing) {
-    return <h1>Application Loading Auth Guard</h1>;
+    return <Loading />;
   }
   if (!initializing && user) {
     return <>{children}</>;

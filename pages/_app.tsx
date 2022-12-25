@@ -4,6 +4,7 @@ import Head from "next/head";
 import ThemeProvider from "../theme";
 import { AuthProvider } from "../Auth/AuthProvider";
 import { AuthGuard } from "../Auth/AuthGuard";
+import Loading from "../components/Loading";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -12,8 +13,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/instagram.ico" />
         <title>Insta clone</title>
       </Head>
-      <AuthProvider>
-        <ThemeProvider>
+      <ThemeProvider>
+        <AuthProvider>
           {pageProps.requireAuth ? (
             <AuthGuard>
               <Component {...pageProps} />
@@ -21,8 +22,8 @@ export default function App({ Component, pageProps }: AppProps) {
           ) : (
             <Component {...pageProps} />
           )}
-        </ThemeProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </>
   );
 }

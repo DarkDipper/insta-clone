@@ -1,0 +1,35 @@
+.loading-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .border-1 {
+    position: absolute;
+    width: calc-to-rem(200);
+    height: calc-to-rem(200);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: calc-to-rem(10);
+    border: calc-to-rem(5) solid #00ef92;
+  }
+  .border-2 {
+    position: absolute;
+    width: calc-to-rem(190);
+    height: calc-to-rem(190);
+    border-radius: calc-to-rem(10);
+    border: calc-to-rem(5) solid #00b9d8;
+  }
+}
+.dark {
+  .loading-page {
+    background: black;
+    color: white;
+  }
+}
+.white {
+  .loading-page {
+    background: white;
+    color: black;
+  }
+}

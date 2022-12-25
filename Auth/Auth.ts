@@ -45,8 +45,16 @@ class Auth {
     this.onUserChange(this.user);
   }
   resolveUser(cb: UserCB) {
-    this.onAuthStateChange(cb)
-    this.onUserChange(this.user)
+    setTimeout(() => {
+      if (window) {
+        const signedInUser = window.sessionStorage.getItem("user");
+        if (signedInUser) {
+          this.user = JSON.parse(signedInUser);
+        }
+      }
+      this.onAuthStateChange(cb);
+      this.onUserChange(this.user);
+    }, 0);
   }
 }
 
