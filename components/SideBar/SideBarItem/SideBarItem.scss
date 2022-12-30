@@ -1,14 +1,38 @@
 .side-bar__item{
   background: transparent;
-  width: 100%;
+  width: calc-to-rem(204);
+  height: calc-to-rem(30);
   border: none;
-  font-size: calc-to-rem(24);
   text-decoration: none;
-  padding-block: calc-to-rem(4);
+  padding: calc-to-rem(6.4) calc-to-rem(6.4);
+  border-radius: calc-to-rem(24);
+  transition: all ease 0.3s;
+  display: flex;
+  align-items: center;
+  &:hover{
+    background: rgba(128, 128, 128, 0.405);
+  }
   &__wrapper{
     display: flex;
     align-items: center;
     gap: calc-to-rem(16);
+    width: calc-to-rem(204);
+    & svg{
+      font-size: calc-to-rem(30);
+    }
+    &--text{
+      font-size: calc-to-rem(24);
+      transition: all ease 0.3s;
+    }
+  }
+  &.hide{
+    width: calc-to-rem(30);
+    overflow: hidden;
+    .side-bar__item__wrapper{
+      &--text{
+        opacity: 0;
+      }
+    }
   }
 }
 

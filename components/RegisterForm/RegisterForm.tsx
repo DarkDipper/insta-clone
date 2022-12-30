@@ -4,35 +4,44 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaRegMoon, FaSun } from "react-icons/fa";
 import IconButton from "../IconButton";
 import { ThemeContext } from "../../theme";
+import useAuth from "../../hooks/useAuth";
+
 type Props = {
   setShowRegister: (value: boolean) => void;
 };
-
 type userState = {
-  username?: string;
-  email?: string;
-  password?: string;
+  username: string;
+  email: string;
+  password: string;
 };
 type userAction = {
   type: string;
-  payload: userState;
+  payload?: userState;
 };
 
 function reducer(state: userState, action: userAction) {
   const { type, payload } = action;
-  switch (type) {
-    case "username":
-      return { ...state, username: payload.username };
-    case "password":
-      return { ...state, password: payload.password };
-    case "email":
-      return { ...state, email: payload.email };
-    default:
-      throw new Error("Cannot change user state");
+  if (payload !== undefined) {
+    switch (type) {
+      case "update":
+        return { ...payload };
+      case "reset":
+        return {
+          username: "",
+          email: "",
+          password: "",
+        };
+      default:
+        throw new Error("Cannot change user state");
+    }
+  } else {
+    throw Error("Payload empty")
   }
 }
 
 export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
+  const { auth, initializing, getRedirect, clearRedirect, user, error } =
+    useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const { mode, toggleMode } = useContext(ThemeContext);
   const [uState, dispatch] = useReducer(reducer, {
@@ -47,17 +56,14 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // console.log(JSON.stringify(uState));
-    const respone = await fetch("http://localhost:5000/api/v1/user/register", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(uState),
-    });
-    const json = await respone.json();
+    const json = await auth.signUp(
+      uState.username,
+      uState.password,
+      uState.email
+    );
     console.log(json);
+    dispatch({ type: "reset" });
+    setShowRegister(false);
   };
   return (
     <div className={"register-container"}>
@@ -80,8 +86,8 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
               value={uState.username}
               onChange={(e) => {
                 dispatch({
-                  type: "username",
-                  payload: { username: e.target.value },
+                  type: "update",
+                  payload: { ...uState, username: e.target.value },
                 });
               }}
             />
@@ -95,8 +101,8 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
               value={uState.email}
               onChange={(e) => {
                 dispatch({
-                  type: "email",
-                  payload: { email: e.target.value },
+                  type: "update",
+                  payload: { ...uState, email: e.target.value },
                 });
               }}
             />
@@ -110,8 +116,8 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
               value={uState.password}
               onChange={(e) => {
                 dispatch({
-                  type: "password",
-                  payload: { password: e.target.value },
+                  type: "update",
+                  payload: { ...uState, password: e.target.value },
                 });
               }}
             />

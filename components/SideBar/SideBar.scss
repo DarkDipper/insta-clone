@@ -1,33 +1,63 @@
 .side-bar {
   position: fixed;
-  background: #222831;
+  // background: #222831;
+  background: yellowgreen;
   width: calc-to-rem(220);
   height: calc(100vh - calc-to-rem(16));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: calc-to-rem(8) calc-to-rem(12);
+  transition: all ease 0.3s;
+  overflow: hidden;
+  &.hide {
+    background: darkgray;
+    width: calc-to-rem(48);
+    .side-bar__top {
+      .side-bar__top__title {
+        &--text{
+          opacity: 0;
+        }
+        &--icon{
+          font-size: calc-to-rem(30);
+        }
+      }
+    }
+  }
   &__top {
     display: flex;
     flex-direction: column;
     gap: calc-to-rem(20);
     &__title {
+      position: relative;
       display: block;
-      font-family: "Dancing Script", cursive;
       padding: calc-to-rem(25) calc-to-rem(12) calc-to-rem(16);
-      font-size: calc-to-rem(35);
+      transition: all ease 0.3s;
       text-decoration: none;
+      &--text {
+        font-size: calc-to-rem(35);
+        font-family: "Dancing Script", cursive;
+        transition: all ease 0.3s;
+      }
+      &--icon{
+        position: absolute;
+        bottom: calc-to-rem(16);
+        left: calc-to-rem(6.4);
+        font-size: calc-to-rem(0);
+        transition: all ease 0.3s;
+      }
       .dark & {
         color: white;
       }
     }
-    &__menu{
+    &__menu {
       display: flex;
       flex-direction: column;
-      gap: calc-to-rem(30);
+      gap: calc-to-rem(22);
     }
   }
-  &__bottom{
-    padding: calc-to-rem(16) calc-to-rem(12);
+  &__bottom {
+    padding-block: calc-to-rem(16);
+    padding-inline: 0 calc-to-rem(12);
   }
 }
