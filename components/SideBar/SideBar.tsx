@@ -42,7 +42,13 @@ const sideData = [
     title: "Create",
   },
   {
-    Icon: <Avatar src="https://i.ibb.co/G3yfYFN/Monokuma.png" height={30} width={30} />,
+    Icon: (
+      <Avatar
+        src="https://i.ibb.co/G3yfYFN/Monokuma.png"
+        height={30}
+        width={30}
+      />
+    ),
     title: "Profile",
   },
 ];
@@ -71,7 +77,12 @@ export default function SideBar() {
         </div>
       </div>
       <div className="side-bar__bottom">
-        <SideBarItem Icon={<FaBars />} title="More" setHide={setHide} hide={hide} />
+        <SideBarItem
+          Icon={<FaBars />}
+          title="More"
+          setHide={setHide}
+          hide={hide}
+        />
       </div>
     </div>
   );

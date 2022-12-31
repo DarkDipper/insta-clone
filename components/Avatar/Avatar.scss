@@ -4,5 +4,7 @@
   height: calc-to-rem(26);
   object-fit: cover;
   border-radius: 50%;
+  object-position: center;
   overflow: hidden;
+  vertical-align: middle;
 }
