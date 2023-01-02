@@ -45,8 +45,8 @@ const sideData = [
     Icon: (
       <Avatar
         src="https://i.ibb.co/G3yfYFN/Monokuma.png"
-        height={30}
-        width={30}
+        height={24}
+        width={24}
       />
     ),
     title: "Profile",

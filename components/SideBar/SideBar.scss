@@ -19,7 +19,8 @@
           opacity: 0;
         }
         &--icon{
-          font-size: calc-to-rem(30);
+          font-size: calc-to-rem(24);
+          padding-inline-start: calc-to-rem(6.4);
         }
       }
     }

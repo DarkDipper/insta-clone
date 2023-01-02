@@ -16,21 +16,24 @@
     display: flex;
     align-items: center;
     gap: calc-to-rem(16);
-    width: calc-to-rem(204);
+    // width: calc-to-rem(204);
     & svg{
-      font-size: calc-to-rem(30);
+      font-size: calc-to-rem(24);
     }
     &--text{
-      font-size: calc-to-rem(24);
+      font-size: calc-to-rem(16);
       transition: all ease 0.3s;
     }
   }
   &.hide{
     width: calc-to-rem(30);
     overflow: hidden;
+    justify-content: center;
     .side-bar__item__wrapper{
+      // width: calc-to-rem(42.8);
       &--text{
         opacity: 0;
+        display: none; 
       }
     }
   }

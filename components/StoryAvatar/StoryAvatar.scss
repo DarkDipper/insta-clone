@@ -1,0 +1,42 @@
+.story-avatar {
+  display: inline-block;
+  padding-inline: calc-to-rem(6);
+  padding-block: calc-to-rem(4);
+  &:first-child {
+    padding-left: calc-to-rem(14);
+  }
+  &:last-child {
+    padding-right: calc-to-rem(14);
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  &__avatar {
+    display: flex;
+    align-items: center;
+    &__gradient-border {
+      padding: 4px;
+      border-radius: 50%;
+      background: linear-gradient(
+        to top right,
+        rgb(245 158 11),
+        rgb(192 38 211)
+      );
+    }
+    &__white-border {
+      padding: 3px;
+      border-radius: 50%;
+      background: white;
+    }
+  }
+  &--user-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: calc-to-rem(70);
+    font-size: calc-to-rem(12);
+  }
+}

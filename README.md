@@ -1,6 +1,7 @@
 # Todo list
 - [ ] Try catch the fetch
-- [ ] Story UI
+- [x] Story UI
 - [ ] Post UI
 - [ ] Widget UI
 - [ ] Profile UI
+- [ ] Fix color page 

@@ -11,11 +11,14 @@ export default function Avatar({
   height,
 }: Props) {
   return (
-    <div className="avatar" style={{
-      width: width,
-      height: height,
-    }}>
-      <Image src={src} alt="avatar" fill />
+    <div
+      className="avatar"
+      style={{
+        width: width,
+        height: height,
+      }}
+    >
+      <Image src={src} alt="avatar" fill draggable={false} />
     </div>
   );
 }
