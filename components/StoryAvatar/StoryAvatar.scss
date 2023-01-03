@@ -21,11 +21,12 @@
     &__gradient-border {
       padding: 4px;
       border-radius: 50%;
-      background: linear-gradient(
-        to top right,
-        rgb(245 158 11),
-        rgb(192 38 211)
-      );
+      background: linear-gradient(to top right, #00ef92, #00b9d8);
+      // background: linear-gradient(
+      //   to top right,
+      //   rgb(245 158 11),
+      //   rgb(192 38 211)
+      // );
     }
     &__white-border {
       padding: 3px;
@@ -35,6 +36,7 @@
   }
   &--user-name {
     text-overflow: ellipsis;
+    padding-block-start: 6px;
     overflow: hidden;
     max-width: calc-to-rem(70);
     font-size: calc-to-rem(12);

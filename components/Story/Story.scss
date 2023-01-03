@@ -7,13 +7,34 @@
   white-space: nowrap;
   margin-block-start: calc-to-rem(14);
   padding-block: calc-to-rem(16);
-  // display: flex;
+  display: flex;
   // flex-direction: row;
   // padding-inline-start: 5px;
-  // align-items: center;
+  align-items: center;
   // justify-content: center;
-  overflow-x: auto;
+  overflow-x: scroll;
   overflow-y: hidden;
   // gap: 12px;
   scrollbar-width: none;
+  transition: all ease 0.3s;
+  scroll-behavior: smooth;
+  .btn-scroll-left,
+  .btn-scroll-right {
+    position: sticky;
+    color: whitesmoke;
+    font-size: calc-to-rem(24);
+    padding-inline: calc-to-rem(8);
+    display: flex;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .btn-scroll-left {
+    left: 0;
+  }
+  .btn-scroll-right {
+    right: 0;
+  }
 }

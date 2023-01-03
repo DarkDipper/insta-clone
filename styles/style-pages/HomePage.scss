@@ -2,15 +2,15 @@
   min-height: 100vh;
   display: flex;
   // justify-content: space-between;
-  &__center{
+  &__center {
     margin-left: auto;
-    width: calc(100% - calc-to-rem(244));
+    width: calc(100vw - calc-to-rem(244));
     height: 1000px;
     background: rgba(207, 196, 196, 0.4);
-    &__wrapper{
+    &__wrapper {
       margin: 0 auto;
       width: 820px;
-      &__left{
+      &__left {
         max-width: calc-to-rem(470);
         width: 100%;
       }
@@ -19,6 +19,6 @@
 }
 
 .dark .main-page {
-  background: #393E46;
+  background: #393e46;
   color: white;
 }

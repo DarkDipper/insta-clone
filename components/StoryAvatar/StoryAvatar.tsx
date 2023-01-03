@@ -1,6 +1,11 @@
 import Avatar from "../Avatar";
 
-export default function StoryAvatar() {
+type Props = {
+  src: string;
+  userName: string;
+};
+
+export default function StoryAvatar({ src, userName }: Props) {
   return (
     <div className="story-avatar">
       <div className="story-avatar__wrapper">
