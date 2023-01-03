@@ -18,18 +18,21 @@
   &__avatar {
     display: flex;
     align-items: center;
-    &__gradient-border {
+    &--gradient-border {
       padding: 4px;
       border-radius: 50%;
       background: linear-gradient(to top right, #00ef92, #00b9d8);
-      // background: linear-gradient(
-      //   to top right,
-      //   rgb(245 158 11),
-      //   rgb(192 38 211)
-      // );
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    &__white-border {
-      padding: 3px;
+    &--gray-border {
+      // padding: 4px;
+      border-radius: 50%;
+      border: 2px solid gray;
+    }
+    &--white-border {
+      padding: 2px;
       border-radius: 50%;
       background: white;
     }
