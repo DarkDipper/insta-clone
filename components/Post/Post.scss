@@ -1,0 +1,13 @@
+.post {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &__text {
+      flex-grow: 2;
+      &__user-name {
+        font-weight: bold;
+      }
+    }
+  }
+}

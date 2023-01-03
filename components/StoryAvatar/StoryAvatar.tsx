@@ -2,7 +2,7 @@ import Avatar from "../Avatar";
 
 type Props = {
   src: string;
-  userName: string;
+  userName?: string;
   haveSeenBefore: boolean;
   width?: number;
   height?: number;
@@ -10,7 +10,7 @@ type Props = {
 
 export default function StoryAvatar({
   src,
-  userName,
+  userName = "",
   haveSeenBefore,
   width = 56,
   height = 56,
