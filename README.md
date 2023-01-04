@@ -5,3 +5,4 @@
 - [ ] Widget UI
 - [ ] Profile UI
 - [ ] Fix color page 
+- [ ] Red dot on sidebar item

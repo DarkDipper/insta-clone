@@ -2,6 +2,7 @@
   border-radius: calc-to-rem(8);
   border: calc-to-rem(1) solid $border;
   width: 100%;
+  margin-block-end: calc-to-rem(12);
   &__header {
     display: flex;
     flex-direction: row;
@@ -41,5 +42,62 @@
     object-position: center;
     overflow: hidden;
     vertical-align: middle;
+  }
+  &__footer {
+    padding-inline: calc-to-rem(12);
+    margin-block-start: calc-to-rem(4);
+    &__btns {
+      padding-block-end: calc-to-rem(6);
+      display: flex;
+      &__like-btn,
+      &__comment-btn,
+      &__share-btn,
+      &__save-btn {
+        border: 0;
+        padding: calc-to-rem(8);
+        background: transparent;
+        color: white;
+        // color: #ed4956;
+        cursor: pointer;
+      }
+      &__save-btn {
+        margin-left: auto;
+      }
+    }
+    &__likes {
+      padding-inline: calc-to-rem(8);
+      margin-block-end: calc-to-rem(8);
+      font-weight: bold;
+    }
+    &__paragraph {
+      padding-inline: calc-to-rem(8);
+      margin-block-end: calc-to-rem(8);
+      &__user-name {
+        font-weight: bold;
+      }
+      &__content {
+        font-size: calc-to-rem(14);
+        line-height: calc-to-rem(18);
+        text-align: justify;
+      }
+    }
+    &__view-comments {
+      padding-inline: calc-to-rem(8);
+      margin-block-end: calc-to-rem(8);
+      font-size: calc-to-rem(14);
+      line-height: calc-to-rem(18);
+      color: rgb(168, 168, 168);
+    }
+    &__time {
+      padding-inline: calc-to-rem(8);
+      margin-block-end: calc-to-rem(8);
+      font-size: calc-to-rem(10);
+      color: rgb(168, 168, 168);
+      letter-spacing: calc-to-rem(0.2);
+    }
+    &__comment {
+      height: calc-to-rem(40);
+      border-block-start: calc-to-rem(0.8) solid rgb(38, 38, 38);
+    }
   }
 }
