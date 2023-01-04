@@ -34,4 +34,30 @@
   .btn-scroll-right {
     right: 0;
   }
+  .story-user {
+    display: inline-block;
+    padding-inline: calc-to-rem(6);
+    padding-block: calc-to-rem(4);
+    &:first-child {
+      padding-left: calc-to-rem(14);
+    }
+    &:last-child {
+      padding-right: calc-to-rem(14);
+    }
+    &__wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    &--user-name {
+      text-overflow: ellipsis;
+      padding-block-start: calc-to-rem(6);
+      text-align: center;
+      overflow: hidden;
+      max-width: calc-to-rem(70);
+      font-size: calc-to-rem(12);
+    }
+  }
 }

@@ -1,13 +1,45 @@
 .post {
+  border-radius: calc-to-rem(8);
+  border: calc-to-rem(1) solid $border;
+  width: 100%;
   &__header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+    height: calc-to-rem(56);
+    &__avatar {
+      padding-inline-start: calc-to-rem(8);
+    }
     &__text {
       flex-grow: 2;
+      margin-inline-start: calc-to-rem(6);
       &__user-name {
+        line-height: calc-to-rem(22);
         font-weight: bold;
       }
+      &__sub-title {
+        line-height: calc-to-rem(20);
+      }
     }
+    &__more-btn {
+      background: transparent;
+      border: 0;
+      color: white;
+      padding: calc-to-rem(8);
+      cursor: pointer;
+      &__svg {
+        font-size: 24px;
+      }
+    }
+  }
+  &__content {
+    position: relative;
+    height: calc-to-rem(470);
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    vertical-align: middle;
   }
 }

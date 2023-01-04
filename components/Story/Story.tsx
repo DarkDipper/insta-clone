@@ -11,12 +11,19 @@ export default function Story() {
   let list_temp = [];
   for (let i = 0; i <= 10; i++) {
     list_temp.push(
-      <StoryAvatar
-        key={i}
-        src="https://i.ibb.co/YXL10VM/animelody.png"
-        userName="Hero Shield fwqfwqfwqffwqfqwfw"
-        haveSeenBefore={false}
-      />
+      <div className="story-user">
+        <div className="story-user__wrapper">
+          <StoryAvatar
+            key={i}
+            src="https://i.ibb.co/YXL10VM/animelody.png"
+            userName="Hero Shield fwqfwqfwqffwqfqwfw"
+            haveSeenBefore={false}
+          />
+          <p className="story-user--user-name">
+            Hero Shield fwqfwqfwqffwqfqwfw
+          </p>
+        </div>
+      </div>
     );
   }
   return (
