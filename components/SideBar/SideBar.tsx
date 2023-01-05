@@ -16,30 +16,37 @@ const sideData = [
   {
     Icon: <AiOutlineHome />,
     title: "Home",
+    redDot: false,
   },
   {
     Icon: <IoSearch />,
     title: "Search",
+    redDot: false,
   },
   {
     Icon: <ImCompass2 />,
     title: "Explore",
+    redDot: true,
   },
   {
     Icon: <BsCollectionPlay />,
     title: "Reels",
+    redDot: false,
   },
   {
     Icon: <IoPaperPlane />,
     title: "Message",
+    redDot: true,
   },
   {
     Icon: <BsBellFill />,
     title: "Notification",
+    redDot: true,
   },
   {
     Icon: <BsPlusSquare />,
     title: "Create",
+    redDot: false,
   },
   {
     Icon: (
@@ -50,6 +57,7 @@ const sideData = [
       />
     ),
     title: "Profile",
+    redDot: false,
   },
 ];
 
@@ -71,6 +79,7 @@ export default function SideBar() {
                 title={item.title}
                 setHide={setHide}
                 hide={hide}
+                redDot={item.redDot}
               />
             );
           })}

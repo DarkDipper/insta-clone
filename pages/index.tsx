@@ -17,6 +17,13 @@ export default function Home() {
             <Story />
             <div className="list-post">
               <Post />
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+              <Post />
             </div>
           </div>
         </div>

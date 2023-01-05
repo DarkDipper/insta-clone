@@ -1,8 +1,9 @@
 # Todo list
-- [ ] Try catch the fetch
 - [x] Story UI
-- [ ] Post UI
+- [x] Post UI
 - [ ] Widget UI
 - [ ] Profile UI
 - [ ] Fix color page 
-- [ ] Red dot on sidebar item
+- [x] Red dot on sidebar item
+- [ ] Cut text description of post component
+- [ ] Try catch the fetch

@@ -1,10 +1,16 @@
 import Image from "next/image";
+import { MouseEvent } from "react";
 import StoryAvatar from "../StoryAvatar";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { FaRegComment, FaHeart } from "react-icons/fa";
 import { IoPaperPlane } from "react-icons/io5";
 import { BiBookmark } from "react-icons/bi";
+import { SlEmotsmile } from "react-icons/sl";
 export default function Post() {
+  const handleCommentSubmit = (e: MouseEvent) => {
+    e.preventDefault();
+    console.log("YOu post a comment");
+  };
   return (
     <div className="post">
       <header className="post__header">
@@ -64,8 +70,18 @@ export default function Post() {
         <div className="post__footer__view-comments">View all 14 comments</div>
         <div className="post__footer__time">1 DAY AGO</div>
         <div className="post__footer__comment">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta,
-          saepe?
+          <button className="post__footer__comment__emoji-btn">
+            <SlEmotsmile size={24} />
+          </button>
+          <input type="text" className="post__footer__comment__input-comment" />
+          <button
+            type="submit"
+            onClick={handleCommentSubmit}
+            className="post__footer__comment__post-comment-btn"
+            disabled={false}
+          >
+            Post
+          </button>
         </div>
       </footer>
     </div>
