@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import SideBar from "../components/SideBar";
 import Story from "../components/Story";
 import Post from "../components/Post";
+import Widget from "../components/Widget";
 export default function Home() {
   useEffect(() => {
     console.log("Im in Home");
@@ -25,6 +26,9 @@ export default function Home() {
               <Post />
               <Post />
             </div>
+          </div>
+          <div className="main-page__center__wrapper__right">
+            <Widget />
           </div>
         </div>
       </div>

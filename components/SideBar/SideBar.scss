@@ -1,6 +1,6 @@
 .side-bar {
   position: fixed;
-  background: #222831;
+  background: #000000;
   // background: yellowgreen;
   width: calc-to-rem(220);
   height: calc(100vh - calc-to-rem(16));
@@ -10,15 +10,16 @@
   padding: calc-to-rem(8) calc-to-rem(12);
   transition: all ease 0.3s;
   overflow: hidden;
+  border-inline-end: 0.8px solid #282828;
   &.hide {
     background: darkgray;
     width: calc-to-rem(48);
     .side-bar__top {
       .side-bar__top__title {
-        &--text{
+        &--text {
           opacity: 0;
         }
-        &--icon{
+        &--icon {
           font-size: calc-to-rem(24);
           padding-inline-start: calc-to-rem(6.4);
         }
@@ -40,7 +41,7 @@
         font-family: "Dancing Script", cursive;
         transition: all ease 0.3s;
       }
-      &--icon{
+      &--icon {
         position: absolute;
         bottom: calc-to-rem(16);
         left: calc-to-rem(6.4);

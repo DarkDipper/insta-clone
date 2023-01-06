@@ -9,8 +9,11 @@
     // background: rgba(207, 196, 196, 0.4);
     background: black;
     &__wrapper {
+      position: relative;
+      display: flex;
       margin: 0 auto;
       width: 820px;
+      gap: calc-to-rem(32);
       &__left {
         max-width: calc-to-rem(470);
         width: 100%;
@@ -18,11 +21,18 @@
           margin-block-start: calc-to-rem(16);
         }
       }
+      &__right {
+        margin-block-start: calc-to-rem(14);
+        // border: 1px solid red;
+        border-radius: 10px;
+        width: calc-to-rem(319);
+        height: 500px;
+      }
     }
   }
 }
 
 .dark .main-page {
-  background: #393e46;
+  background: #121212;
   color: white;
 }

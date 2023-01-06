@@ -16,7 +16,6 @@ export default function Story() {
           <StoryAvatar
             key={i}
             src="https://i.ibb.co/YXL10VM/animelody.png"
-            userName="Hero Shield fwqfwqfwqffwqfqwfw"
             haveSeenBefore={false}
           />
           <p className="story-user--user-name">

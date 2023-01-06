@@ -1,7 +1,8 @@
 # Todo list
 - [x] Story UI
+- [ ] Modal component
 - [x] Post UI
-- [ ] Widget UI
+- [x] Widget UI
 - [ ] Profile UI
 - [ ] Fix color page 
 - [x] Red dot on sidebar item

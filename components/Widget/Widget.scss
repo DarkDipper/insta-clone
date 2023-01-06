@@ -1,0 +1,80 @@
+.widget {
+  .main-account {
+    margin-block: calc-to-rem(22);
+    display: flex;
+    align-items: center;
+    height: calc-to-rem(56);
+    &__avatar {
+      margin-inline-end: calc-to-rem(22);
+    }
+    &__name {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-evenly;
+      &__user-name {
+        font-weight: bold;
+        line-height: calc-to-rem(18);
+        font-size: calc-to-rem(14);
+      }
+      &__real-name {
+        color: rgb(168, 168, 168);
+        line-height: calc-to-rem(18);
+        font-size: calc-to-rem(14);
+      }
+    }
+    &__switch-account {
+      color: rgb(0, 149, 246);
+      border: none;
+      background: transparent;
+      font-size: calc-to-rem(14);
+      line-height: calc-to-rem(18);
+      cursor: pointer;
+    }
+  }
+  .suggestion-board {
+    &__header {
+      display: flex;
+      padding-block: calc-to-rem(4);
+      align-items: center;
+      justify-content: space-between;
+      &__text {
+        font-size: calc-to-rem(14);
+        font-weight: 600;
+        color: rgb(168, 168, 168);
+        line-height: calc-to-rem(18);
+      }
+      &__see-all {
+        font-size: calc-to-rem(12);
+        font-weight: 600;
+        color: white;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
+    }
+    &__main {
+      &__suggest-item {
+        padding-block: calc-to-rem(8);
+        display: flex;
+        align-items: center;
+        &__description {
+          flex-grow: 1;
+          margin-inline-start: calc-to-rem(12);
+          font-size: calc-to-rem(14);
+          line-height: calc-to-rem(18);
+          font-weight: 600;
+        }
+        &__follow {
+          color: rgb(0, 149, 246);
+          border: none;
+          background: transparent;
+          font-size: calc-to-rem(14);
+          line-height: calc-to-rem(18);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
