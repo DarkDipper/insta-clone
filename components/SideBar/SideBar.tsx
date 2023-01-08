@@ -62,7 +62,7 @@ const sideData = [
 ];
 
 export default function SideBar() {
-  const [hide, setHide] = useState(false);
+  const [hide, setHide] = useState(true);
   return (
     <div className={`side-bar ${hide ? "hide" : ""}`}>
       <div className="side-bar__top">

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MouseEvent } from "react";
+import { MouseEvent, FormEvent } from "react";
 import StoryAvatar from "../StoryAvatar";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { FaRegComment, FaHeart } from "react-icons/fa";
@@ -7,9 +7,14 @@ import { IoPaperPlane } from "react-icons/io5";
 import { BiBookmark } from "react-icons/bi";
 import { SlEmotsmile } from "react-icons/sl";
 export default function Post() {
-  const handleCommentSubmit = (e: MouseEvent) => {
+  const handleCommentSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("YOu post a comment");
+    const inputElement = e.currentTarget.elements.namedItem(
+      "comment"
+    ) as HTMLInputElement;
+    console.log(inputElement.value);
+    inputElement.value = "";
+    console.log("You post a comment");
   };
   return (
     <div className="post">
@@ -39,6 +44,7 @@ export default function Post() {
           src="https://i.ibb.co/c1YQvN6/defaultpost.jpg"
           alt="content"
           fill
+          sizes="100%"
         />
       </main>
       <footer className="post__footer">
@@ -73,15 +79,24 @@ export default function Post() {
           <button className="post__footer__comment__emoji-btn">
             <SlEmotsmile size={24} />
           </button>
-          <input type="text" className="post__footer__comment__input-comment" />
-          <button
-            type="submit"
-            onClick={handleCommentSubmit}
-            className="post__footer__comment__post-comment-btn"
-            disabled={false}
+          <form
+            onSubmit={handleCommentSubmit}
+            className="post__footer__comment__form"
           >
-            Post
-          </button>
+            <input
+              name="comment"
+              type="text"
+              className="post__footer__comment__form__input-comment"
+              autoComplete="off"
+            />
+            <button
+              type="submit"
+              className="post__footer__comment__form__post-comment-btn"
+              disabled={false}
+            >
+              Post
+            </button>
+          </form>
         </div>
       </footer>
     </div>

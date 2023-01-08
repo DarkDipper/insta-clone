@@ -26,7 +26,6 @@
     &__more-btn {
       background: transparent;
       border: 0;
-      color: white;
       padding: calc-to-rem(8);
       cursor: pointer;
       &__svg {
@@ -56,7 +55,7 @@
         border: 0;
         padding: calc-to-rem(8);
         background: transparent;
-        color: white;
+        color: inherit;
         // color: #ed4956;
         cursor: pointer;
       }
@@ -96,7 +95,7 @@
       letter-spacing: calc-to-rem(0.2);
     }
     &__comment {
-      color: white;
+      color: inherit;
       min-height: calc-to-rem(40);
       max-height: calc-to-rem(80);
       border-block-start: calc-to-rem(0.8) solid rgb(38, 38, 38);
@@ -113,22 +112,27 @@
         color: inherit;
         cursor: pointer;
       }
-      &__input-comment {
-        border: 0;
-        background: transparent;
-        color: inherit;
+      &__form {
+        display: flex;
+        align-items: center;
         flex-grow: 1;
-      }
-      &__post-comment-btn {
-        border: 0;
-        padding: calc-to-rem(8);
-        background: transparent;
-        color: rgb(0, 149, 246);
-        line-height: calc-to-rem(18);
-        font-weight: bold;
-        cursor: pointer;
-        &:disabled {
-          color: rgb(179, 219, 255);
+        &__input-comment {
+          border: 0;
+          background: transparent;
+          color: inherit;
+          flex-grow: 1;
+        }
+        &__post-comment-btn {
+          border: 0;
+          padding: calc-to-rem(8);
+          background: transparent;
+          color: rgb(0, 149, 246);
+          line-height: calc-to-rem(18);
+          font-weight: bold;
+          cursor: pointer;
+          &:disabled {
+            color: rgb(179, 219, 255);
+          }
         }
       }
     }

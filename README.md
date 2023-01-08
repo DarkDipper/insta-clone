@@ -1,10 +1,15 @@
 # Todo list
 - [x] Story UI
+- [ ] Recoil
 - [ ] Modal component
 - [x] Post UI
 - [x] Widget UI
 - [ ] Profile UI
-- [ ] Fix color page 
+- [x] Fix color page 
 - [x] Red dot on sidebar item
 - [ ] Cut text description of post component
 - [ ] Try catch the fetch
+- [ ] Slide Image to post component
+- [ ] Search panel
+- [ ] Emoji picker package
+- [ ] Fix main scroll bar

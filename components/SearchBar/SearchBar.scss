@@ -1,0 +1,61 @@
+.search-bar {
+  position: fixed;
+  background: #000000;
+  height: 100vh;
+  width: calc-to-rem(0);
+  margin-inline-start: calc-to-rem(72);
+  z-index: 2;
+  border: 1px solid $border;
+  border-block: none;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  transition: all ease 0.3s;
+  overflow: hidden;
+  &:focus-within {
+    background: black;
+    width: calc-to-rem(390);
+  }
+  &__header {
+    padding-block-end: calc-to-rem(24);
+    padding-inline: calc-to-rem(24) calc-to-rem(14);
+    border-bottom: 1px solid $border;
+    &__title {
+      padding-block: calc-to-rem(36);
+      margin-block: calc-to-rem(8);
+    }
+    &__input {
+      position: relative;
+      display: flex;
+      align-items: center;
+      // margin-inline: calc-to-rem(24) calc-to-rem(14);
+      input {
+        width: 100%;
+        height: calc-to-rem(40);
+        padding-block: calc-to-rem(3);
+        padding-inline: calc-to-rem(16);
+        border-radius: calc-to-rem(8);
+        background: rgb(239, 239, 239);
+        color: rgb(38, 38, 38);
+        font-size: calc-to-rem(16);
+        line-height: cacl-to-rem(22);
+        border: none;
+      }
+      &__close-icon {
+        padding: 0;
+        color: #c8c8c8;
+        position: absolute;
+        // top: 0;
+        right: calc-to-rem(16);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+  &__results {
+    overflow: hidden;
+    padding-inline: calc-to-rem(24) calc-to-rem(14);
+    margin-block-start: calc-to-rem(18);
+    text-align: justify;
+  }
+}

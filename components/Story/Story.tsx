@@ -11,10 +11,9 @@ export default function Story() {
   let list_temp = [];
   for (let i = 0; i <= 10; i++) {
     list_temp.push(
-      <div className="story-user">
+      <div key={i} className="story-user">
         <div className="story-user__wrapper">
           <StoryAvatar
-            key={i}
             src="https://i.ibb.co/YXL10VM/animelody.png"
             haveSeenBefore={false}
           />

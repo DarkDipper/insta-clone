@@ -3,6 +3,7 @@ import SideBar from "../components/SideBar";
 import Story from "../components/Story";
 import Post from "../components/Post";
 import Widget from "../components/Widget";
+import SearchBar from "../components/SearchBar";
 export default function Home() {
   useEffect(() => {
     console.log("Im in Home");
@@ -12,6 +13,7 @@ export default function Home() {
     <div className="main-page">
       {/* Sidebar */}
       <SideBar />
+      <SearchBar />
       <div className="main-page__center">
         <div className="main-page__center__wrapper">
           <div className="main-page__center__wrapper__left">
@@ -32,7 +34,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* Widget */}
     </div>
   );
 }
@@ -40,7 +41,7 @@ export default function Home() {
 export function getServerSideProps() {
   return {
     props: {
-      requireAuth: true,
+      // requireAuth: true,
     },
   };
 }

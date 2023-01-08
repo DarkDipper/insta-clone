@@ -34,6 +34,7 @@
     }
   }
   .suggestion-board {
+    margin-block-end: calc-to-rem(22);
     &__header {
       display: flex;
       padding-block: calc-to-rem(4);
@@ -48,7 +49,7 @@
       &__see-all {
         font-size: calc-to-rem(12);
         font-weight: 600;
-        color: white;
+        color: inherit;
         background: transparent;
         border: none;
         cursor: pointer;
@@ -75,6 +76,21 @@
           cursor: pointer;
         }
       }
+    }
+  }
+  .copy-right {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    gap: calc-to-rem(22);
+    &__socials-icon {
+      display: flex;
+      align-items: center;
+      gap: calc-to-rem(32);
+    }
+    &__text {
+      font-size: calc-to-rem(12);
+      color: rgb(115, 115, 115);
     }
   }
 }

@@ -1,7 +1,9 @@
+import { BsFacebook, BsGithub, BsLinkedin } from "react-icons/bs";
+import { RxDotFilled } from "react-icons/rx";
 import Avatar from "../Avatar";
 
 function Widget() {
-  const suggestItem = (
+  const SuggestItem = () => (
     <div className="suggestion-board__main__suggest-item">
       <div className="suggestion-board__main__suggest-item__avatar">
         <Avatar
@@ -21,8 +23,8 @@ function Widget() {
     </div>
   );
   const listSuggest = [];
-  for (let i = 0; i <= 5; i++) {
-    listSuggest.push(suggestItem);
+  for (let i = 0; i <= 4; i++) {
+    listSuggest.push(<SuggestItem key={i} />);
   }
   return (
     <div className="widget">
@@ -46,6 +48,14 @@ function Widget() {
           <button className="suggestion-board__header__see-all">See All</button>
         </header>
         <main className="suggestion-board__main">{listSuggest}</main>
+      </div>
+      <div className="copy-right">
+        <div className="copy-right__socials-icon">
+          <BsGithub size={20} />
+          <BsLinkedin size={20} />
+          <BsFacebook size={20} />
+        </div>
+        <p className="copy-right__text">&#169; 2023 Insta clone from Dipper</p>
       </div>
     </div>
   );

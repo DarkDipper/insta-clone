@@ -18,7 +18,7 @@ export default function Avatar({
         height: height,
       }}
     >
-      <Image src={src} alt="avatar" fill draggable={false} />
+      <Image src={src} alt="avatar" sizes="100%" fill draggable={false} />
     </div>
   );
 }

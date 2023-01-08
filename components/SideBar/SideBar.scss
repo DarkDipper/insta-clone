@@ -11,8 +11,9 @@
   transition: all ease 0.3s;
   overflow: hidden;
   border-inline-end: 0.8px solid #282828;
+  z-index: 9999;
   &.hide {
-    background: darkgray;
+    // background: darkgray;s
     width: calc-to-rem(48);
     .side-bar__top {
       .side-bar__top__title {
