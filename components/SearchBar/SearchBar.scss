@@ -11,8 +11,7 @@
   border-bottom-right-radius: 16px;
   transition: all ease 0.3s;
   overflow: hidden;
-  &:focus-within {
-    background: black;
+  &.show {
     width: calc-to-rem(390);
   }
   &__header {

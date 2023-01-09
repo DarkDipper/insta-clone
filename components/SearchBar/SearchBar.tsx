@@ -1,16 +1,26 @@
 import { useState, useRef } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import useComponentVisible from "../../hooks/useComponentVisible";
 
 function SearchBar() {
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const [Show, setShow] = useState(false);
+  const {
+    externalComponentRef,
+    ref,
+    isComponentVisible,
+    setIsComponentVisible,
+  } = useComponentVisible(false);
+  // console.log("re-render");
   return (
     <>
       <button
+        ref={externalComponentRef}
         style={{ position: "absolute", right: "0", top: "0" }}
-        onClick={() => {
-          // setShow((preShow) => !preShow);
-          // console.log("You click");
+        onClick={(e) => {
+          e.preventDefault();
+          setIsComponentVisible((prev) => {
+            return !prev;
+          });
           if (searchInputRef.current !== null) {
             searchInputRef.current.focus();
           }
@@ -19,11 +29,8 @@ function SearchBar() {
         Click
       </button>
       <div
-        className={`search-bar`}
-        onClick={(e) => {
-          // e.preventDefault();
-          e.stopPropagation();
-        }}
+        ref={ref}
+        className={`search-bar ${isComponentVisible ? "show" : ""}`}
       >
         <header className="search-bar__header">
           <h2 className="search-bar__header__title">Search</h2>
