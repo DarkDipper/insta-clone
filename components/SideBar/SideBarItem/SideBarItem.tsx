@@ -1,38 +1,34 @@
 import Link from "next/link";
-import { MouseEvent } from "react";
+import { MouseEvent, RefObject, forwardRef } from "react";
 type Props = {
   Icon: React.ReactNode;
   title: string;
-  setHide: (value: any) => void;
   hide: boolean;
   redDot?: boolean;
+  handleItem: (e: MouseEvent) => void;
 };
 
-export default function SideBarItem({
-  Icon,
-  title,
-  setHide,
-  hide,
-  redDot = false,
-}: Props) {
-  const handleLink = (e: MouseEvent) => {
-    e.preventDefault();
-    setHide((preState: boolean) => !preState);
-  };
-  return (
-    <Link
-      href="#"
-      className={`side-bar__item ${hide ? "hide" : ""}`}
-      onClick={handleLink}
-    >
-      <div className="side-bar__item__wrapper">
-        <div
-          className={`side-bar__item__wrapper--icon ${redDot ? "red-dot" : ""}`}
-        >
-          {Icon}
+const SideBarItem = forwardRef<HTMLDivElement, Props>(
+  ({ Icon, title, hide, redDot = false, handleItem }: Props, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={`side-bar__item ${hide ? "hide" : ""}`}
+        onClick={handleItem}
+      >
+        <div className="side-bar__item__wrapper">
+          <div
+            className={`side-bar__item__wrapper--icon ${
+              redDot ? "red-dot" : ""
+            }`}
+          >
+            {Icon}
+          </div>
+          <p className={`side-bar__item__wrapper--text`}>{title}</p>
         </div>
-        <p className={`side-bar__item__wrapper--text`}>{title}</p>
       </div>
-    </Link>
-  );
-}
+    );
+  }
+);
+SideBarItem.displayName = "SideBarItem";
+export default SideBarItem;

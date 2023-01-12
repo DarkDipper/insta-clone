@@ -50,6 +50,20 @@
     }
   }
 }
+@media only screen and (max-width: 900px) {
+  .side-bar__item {
+    width: calc-to-rem(30);
+    overflow: hidden;
+    justify-content: center;
+    .side-bar__item__wrapper {
+      // width: calc-to-rem(42.8);
+      &--text {
+        opacity: 0;
+        display: none;
+      }
+    }
+  }
+}
 
 .dark .side-bar__item {
   color: white;

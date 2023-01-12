@@ -12,6 +12,23 @@
   overflow: hidden;
   border-inline-end: 0.8px solid #282828;
   z-index: 9999;
+  @media only screen and (max-width: 900px) {
+    & {
+      // background: darkgray;s
+      width: calc-to-rem(48);
+      .side-bar__top {
+        .side-bar__top__title {
+          &--text {
+            opacity: 0;
+          }
+          &--icon {
+            font-size: calc-to-rem(24);
+            padding-inline-start: calc-to-rem(6.4);
+          }
+        }
+      }
+    }
+  }
   &.hide {
     // background: darkgray;s
     width: calc-to-rem(48);

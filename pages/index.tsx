@@ -13,7 +13,6 @@ export default function Home() {
     <div className="main-page">
       {/* Sidebar */}
       <SideBar />
-      <SearchBar />
       <div className="main-page__center">
         <div className="main-page__center__wrapper">
           <div className="main-page__center__wrapper__left">

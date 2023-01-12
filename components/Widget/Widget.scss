@@ -93,4 +93,7 @@
       color: rgb(115, 115, 115);
     }
   }
+  @media only screen and (max-width: 1000px) {
+    display: none;
+  }
 }
