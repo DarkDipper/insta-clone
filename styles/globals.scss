@@ -19,6 +19,7 @@
 @import "components/Post/Post.scss";
 @import "components/Widget/Widget.scss";
 @import "components/SearchBar/SearchBar.scss";
+@import "components/ImageSlider/ImageSlider.scss";
 
 // Pages
 @import "./styles/style-pages/CheckinPage.scss";
@@ -29,6 +30,9 @@ body {
   // font-family: "Roboto", sans-serif;
   font-family: "Segoe UI", sans-serif;
   font-size: calc-to-rem(16);
+  // overflow-y: hidden;
+  scrollbar-color: darkgray black;
+  scrollbar-width: thin;
 }
 button {
   font-family: "Segoe UI", sans-serif;

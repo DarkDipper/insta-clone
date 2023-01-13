@@ -17,11 +17,16 @@ export default function Checkin() {
     return () => clearInterval(interval);
   }, [imgTransition]);
 
-  
   return (
     <div className="login-page">
       <div className="login-page__left">
-        <Image src="https://i.ibb.co/JCVy7Nb/login-Page.png" width={465} height={635} alt="" className="image-login-background"/>
+        <Image
+          src="https://i.ibb.co/JCVy7Nb/login-Page.png"
+          width={465}
+          height={635}
+          alt=""
+          className="image-login-background"
+        />
         <div className="image-login">
           <Image
             className={imgTransition === 0 ? "show" : "hide"}

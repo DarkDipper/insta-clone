@@ -5,11 +5,14 @@
 - [x] Post UI
 - [x] Widget UI
 - [ ] Profile UI
+- [ ] Chat UI
+- [ ] Explore UI
+- [ ] Setting UI
 - [x] Fix color page 
 - [x] Red dot on sidebar item
-- [ ] Cut text description of post component
+- [x] Cut text description of post component
 - [ ] Try catch the fetch
 - [ ] Slide Image to post component
-- [ ] Search panel
+- [x] Search panel
 - [ ] Emoji picker package
-- [ ] Fix main scroll bar
+- [x] Fix main scroll bar

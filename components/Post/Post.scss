@@ -1,7 +1,7 @@
 .post {
   border-radius: calc-to-rem(8);
   border: calc-to-rem(1) solid $border;
-  width: 100%;
+  width: 470px;
   margin-block-end: calc-to-rem(12);
   &__header {
     display: flex;
@@ -40,7 +40,7 @@
     object-fit: cover;
     object-position: center;
     overflow: hidden;
-    vertical-align: middle;
+    // vertical-align: middle;
   }
   &__footer {
     margin-block-start: calc-to-rem(4);
@@ -70,15 +70,33 @@
     }
     &__paragraph {
       padding-inline: calc-to-rem(20);
-      margin-block-end: calc-to-rem(8);
+      overflow: hidden;
       &__user-name {
+        display: block;
         font-weight: bold;
+        margin-block-end: 8px;
       }
       &__content {
+        display: -webkit-box;
+        // display: block;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
         font-size: calc-to-rem(14);
         line-height: calc-to-rem(18);
         text-align: justify;
+        &--show {
+          display: block;
+          margin-block-end: calc-to-rem(8);
+        }
       }
+    }
+    &__view-more {
+      margin-block-end: calc-to-rem(8);
+      font-size: calc-to-rem(14);
+      line-height: calc-to-rem(18);
+      color: rgb(168, 168, 168);
+      padding-inline: calc-to-rem(20);
+      cursor: pointer;
     }
     &__view-comments {
       padding-inline: calc-to-rem(20);

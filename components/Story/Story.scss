@@ -1,4 +1,7 @@
 .story {
+  &::-webkit-scrollbar {
+    display: none;
+  }
   position: relative;
   border-radius: calc-to-rem(8);
   border: 1px solid $border;

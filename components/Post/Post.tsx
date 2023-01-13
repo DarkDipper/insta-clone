@@ -1,12 +1,32 @@
 import Image from "next/image";
-import { MouseEvent, FormEvent } from "react";
+import { MouseEvent, FormEvent, useState } from "react";
 import StoryAvatar from "../StoryAvatar";
+import ImageSlider from "../ImageSlider";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { FaRegComment, FaHeart } from "react-icons/fa";
 import { IoPaperPlane } from "react-icons/io5";
 import { BiBookmark } from "react-icons/bi";
 import { SlEmotsmile } from "react-icons/sl";
+
+const SlideImage = [
+  {
+    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
+  },
+  {
+    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
+  },
+  {
+    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
+  },
+  {
+    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
+  },
+  {
+    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
+  },
+];
 export default function Post() {
+  const [More, setMore] = useState(false);
   const handleCommentSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const inputElement = e.currentTarget.elements.namedItem(
@@ -15,6 +35,10 @@ export default function Post() {
     console.log(inputElement.value);
     inputElement.value = "";
     console.log("You post a comment");
+  };
+  const handleMore = (e: MouseEvent) => {
+    e.preventDefault();
+    setMore(true);
   };
   return (
     <div className="post">
@@ -40,12 +64,7 @@ export default function Post() {
         </button>
       </header>
       <main className="post__content">
-        <Image
-          src="https://i.ibb.co/c1YQvN6/defaultpost.jpg"
-          alt="content"
-          fill
-          sizes="100%"
-        />
+        <ImageSlider listImages={SlideImage} />
       </main>
       <footer className="post__footer">
         <div className="post__footer__btns">
@@ -64,8 +83,12 @@ export default function Post() {
         </div>
         <div className="post__footer__likes">1,270 likes</div>
         <div className="post__footer__paragraph">
-          <span className="post__footer__paragraph__user-name">userName </span>{" "}
-          <span className="post__footer__paragraph__content">
+          <span className="post__footer__paragraph__user-name">userName </span>
+          <span
+            className={`post__footer__paragraph__content${
+              More ? "--show" : ""
+            }`}
+          >
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto
             ad at numquam unde tempora amet veniam voluptate, praesentium cum
             quam ut delectus laudantium nesciunt nihil totam, dignissimos quos
@@ -73,6 +96,13 @@ export default function Post() {
             nam eum corporis natus?
           </span>
         </div>
+        {!More ? (
+          <div onClick={handleMore} className="post__footer__view-more">
+            more
+          </div>
+        ) : (
+          ""
+        )}
         <div className="post__footer__view-comments">View all 14 comments</div>
         <div className="post__footer__time">1 DAY AGO</div>
         <div className="post__footer__comment">

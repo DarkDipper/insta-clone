@@ -3,7 +3,7 @@ import SideBar from "../components/SideBar";
 import Story from "../components/Story";
 import Post from "../components/Post";
 import Widget from "../components/Widget";
-import SearchBar from "../components/SearchBar";
+
 export default function Home() {
   useEffect(() => {
     console.log("Im in Home");
