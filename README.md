@@ -12,7 +12,8 @@
 - [x] Red dot on sidebar item
 - [x] Cut text description of post component
 - [ ] Try catch the fetch
-- [ ] Slide Image to post component
+- [x] Slide Image to post component
 - [x] Search panel
 - [ ] Emoji picker package
+- [ ] Comment component
 - [x] Fix main scroll bar

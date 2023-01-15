@@ -3,9 +3,10 @@ import Image from "next/image";
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 type props = {
   listImages: { src: string }[];
+  size: number;
 };
 
-function ImageSlider({ listImages }: props) {
+function ImageSlider({ listImages, size }: props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const handelNext = (e: MouseEvent) => {
     e.preventDefault();
@@ -26,20 +27,20 @@ function ImageSlider({ listImages }: props) {
           className="image-slider-container--left-btn"
           onClick={handlePrev}
         >
-          <AiFillLeftCircle />
+          <AiFillLeftCircle size={30} />
         </button>
       ) : (
         ""
       )}
       <div
         className="image-slider-container__main-content"
-        style={{ transform: `translateX(${-470 * currentIndex}px)` }}
+        style={{ transform: `translateX(${-size * currentIndex}px)` }}
       >
         {/* <Image src={listImages[0]["src"]} alt="" fill sizes="100%" /> */}
         {listImages.map((item, index) => {
           return (
             <div className="image" key={index}>
-              <Image src={item.src} alt="" width={470} height={470} />
+              <Image src={item.src} alt="" width={size} height={size} />
             </div>
           );
         })}
@@ -49,7 +50,7 @@ function ImageSlider({ listImages }: props) {
           className="image-slider-container--right-btn"
           onClick={handelNext}
         >
-          <AiFillRightCircle />
+          <AiFillRightCircle size={30} />
         </button>
       ) : (
         ""

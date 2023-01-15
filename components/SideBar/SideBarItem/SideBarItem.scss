@@ -9,6 +9,7 @@
   transition: all ease 0.3s;
   display: flex;
   align-items: center;
+  cursor: pointer;
   &:hover {
     background: rgba(128, 128, 128, 0.405);
   }
