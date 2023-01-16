@@ -1,0 +1,25 @@
+.comment-container {
+  margin-block-end: 10px;
+  &__user {
+    display: flex;
+    align-items: center;
+    margin-block-end: calc-to-rem(8);
+    gap: calc-to-rem(18);
+    &__name {
+      font-size: calc-to-rem(14);
+      font-weight: 600;
+      line-height: calc-to-rem(18);
+    }
+  }
+  &__content {
+    margin-block-end: calc-to-rem(10);
+    margin-inline-start: calc-to-rem(50);
+    font-size: calc-to-rem(14);
+    line-height: calc-to-rem(18);
+  }
+  &__footer {
+    margin-inline-start: calc-to-rem(50);
+    font-size: calc-to-rem(12);
+    color: rgb(168, 168, 168);
+  }
+}

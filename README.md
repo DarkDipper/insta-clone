@@ -1,7 +1,8 @@
 # Todo list
 - [x] Story UI
 - [ ] Recoil
-- [ ] Modal component
+- [x] Modal component
+- [x] Modal Post component
 - [x] Post UI
 - [x] Widget UI
 - [ ] Profile UI
@@ -15,5 +16,5 @@
 - [x] Slide Image to post component
 - [x] Search panel
 - [ ] Emoji picker package
-- [ ] Comment component
+- [x] Comment component
 - [x] Fix main scroll bar

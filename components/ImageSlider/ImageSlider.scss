@@ -29,6 +29,7 @@
     display: flex;
     align-items: center;
     transition: all ease-in-out 0.3s;
+    overflow: hidden;
     .image {
       object-fit: cover;
       object-position: center;

@@ -2,8 +2,8 @@ import Image from "next/image";
 import { MouseEvent, FormEvent, useState } from "react";
 import StoryAvatar from "../StoryAvatar";
 import ImageSlider from "../ImageSlider";
-import { FiMoreHorizontal } from "react-icons/fi";
-import { FaRegComment, FaHeart } from "react-icons/fa";
+import { FiHeart, FiMoreHorizontal } from "react-icons/fi";
+import { FaRegComment } from "react-icons/fa";
 import { IoPaperPlane } from "react-icons/io5";
 import { BiBookmark } from "react-icons/bi";
 import { SlEmotsmile } from "react-icons/sl";
@@ -69,7 +69,7 @@ export default function Post() {
       <footer className="post__footer">
         <div className="post__footer__btns">
           <button className="post__footer__btns__like-btn">
-            <FaHeart size={24} />
+            <FiHeart size={24} />
           </button>
           <button className="post__footer__btns__comment-btn">
             <FaRegComment size={24} />
