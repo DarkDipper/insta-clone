@@ -66,6 +66,9 @@
           // color: #ed4956;
           cursor: pointer;
         }
+        &__like-btn.liked {
+          color: rgb(237, 73, 86);
+        }
         &__save-btn {
           margin-left: auto;
         }

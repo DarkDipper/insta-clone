@@ -1,8 +1,8 @@
-import { FormEvent, RefObject } from "react";
+import { FormEvent, RefObject, useState, MouseEvent } from "react";
 import Avatar from "../Avatar";
 import ImageSlider from "../ImageSlider";
 import Comment from "../Comment";
-import { FaRegComment } from "react-icons/fa";
+import { FaHeart, FaRegComment } from "react-icons/fa";
 import { IoPaperPlane } from "react-icons/io5";
 import { BiBookmark } from "react-icons/bi";
 import { FiHeart } from "react-icons/fi";
@@ -14,6 +14,7 @@ type Props = {
 };
 
 function ModalPost({ SlideImage, modalPostRef }: Props) {
+  const [Liked, setLiked] = useState(false);
   const handleCommentSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const inputElement = e.currentTarget.elements.namedItem(
@@ -22,6 +23,10 @@ function ModalPost({ SlideImage, modalPostRef }: Props) {
     console.log(inputElement.value);
     inputElement.value = "";
     console.log("You post a comment");
+  };
+  const handleLiked = (e: MouseEvent) => {
+    e.preventDefault();
+    setLiked((prev) => !prev);
   };
   return (
     <div className="modal-post" ref={modalPostRef}>
@@ -43,8 +48,13 @@ function ModalPost({ SlideImage, modalPostRef }: Props) {
         </main>
         <footer className="modal-post__right__footer">
           <div className="modal-post__right__footer__btns">
-            <button className="modal-post__right__footer__btns__like-btn">
-              <FiHeart size={24} />
+            <button
+              className={`modal-post__right__footer__btns__like-btn ${
+                Liked && "liked"
+              }`}
+              onClick={handleLiked}
+            >
+              {!Liked ? <FiHeart size={24} /> : <FaHeart size={24} />}
             </button>
             <button className="modal-post__right__footer__btns__comment-btn">
               <FaRegComment size={24} />

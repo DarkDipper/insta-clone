@@ -59,6 +59,9 @@
         // color: #ed4956;
         cursor: pointer;
       }
+      &__like-btn.liked {
+        color: rgb(237, 73, 86);
+      }
       &__save-btn {
         margin-left: auto;
       }
@@ -104,6 +107,7 @@
       font-size: calc-to-rem(14);
       line-height: calc-to-rem(18);
       color: rgb(168, 168, 168);
+      cursor: pointer;
     }
     &__time {
       padding-inline: calc-to-rem(20);
