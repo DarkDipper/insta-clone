@@ -15,7 +15,7 @@
       font-size: calc-to-rem(56);
       margin-block: 0 0.67em;
     }
-    .btn-toggle-mode{
+    .btn-toggle-mode {
       position: absolute;
       top: 2%;
       right: 2%;
@@ -63,7 +63,7 @@
         }
       }
       .login-btn {
-        margin-block: calc-to-rem(30) calc-to-rem(46);
+        margin-block: calc-to-rem(30) calc-to-rem(18);
         padding: calc-to-rem(5) calc-to-rem(10);
         border: none;
         border-radius: 6px;
@@ -77,13 +77,17 @@
           cursor: pointer;
           background: rgba(0, 148, 246, 0.8);
         }
-        &:active{
+        &:active {
           background: rgb(0, 114, 189);
         }
         &:disabled {
           background: rgb(178, 223, 252);
           color: #fdfeff;
         }
+      }
+      .login-error {
+        color: red;
+        margin-block-end: calc-to-rem(28);
       }
     }
     a {

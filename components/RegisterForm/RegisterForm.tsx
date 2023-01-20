@@ -5,7 +5,7 @@ import { FaRegMoon, FaSun } from "react-icons/fa";
 import IconButton from "../IconButton";
 import { ThemeContext } from "../../theme";
 import useAuth from "../../hooks/useAuth";
-
+import axios from "axios";
 type Props = {
   setShowRegister: (value: boolean) => void;
 };
@@ -35,7 +35,7 @@ function reducer(state: userState, action: userAction) {
         throw new Error("Cannot change user state");
     }
   } else {
-    throw Error("Payload empty")
+    throw Error("Payload empty");
   }
 }
 
@@ -56,12 +56,24 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const json = await auth.signUp(
-      uState.username,
-      uState.password,
-      uState.email
-    );
-    console.log(json);
+    const respone = await axios
+      .post(
+        "http://localhost:5000/api/v1/user/register",
+        {
+          username: uState.username,
+          password: uState.password,
+          email: uState.username,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .catch((respone) => {
+        console.log(respone);
+      });
+    const registerStatus = await auth.signUp(respone);
     dispatch({ type: "reset" });
     setShowRegister(false);
   };
@@ -94,7 +106,7 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
           </div>
           <div className="email-input">
             <input
-              type="email"
+              type="text"
               name="email"
               id="email"
               placeholder="Email"

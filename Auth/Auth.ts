@@ -1,7 +1,5 @@
+import { AxiosResponse } from "axios";
 type User = {
-  // userName: string;
-  // email: string;
-  // passWord: string;
   token: string;
 };
 
@@ -27,41 +25,43 @@ class Auth {
   protected onUserChange(user: User | null, error?: { message: string }) {
     this.cb && this.cb(user, error);
   }
-  async signUp(userName: string, passWord: string, Email: string) {
-    const respone = await fetch("http://localhost:5000/api/v1/user/register", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: userName,
-        password: passWord,
-        email: Email,
-      }),
-    });
-    const json = await respone.json();
-    return json;
+  async signUp(respone: AxiosResponse | void) {
+    try {
+      if (respone === undefined) {
+        throw Error("Respone is void");
+      }
+      const { status, message, data } = await respone.data;
+      return true;
+    } catch (e) {
+      if (e instanceof Error) {
+        console.log(e.message);
+      }
+      return false;
+    }
   }
-  async signIn(userName: string, passWord: string) {
-    console.log(`Sign in with email: ${userName} password: ${passWord}`);
-    const respone = await fetch("http://localhost:5000/api/v1/user/login", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: userName,
-        password: passWord,
-      }),
-    });
-    const json = await respone.json();
-    this.user = {
-      token: json.userToken,
-    };
-    window.sessionStorage.setItem("user", JSON.stringify(this.user));
-    this.onUserChange(this.user);
+  async signIn(respone: AxiosResponse | void) {
+    try {
+      if (respone === undefined) {
+        throw Error("Respone is void");
+      }
+      if (respone.status === 200) {
+        const { token: userToken } = respone.data;
+        console.log(userToken);
+        this.user = {
+          token: userToken,
+        };
+        window.sessionStorage.setItem("user", JSON.stringify(this.user));
+        this.onUserChange(this.user);
+      } else {
+        throw Error(`${respone.status}`);
+      }
+      return true;
+    } catch (e) {
+      if (e instanceof Error) {
+        console.log(e.message);
+      }
+      return false;
+    }
   }
   async signOut() {
     console.log("Sign out");
