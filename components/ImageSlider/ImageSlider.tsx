@@ -5,9 +5,10 @@ import CustomImage from "../CustomImage";
 type props = {
   listImages: { src: string }[];
   size: number;
+  handleModal?: (e: MouseEvent) => void;
 };
 
-function ImageSlider({ listImages, size }: props) {
+function ImageSlider({ listImages, size, handleModal }: props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const handelNext = (e: MouseEvent) => {
     e.preventDefault();
@@ -23,23 +24,29 @@ function ImageSlider({ listImages, size }: props) {
   };
   return (
     <div className="image-slider-container">
-      {currentIndex !== 0 ? (
+      {currentIndex !== 0 && (
         <button
           className="image-slider-container--left-btn"
           onClick={handlePrev}
         >
           <AiFillLeftCircle size={30} />
         </button>
-      ) : (
-        ""
       )}
       <div
         className="image-slider-container__main-content"
-        style={{ transform: `translateX(${-size * currentIndex}px)` }}
+        onClick={handleModal}
+        style={{
+          transform: `translateX(${-size * currentIndex}px)`,
+          cursor: handleModal && "pointer",
+        }}
       >
         {listImages.map((item, index) => {
           return (
-            <div className="image" key={index}>
+            <div
+              className="image"
+              key={index}
+              style={{ width: `${size}px`, height: `${size}px` }}
+            >
               {/* <Image
                 src={item.src}
                 alt=""
@@ -51,15 +58,13 @@ function ImageSlider({ listImages, size }: props) {
           );
         })}
       </div>
-      {currentIndex !== listImages.length - 1 ? (
+      {currentIndex !== listImages.length - 1 && (
         <button
           className="image-slider-container--right-btn"
           onClick={handelNext}
         >
           <AiFillRightCircle size={30} />
         </button>
-      ) : (
-        ""
       )}
       <div className="list-pointer">
         {listImages.map((_, index) => (

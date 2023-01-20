@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: whitesmoke;
+    color: rgb(132, 132, 132);
     z-index: 9999;
     top: 50%;
     border: 0;
@@ -31,14 +31,15 @@
     transition: all ease-in-out 0.3s;
     overflow: hidden;
     .image {
-      width: 470px;
-      height: 470px;
+      // width: 470px;
+      // height: 470px;
       position: relative;
       object-fit: contain;
       object-position: center;
       overflow: hidden;
       display: flex;
-      // align-items: center;
+      align-items: center;
+      justify-content: center;
     }
   }
   .list-pointer {

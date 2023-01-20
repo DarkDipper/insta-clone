@@ -95,7 +95,11 @@ export default function Post() {
           </button>
         </header>
         <main className="post__content">
-          <ImageSlider listImages={SlideImage} size={470} />
+          <ImageSlider
+            handleModal={handleModalPost}
+            listImages={SlideImage}
+            size={470}
+          />
         </main>
         <footer className="post__footer">
           <div className="post__footer__btns">
