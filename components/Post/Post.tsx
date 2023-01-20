@@ -16,16 +16,16 @@ const SlideImage = [
     src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
   },
   {
-    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
+    src: "https://i.ibb.co/nkYrxTW/loginpage3.png",
   },
   {
-    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
+    src: "https://i.ibb.co/YXL10VM/animelody.png",
   },
   {
-    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
+    src: "https://i.ibb.co/G3yfYFN/Monokuma.png",
   },
   {
-    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
+    src: "https://i.ibb.co/Ctx4kbM/avatar.jpg",
   },
 ];
 export default function Post() {

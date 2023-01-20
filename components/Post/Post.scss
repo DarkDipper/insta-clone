@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: center;
     height: calc-to-rem(56);
+    border-bottom: 1px solid $border;
     &__avatar {
       padding-inline-start: calc-to-rem(8);
     }
@@ -40,9 +41,9 @@
     object-fit: cover;
     object-position: center;
     overflow: hidden;
-    // vertical-align: middle;
   }
   &__footer {
+    border-top: 1px solid $border;
     margin-block-start: calc-to-rem(4);
     &__btns {
       padding-block-end: calc-to-rem(6);

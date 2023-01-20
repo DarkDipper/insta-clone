@@ -1,6 +1,7 @@
 import { MouseEvent, useState } from "react";
 import Image from "next/image";
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+import CustomImage from "../CustomImage";
 type props = {
   listImages: { src: string }[];
   size: number;
@@ -36,11 +37,16 @@ function ImageSlider({ listImages, size }: props) {
         className="image-slider-container__main-content"
         style={{ transform: `translateX(${-size * currentIndex}px)` }}
       >
-        {/* <Image src={listImages[0]["src"]} alt="" fill sizes="100%" /> */}
         {listImages.map((item, index) => {
           return (
             <div className="image" key={index}>
-              <Image src={item.src} alt="" width={size} height={size} />
+              {/* <Image
+                src={item.src}
+                alt=""
+                width={size}
+                height={size}
+              /> */}
+              <CustomImage src={item.src} />
             </div>
           );
         })}

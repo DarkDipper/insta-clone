@@ -40,7 +40,7 @@ export default function Home() {
 export function getServerSideProps() {
   return {
     props: {
-      requireAuth: true,
+      // requireAuth: true,
     },
   };
 }

@@ -31,9 +31,14 @@
     transition: all ease-in-out 0.3s;
     overflow: hidden;
     .image {
-      object-fit: cover;
-      object-position: center;
+      width: 470px;
+      height: 470px;
       position: relative;
+      object-fit: contain;
+      object-position: center;
+      overflow: hidden;
+      display: flex;
+      // align-items: center;
     }
   }
   .list-pointer {
@@ -48,7 +53,8 @@
     &__pointer {
       height: 6px;
       width: 6px;
-      background: rgb(250, 250, 250);
+      // background: rgb(250, 250, 250);
+      background: darkorange;
       border-radius: 50%;
       transition: all 0.2s ease-in-out;
       opacity: 0.4;
