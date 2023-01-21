@@ -4,7 +4,17 @@ import Head from "next/head";
 import ThemeProvider from "../theme";
 import { AuthProvider } from "../Auth/AuthProvider";
 import { AuthGuard } from "../Auth/AuthGuard";
-import Loading from "../components/Loading";
+import localFont from "@next/font/local";
+import { Explora } from "@next/font/google";
+const segoeUI = localFont({
+  src: "../public/font/Segoe fonts v1710/segoeui.ttf",
+});
+
+const roboto = Explora({
+  weight: "400",
+  style: ["normal"],
+  subsets: ["latin"],
+});
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -20,7 +30,9 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </AuthGuard>
           ) : (
-            <Component {...pageProps} />
+            <div className={segoeUI.className}>
+              <Component {...pageProps} />
+            </div>
           )}
         </AuthProvider>
       </ThemeProvider>

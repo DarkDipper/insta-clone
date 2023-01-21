@@ -14,7 +14,11 @@ import { FaBars } from "react-icons/fa";
 import { useState, MouseEvent, useEffect } from "react";
 import useComponentVisible from "../../hooks/useComponentVisible";
 import SearchBar from "../SearchBar";
-
+import { Dancing_Script } from "@next/font/google";
+const dancingScript = Dancing_Script({
+  style: ["normal"],
+  subsets: ["latin"],
+});
 export default function SideBar() {
   const [hide, setHide] = useState(false);
   const {
@@ -119,7 +123,12 @@ export default function SideBar() {
       <div className={`side-bar ${hide ? "hide" : ""}`}>
         <div className="side-bar__top">
           <Link href="#" className="side-bar__top__title">
-            <p className="side-bar__top__title--text">Instagram</p>
+            <p
+              style={dancingScript.style}
+              className="side-bar__top__title--text"
+            >
+              Instagram
+            </p>
             <BsInstagram className="side-bar__top__title--icon" />
           </Link>
           <div className="side-bar__top__menu">
