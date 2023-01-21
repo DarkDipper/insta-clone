@@ -1,5 +1,6 @@
 # Todo list
 - [x] Story UI
+- [x] Custom Image component
 - [ ] Recoil
 - [x] Modal component
 - [x] Modal Post component
@@ -18,3 +19,7 @@
 - [ ] Emoji picker package
 - [x] Comment component
 - [x] Fix main scroll bar
+
+# Bug
+- [x] Custom Image with height value of 0
+- [ ] Font segoe UI
