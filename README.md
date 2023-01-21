@@ -22,4 +22,4 @@
 
 # Bug
 - [x] Custom Image with height value of 0
-- [ ] Font segoe UI
+- [x] Font segoe UI

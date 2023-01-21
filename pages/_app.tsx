@@ -1,20 +1,15 @@
-import "../styles/globals.scss";
+import "@yourapp/styles/globals.scss";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import ThemeProvider from "../theme";
 import { AuthProvider } from "../Auth/AuthProvider";
 import { AuthGuard } from "../Auth/AuthGuard";
 import localFont from "@next/font/local";
-import { Explora } from "@next/font/google";
 const segoeUI = localFont({
   src: "../public/font/Segoe fonts v1710/segoeui.ttf",
+  preload: false,
 });
 
-const roboto = Explora({
-  weight: "400",
-  style: ["normal"],
-  subsets: ["latin"],
-});
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -27,7 +22,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <AuthProvider>
           {pageProps.requireAuth ? (
             <AuthGuard>
-              <Component {...pageProps} />
+              <div className={segoeUI.className}>
+                <Component {...pageProps} />
+              </div>
             </AuthGuard>
           ) : (
             <div className={segoeUI.className}>

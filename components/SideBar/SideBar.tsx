@@ -18,6 +18,7 @@ import { Dancing_Script } from "@next/font/google";
 const dancingScript = Dancing_Script({
   style: ["normal"],
   subsets: ["latin"],
+  preload: false,
 });
 export default function SideBar() {
   const [hide, setHide] = useState(false);
