@@ -36,16 +36,15 @@ export default function SideBar() {
   }, [searchBarVisible, setHide]);
   const sideData = [
     {
-      Icon: <AiOutlineHome />,
+      Icon: <AiOutlineHome size={24} />,
       title: "Home",
       redDot: false,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
-        setHide((preState: boolean) => !preState);
       },
     },
     {
-      Icon: <IoSearch />,
+      Icon: <IoSearch size={24} />,
       title: "Search",
       redDot: false,
       handleItem: (e: MouseEvent) => {
@@ -59,48 +58,43 @@ export default function SideBar() {
       ref: buttonSearchRef,
     },
     {
-      Icon: <ImCompass2 />,
+      Icon: <ImCompass2 size={24} />,
       title: "Explore",
       redDot: true,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
-        setHide((preState: boolean) => !preState);
       },
     },
     {
-      Icon: <BsCollectionPlay />,
+      Icon: <BsCollectionPlay size={24} />,
       title: "Reels",
       redDot: false,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
-        setHide((preState: boolean) => !preState);
       },
     },
     {
-      Icon: <IoPaperPlane />,
+      Icon: <IoPaperPlane size={24} />,
       title: "Message",
       redDot: true,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
-        setHide((preState: boolean) => !preState);
       },
     },
     {
-      Icon: <BsBellFill />,
+      Icon: <BsBellFill size={24} />,
       title: "Notification",
       redDot: true,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
-        setHide((preState: boolean) => !preState);
       },
     },
     {
-      Icon: <BsPlusSquare />,
+      Icon: <BsPlusSquare size={24} />,
       title: "Create",
       redDot: false,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
-        setHide((preState: boolean) => !preState);
       },
     },
     {
@@ -115,7 +109,6 @@ export default function SideBar() {
       redDot: false,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
-        setHide((preState: boolean) => !preState);
       },
     },
   ];
@@ -150,7 +143,7 @@ export default function SideBar() {
         </div>
         <div className="side-bar__bottom">
           <SideBarItem
-            Icon={<FaBars />}
+            Icon={<FaBars size={24} />}
             title="More"
             hide={hide}
             handleItem={() => {}}

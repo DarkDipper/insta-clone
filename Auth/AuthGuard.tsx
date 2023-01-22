@@ -8,7 +8,6 @@ function AuthGuard({ children }: { children: JSX.Element }) {
   useEffect(() => {
     if (!initializing) {
       if (!user) {
-        console.log("No user");
         setRedirect(router.route);
         router.push("/checkin");
       }

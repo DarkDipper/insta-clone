@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import { Auth, User } from "./Auth";
-import { useRouter } from "next/router";
 
 const auth = new Auth();
 
@@ -35,7 +34,6 @@ function AuthProvider({ children }: { children: JSX.Element }) {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<{ message: string } | null>(null);
   const [initializing, setInitializing] = useState(true);
-  const router = useRouter();
 
   useEffect(() => {
     auth.resolveUser((user, error) => {
@@ -51,7 +49,7 @@ function AuthProvider({ children }: { children: JSX.Element }) {
       }
       setInitializing(false);
     });
-  },[]);
+  }, []);
   const value = {
     auth,
     initializing,

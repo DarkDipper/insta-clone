@@ -6,9 +6,15 @@ import IconButton from "../IconButton";
 import { ThemeContext } from "../../theme";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import { Dancing_Script } from "@next/font/google";
 type Props = {
   setShowRegister: (value: boolean) => void;
 };
+const dancingScript = Dancing_Script({
+  style: ["normal"],
+  subsets: ["latin"],
+  preload: false,
+});
 type userState = {
   username: string;
   email: string;
@@ -80,7 +86,9 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
   return (
     <div className={"register-container"}>
       <div className="register-container__top">
-        <h1 className="name-app">Instagram</h1>
+        <h1 className="name-app" style={dancingScript.style}>
+          Instagram
+        </h1>
         <IconButton className="btn-toggle-mode" onClick={toggleMode}>
           {mode === "light" ? (
             <FaRegMoon style={{ height: "100%", width: "100%" }} />

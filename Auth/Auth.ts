@@ -1,3 +1,4 @@
+import { setCookie, getCookie, removeCookies } from "cookies-next";
 import { AxiosResponse } from "axios";
 type User = {
   token: string;
@@ -45,12 +46,15 @@ class Auth {
         throw Error("Respone is void");
       }
       if (respone.status === 200) {
-        const { token: userToken } = respone.data;
-        console.log(userToken);
+        const { userToken } = respone.data;
         this.user = {
           token: userToken,
         };
-        window.sessionStorage.setItem("user", JSON.stringify(this.user));
+        setCookie("6gR265$m_t0k3n", userToken, {
+          sameSite: "none",
+          secure: true,
+        });
+        // window.sessionStorage.setItem("user", JSON.stringify(this.user));
         this.onUserChange(this.user);
       } else {
         throw Error(`${respone.status}`);
@@ -65,16 +69,21 @@ class Auth {
   }
   async signOut() {
     console.log("Sign out");
-    window.sessionStorage.removeItem("user");
+    // window.sessionStorage.removeItem("user");
+    removeCookies("6gR265$m_t0k3n");
     this.user = null;
     this.onUserChange(this.user);
   }
   resolveUser(cb: UserCB) {
     setTimeout(() => {
       if (window) {
-        const signedInUser = window.sessionStorage.getItem("user");
-        if (signedInUser) {
-          this.user = JSON.parse(signedInUser);
+        // const signedInUser = window.sessionStorage.getItem("user");
+        const signedInUser = getCookie("6gR265$m_t0k3n");
+
+        if (typeof signedInUser === "string") {
+          this.user = {
+            token: signedInUser,
+          };
         }
       }
       this.onAuthStateChange(cb);

@@ -7,10 +7,15 @@ import { ThemeContext } from "../../theme";
 import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { Dancing_Script } from "@next/font/google";
 type Props = {
   setShowRegister: (value: boolean) => void;
 };
-
+const dancingScript = Dancing_Script({
+  style: ["normal"],
+  subsets: ["latin"],
+  preload: false,
+});
 export default function LoginForm({ setShowRegister }: Props): JSX.Element {
   const { auth, initializing, getRedirect, clearRedirect, user, error } =
     useAuth();
@@ -64,7 +69,9 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
   return (
     <div className={"login-container"}>
       <div className="login-container__top">
-        <h1 className="name-app">Instagram</h1>
+        <h1 className="name-app" style={dancingScript.style}>
+          Instagram
+        </h1>
         <IconButton className="btn-toggle-mode" onClick={toggleMode}>
           {mode === "light" ? (
             <FaRegMoon style={{ height: "100%", width: "100%" }} />
