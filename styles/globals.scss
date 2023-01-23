@@ -1,5 +1,5 @@
 // Config
-@import "resetScss";
+
 @import "functions";
 @import "variables";
 // @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
@@ -23,10 +23,17 @@
 @import "components/Modal/Modal.scss";
 @import "components/ModalPost/ModalPost.scss";
 @import "components/Comment/Comment.scss";
+@import "components/Share/Share.scss";
 
 // Pages
 @import "./styles/style-pages/CheckinPage.scss";
 @import "./style-pages/HomePage.scss";
+
+// Config
+@import "resetScss";
+@import "functions";
+@import "variables";
+
 // Global
 html,
 body {

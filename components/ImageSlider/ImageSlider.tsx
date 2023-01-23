@@ -1,9 +1,8 @@
 import { MouseEvent, useState } from "react";
-import Image from "next/image";
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import CustomImage from "../CustomImage";
 type props = {
-  listImages: { src: string }[];
+  listImages: string[];
   size: number;
   handleModal?: (e: MouseEvent) => void;
 };
@@ -24,7 +23,7 @@ function ImageSlider({ listImages, size, handleModal }: props) {
   };
   return (
     <div className="image-slider-container">
-      {currentIndex !== 0 && (
+      {currentIndex !== 0 && listImages.length > 1 && (
         <button
           className="image-slider-container--left-btn"
           onClick={handlePrev}
@@ -40,25 +39,19 @@ function ImageSlider({ listImages, size, handleModal }: props) {
           cursor: handleModal && "pointer",
         }}
       >
-        {listImages.map((item, index) => {
+        {listImages.map((src, index) => {
           return (
             <div
               className="image"
               key={index}
               style={{ width: `${size}px`, height: `${size}px` }}
             >
-              {/* <Image
-                src={item.src}
-                alt=""
-                width={size}
-                height={size}
-              /> */}
-              <CustomImage src={item.src} />
+              <CustomImage src={src} />
             </div>
           );
         })}
       </div>
-      {currentIndex !== listImages.length - 1 && (
+      {currentIndex !== listImages.length - 1 && listImages.length > 1 && (
         <button
           className="image-slider-container--right-btn"
           onClick={handelNext}

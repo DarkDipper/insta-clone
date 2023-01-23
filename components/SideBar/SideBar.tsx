@@ -14,6 +14,8 @@ import { FaBars } from "react-icons/fa";
 import { useState, MouseEvent, useEffect } from "react";
 import useComponentVisible from "../../hooks/useComponentVisible";
 import SearchBar from "../SearchBar";
+import Modal from "../Modal";
+import Share from "../Share";
 import { Dancing_Script } from "@next/font/google";
 const dancingScript = Dancing_Script({
   style: ["normal"],
@@ -22,6 +24,7 @@ const dancingScript = Dancing_Script({
 });
 export default function SideBar() {
   const [hide, setHide] = useState(false);
+  const [showShare, setShowShare] = useState(false);
   const {
     externalComponentRef: buttonSearchRef,
     ref: searchBarRef,
@@ -95,6 +98,7 @@ export default function SideBar() {
       redDot: false,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
+        setShowShare(true);
       },
     },
     {
@@ -154,6 +158,11 @@ export default function SideBar() {
         searchBarVisible={searchBarVisible}
         searchBarRef={searchBarRef}
       />
+      {showShare && (
+        <Modal handleClose={setShowShare}>
+          <Share />
+        </Modal>
+      )}
     </>
   );
 }

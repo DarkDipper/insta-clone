@@ -10,25 +10,11 @@ import { SlEmotsmile } from "react-icons/sl";
 import useComponentVisible from "../../hooks/useComponentVisible";
 import ModalPost from "../ModalPost";
 import Modal from "../Modal";
-
-const SlideImage = [
-  {
-    src: "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
-  },
-  {
-    src: "https://i.ibb.co/nkYrxTW/loginpage3.png",
-  },
-  {
-    src: "https://i.ibb.co/YXL10VM/animelody.png",
-  },
-  {
-    src: "https://i.ibb.co/G3yfYFN/Monokuma.png",
-  },
-  {
-    src: "https://i.ibb.co/Ctx4kbM/avatar.jpg",
-  },
-];
-export default function Post() {
+type Props = {
+  listImage: string[];
+  desc: string;
+};
+export default function Post({ listImage, desc }: Props) {
   const [More, setMore] = useState(false);
   const [Liked, setLiked] = useState(false);
   const {
@@ -68,8 +54,8 @@ export default function Post() {
   return (
     <>
       {modalPostVisible && (
-        <Modal>
-          <ModalPost SlideImage={SlideImage} modalPostRef={modalPostRef} />
+        <Modal handleClose={setModalPostVisible}>
+          <ModalPost SlideImage={listImage} modalPostRef={modalPostRef} />
         </Modal>
       )}
       <div className="post">
@@ -97,7 +83,7 @@ export default function Post() {
         <main className="post__content">
           <ImageSlider
             handleModal={handleModalPost}
-            listImages={SlideImage}
+            listImages={listImage}
             size={470}
           />
         </main>
@@ -129,17 +115,13 @@ export default function Post() {
             </span>
             <span
               className={`post__footer__paragraph__content${
-                More ? "--show" : ""
+                More || desc.length < 100 ? "--show" : ""
               }`}
             >
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Architecto ad at numquam unde tempora amet veniam voluptate,
-              praesentium cum quam ut delectus laudantium nesciunt nihil totam,
-              dignissimos quos illo quibusdam eveniet soluta similique. Nesciunt
-              iusto perspiciatis nam eum corporis natus?
+              {desc}
             </span>
           </div>
-          {!More && (
+          {!More && desc.length > 100 && (
             <div onClick={handleMore} className="post__footer__view-more">
               more
             </div>

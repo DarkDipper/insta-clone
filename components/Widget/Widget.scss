@@ -25,6 +25,7 @@
       }
     }
     &__switch-account {
+      font-family: inherit;
       color: rgb(0, 149, 246);
       border: none;
       background: transparent;
@@ -47,6 +48,7 @@
         line-height: calc-to-rem(18);
       }
       &__see-all {
+        font-family: inherit;
         font-size: calc-to-rem(12);
         font-weight: 600;
         color: inherit;
@@ -68,6 +70,7 @@
           font-weight: 600;
         }
         &__follow {
+          font-family: inherit;
           color: rgb(0, 149, 246);
           border: none;
           background: transparent;
