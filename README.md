@@ -23,4 +23,5 @@
 # Bug
 - [x] Custom Image with height value of 0
 - [x] Font segoe UI
-- [ ] Fix break line in post using `white-space: pre-line;`
+- [x] Fix break line in post using `white-space: pre-line;`
+- [ ] Handle wrong typefile

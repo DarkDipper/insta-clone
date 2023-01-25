@@ -5,12 +5,21 @@ import ThemeProvider from "../theme";
 import { AuthProvider } from "../Auth/AuthProvider";
 import { AuthGuard } from "../Auth/AuthGuard";
 import localFont from "@next/font/local";
+import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { useEffect, useState } from "react";
+import Loading from "@yourapp/components/Loading";
 const segoeUI = localFont({
   src: "../public/font/Segoe fonts v1710/segoeui.ttf",
   preload: false,
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient());
+  const [loadingState, setLoadingState] = useState(false);
+  // useEffect(() => {
+  //   setLoadingState(false);
+  // }, []);
   return (
     <>
       <Head>
@@ -18,21 +27,30 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/instagram.ico" />
         <title>Insta clone</title>
       </Head>
-      <ThemeProvider>
-        <AuthProvider>
-          {pageProps.requireAuth ? (
-            <AuthGuard>
-              <div className={segoeUI.className}>
-                <Component {...pageProps} />
-              </div>
-            </AuthGuard>
-          ) : (
-            <div className={segoeUI.className}>
-              <Component {...pageProps} />
-            </div>
-          )}
-        </AuthProvider>
-      </ThemeProvider>
+      {!loadingState ? (
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <ThemeProvider>
+              <AuthProvider>
+                {pageProps.requireAuth ? (
+                  <AuthGuard>
+                    <div className={segoeUI.className}>
+                      <Component {...pageProps} />
+                    </div>
+                  </AuthGuard>
+                ) : (
+                  <div className={segoeUI.className}>
+                    <Component {...pageProps} />
+                  </div>
+                )}
+              </AuthProvider>
+            </ThemeProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </Hydrate>
+        </QueryClientProvider>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }

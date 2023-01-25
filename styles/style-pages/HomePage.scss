@@ -19,6 +19,7 @@
         width: 100%;
         .list-post {
           margin-block-start: calc-to-rem(16);
+          transition: all ease-in-out 1s;
         }
       }
       &__right {

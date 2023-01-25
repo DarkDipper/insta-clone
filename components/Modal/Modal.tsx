@@ -1,4 +1,4 @@
-import { RefObject, ReactNode, Dispatch, SetStateAction } from "react";
+import { ReactNode, Dispatch, SetStateAction } from "react";
 import { IoClose } from "react-icons/io5";
 type Props = {
   children: ReactNode;

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { MouseEvent, FormEvent, useState, useEffect } from "react";
 import StoryAvatar from "../StoryAvatar";
 import ImageSlider from "../ImageSlider";
@@ -15,6 +14,7 @@ type Props = {
   desc: string;
 };
 export default function Post({ listImage, desc }: Props) {
+  const [Height, setHeight] = useState("0");
   const [More, setMore] = useState(false);
   const [Liked, setLiked] = useState(false);
   const {
@@ -50,7 +50,9 @@ export default function Post({ listImage, desc }: Props) {
       document.documentElement.style.overflow = "scroll";
     }
   }, [modalPostVisible]);
-
+  useEffect(() => {
+    setHeight("auto");
+  }, []);
   return (
     <>
       {modalPostVisible && (
@@ -58,7 +60,7 @@ export default function Post({ listImage, desc }: Props) {
           <ModalPost SlideImage={listImage} modalPostRef={modalPostRef} />
         </Modal>
       )}
-      <div className="post">
+      <div className="post" style={{ height: Height }}>
         <header className="post__header">
           <div className="post__header__avatar">
             <StoryAvatar

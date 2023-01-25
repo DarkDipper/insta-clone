@@ -1,28 +1,52 @@
-import { MouseEvent, useState } from "react";
+import {
+  MouseEvent,
+  useState,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from "react";
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import CustomImage from "../CustomImage";
 type props = {
   listImages: string[];
   size: number;
   handleModal?: (e: MouseEvent) => void;
+  setShareIndex?: Dispatch<SetStateAction<number>>;
 };
 
-function ImageSlider({ listImages, size, handleModal }: props) {
+function ImageSlider({ listImages, size, handleModal, setShareIndex }: props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const handelNext = (e: MouseEvent) => {
     e.preventDefault();
     setCurrentIndex((prev) => prev + 1);
+    if (setShareIndex) {
+      setShareIndex((prev) => prev + 1);
+    }
   };
   const handlePrev = (e: MouseEvent) => {
     e.preventDefault();
     setCurrentIndex((prev) => prev - 1);
+    if (setShareIndex) {
+      setShareIndex((prev) => prev - 1);
+    }
   };
   const handlePointer = (e: MouseEvent, index: number) => {
+    e.preventDefault();
     setCurrentIndex(index);
-    console.log(index);
+    if (setShareIndex) {
+      setShareIndex(index);
+    }
   };
+  useEffect(() => {
+    if (setShareIndex) {
+      if (currentIndex > listImages.length - 1) {
+        setCurrentIndex(currentIndex - 1);
+      }
+    }
+  }, [listImages]);
   return (
     <div className="image-slider-container">
+      {/* {currentIndex} */}
       {currentIndex !== 0 && listImages.length > 1 && (
         <button
           className="image-slider-container--left-btn"

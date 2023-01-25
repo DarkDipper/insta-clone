@@ -21,7 +21,7 @@ export default function Checkin() {
     <div className="login-page">
       <div className="login-page__left">
         <Image
-          src="https://i.ibb.co/JCVy7Nb/login-Page.png"
+          src="https://i.imgur.com/mRdB9za.png"
           width={465}
           height={635}
           alt=""
@@ -30,28 +30,28 @@ export default function Checkin() {
         <div className="image-login">
           <Image
             className={imgTransition === 0 ? "show" : "hide"}
-            src="https://i.ibb.co/Wp5TC5s/loginpage1.png"
+            src="https://i.imgur.com/K7a0QOr.png"
             width={250}
             height={541}
             alt=""
           />
           <Image
             className={imgTransition === 1 ? "show" : "hide"}
-            src="https://i.ibb.co/g9Phymv/loginpage2.png"
+            src="https://i.imgur.com/Bf2Eau4.png"
             width={250}
             height={541}
             alt=""
           />
           <Image
             className={imgTransition === 2 ? "show" : "hide"}
-            src="https://i.ibb.co/nkYrxTW/loginpage3.png"
+            src="https://i.imgur.com/Ovb0G0m.png"
             width={250}
             height={541}
             alt=""
           />
           <Image
             className={imgTransition === 3 ? "show" : "hide"}
-            src="https://i.ibb.co/8BzLG09/loginpage4.png"
+            src="https://i.imgur.com/BRqXvbR.png"
             width={250}
             height={541}
             alt=""

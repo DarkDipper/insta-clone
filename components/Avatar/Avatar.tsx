@@ -6,7 +6,7 @@ type Props = {
   height?: number;
 };
 export default function Avatar({
-  src = "https://i.ibb.co/gWjhxPq/defaultavatar.png",
+  src = "https://i.imgur.com/uITbeDy.png",
   width,
   height,
 }: Props) {

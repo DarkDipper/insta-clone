@@ -160,7 +160,7 @@ export default function SideBar() {
       />
       {showShare && (
         <Modal handleClose={setShowShare}>
-          <Share />
+          <Share handleClose={setShowShare} />
         </Modal>
       )}
     </>
