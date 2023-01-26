@@ -13,12 +13,13 @@ import { MdPhotoCamera } from "react-icons/md";
 import { IoIosAddCircle, IoIosTrash } from "react-icons/io";
 import axios from "axios";
 import useAuth from "@yourapp/hooks/useAuth";
+import Loading from "../Loading";
 type Props = {
   handleClose: Dispatch<SetStateAction<boolean>>;
 };
 function Share({ handleClose }: Props) {
   const { user } = useAuth();
-  const [listImage, setListImage] = useState<string[]>([
+  const [listImage, setListImage] = useState<{ path: string }[]>([
     // "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
     // "https://i.ibb.co/nkYrxTW/loginpage3.png",
     // "https://i.ibb.co/YXL10VM/animelody.png",
@@ -76,12 +77,12 @@ function Share({ handleClose }: Props) {
     setListImage([]);
     for (const file of selectedFile) {
       const objectUrl = URL.createObjectURL(file);
-      setListImage((prev) => [...prev, objectUrl]);
+      setListImage((prev) => [...prev, { path: objectUrl }]);
     }
     // free memory when ever this component is unmounted
     return () => {
       for (const imgUrl of listImage) {
-        URL.revokeObjectURL(imgUrl);
+        URL.revokeObjectURL(imgUrl.path);
       }
     };
   }, [selectedFile]);
@@ -184,7 +185,19 @@ function Share({ handleClose }: Props) {
           </div>
         </>
       ) : (
-        <h1>Uploading...</h1>
+        // <h1>Uploading...</h1>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            top: 0,
+            left: "50%",
+          }}
+        >
+          <Loading />
+        </div>
       )}
     </div>
   );

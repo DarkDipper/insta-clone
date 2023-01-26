@@ -9,7 +9,12 @@ import { FiHeart } from "react-icons/fi";
 import { SlEmotsmile } from "react-icons/sl";
 
 type Props = {
-  SlideImage: string[];
+  SlideImage: {
+    path: string;
+    width: number;
+    height: number;
+    blurHash?: string;
+  }[];
   modalPostRef: RefObject<HTMLDivElement>;
 };
 

@@ -10,11 +10,16 @@ import useComponentVisible from "../../hooks/useComponentVisible";
 import ModalPost from "../ModalPost";
 import Modal from "../Modal";
 type Props = {
-  listImage: string[];
+  listImage: {
+    path: string;
+    width: number;
+    height: number;
+    blurHash?: string;
+  }[];
   desc: string;
 };
 export default function Post({ listImage, desc }: Props) {
-  const [Height, setHeight] = useState("0");
+  // const [Height, setHeight] = useState("0");
   const [More, setMore] = useState(false);
   const [Liked, setLiked] = useState(false);
   const {
@@ -50,9 +55,9 @@ export default function Post({ listImage, desc }: Props) {
       document.documentElement.style.overflow = "scroll";
     }
   }, [modalPostVisible]);
-  useEffect(() => {
-    setHeight("auto");
-  }, []);
+  // useEffect(() => {
+  //   setHeight("auto");
+  // }, []);
   return (
     <>
       {modalPostVisible && (
@@ -60,7 +65,7 @@ export default function Post({ listImage, desc }: Props) {
           <ModalPost SlideImage={listImage} modalPostRef={modalPostRef} />
         </Modal>
       )}
-      <div className="post" style={{ height: Height }}>
+      <div className="post">
         <header className="post__header">
           <div className="post__header__avatar">
             <StoryAvatar

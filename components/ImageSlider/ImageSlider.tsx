@@ -8,7 +8,12 @@ import {
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import CustomImage from "../CustomImage";
 type props = {
-  listImages: string[];
+  listImages: {
+    path: string;
+    width?: number;
+    height?: number;
+    blurHash?: string;
+  }[];
   size: number;
   handleModal?: (e: MouseEvent) => void;
   setShareIndex?: Dispatch<SetStateAction<number>>;
@@ -46,7 +51,6 @@ function ImageSlider({ listImages, size, handleModal, setShareIndex }: props) {
   }, [listImages]);
   return (
     <div className="image-slider-container">
-      {/* {currentIndex} */}
       {currentIndex !== 0 && listImages.length > 1 && (
         <button
           className="image-slider-container--left-btn"
@@ -63,14 +67,19 @@ function ImageSlider({ listImages, size, handleModal, setShareIndex }: props) {
           cursor: handleModal && "pointer",
         }}
       >
-        {listImages.map((src, index) => {
+        {listImages.map((img, index) => {
           return (
             <div
               className="image"
               key={index}
               style={{ width: `${size}px`, height: `${size}px` }}
             >
-              <CustomImage src={src} />
+              <CustomImage
+                src={img.path}
+                imgHeight={img.height}
+                imgWidth={img.width}
+                blurHash={img.blurHash}
+              />
             </div>
           );
         })}

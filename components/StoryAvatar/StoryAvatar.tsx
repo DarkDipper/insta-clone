@@ -1,3 +1,4 @@
+import useBlur from "@yourapp/hooks/useBlurHash";
 import Avatar from "../Avatar";
 
 type Props = {

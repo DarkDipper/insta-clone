@@ -1,4 +1,4 @@
-# Todo list
+# Todo list 📃
 - [x] Story UI
 - [x] Custom Image component
 - [ ] Recoil
@@ -19,9 +19,12 @@
 - [ ] Emoji picker package
 - [x] Comment component
 - [x] Fix main scroll bar
+- [ ] Share post can take breakline in Description
+- [x] Loading state of image
 
-# Bug
+# Bug 🐛
 - [x] Custom Image with height value of 0
 - [x] Font segoe UI
 - [x] Fix break line in post using `white-space: pre-line;`
-- [ ] Handle wrong typefile
+- [x] Handle wrong typefile
+- [x] New post list image keep the shape of previous post
