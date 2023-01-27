@@ -1,4 +1,5 @@
 # Todo list 📃
+
 - [x] Story UI
 - [x] Custom Image component
 - [ ] Recoil
@@ -10,7 +11,7 @@
 - [ ] Chat UI
 - [ ] Explore UI
 - [ ] Setting UI
-- [x] Fix color page 
+- [x] Fix color page
 - [x] Red dot on sidebar item
 - [x] Cut text description of post component
 - [ ] Try catch the fetch
@@ -21,10 +22,17 @@
 - [x] Fix main scroll bar
 - [ ] Share post can take breakline in Description
 - [x] Loading state of image
+- [ ] Apply next-theme
+- [ ] Consider middleware netx js
 
 # Bug 🐛
+
 - [x] Custom Image with height value of 0
 - [x] Font segoe UI
 - [x] Fix break line in post using `white-space: pre-line;`
 - [x] Handle wrong typefile
 - [x] New post list image keep the shape of previous post
+- [ ] So if a user have `user cookie` eventhough it empty it can send request to the server and show the page
+
+usename/password => verify => token/cookie => class auth => home page
+username/password => verify => token/cokie => middleware => home page

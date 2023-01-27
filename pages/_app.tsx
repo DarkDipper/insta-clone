@@ -2,8 +2,6 @@ import "@yourapp/styles/globals.scss";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import ThemeProvider from "../theme";
-import { AuthProvider } from "../Auth/AuthProvider";
-import { AuthGuard } from "../Auth/AuthGuard";
 import localFont from "@next/font/local";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -31,19 +29,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
             <ThemeProvider>
-              <AuthProvider>
-                {pageProps.requireAuth ? (
-                  <AuthGuard>
-                    <div className={segoeUI.className}>
-                      <Component {...pageProps} />
-                    </div>
-                  </AuthGuard>
-                ) : (
-                  <div className={segoeUI.className}>
-                    <Component {...pageProps} />
-                  </div>
-                )}
-              </AuthProvider>
+              <div className={segoeUI.className}>
+                <Component {...pageProps} />
+              </div>
             </ThemeProvider>
             <ReactQueryDevtools initialIsOpen={false} />
           </Hydrate>

@@ -79,9 +79,9 @@ export default function Home({ cookie }: Props) {
     console.log(data);
     console.log("Im in Home");
   }, []);
-  // if (status === "loading") {
-  //   return <Loading />;
-  // }
+  if (status === "loading") {
+    return <Loading />;
+  }
   return (
     <div className="main-page">
       {/* Sidebar */}
@@ -91,15 +91,15 @@ export default function Home({ cookie }: Props) {
           <div className="main-page__center__wrapper__left">
             <Story />
             <div className="list-post">
-              {/* {data &&
+              {data &&
                 data["Posts"].map((p, index) => (
                   <Post
-                    key={index}
+                    key={p["_id"]}
                     listImage={p["list_image"]}
                     desc={p["description"]}
                   />
-                ))} */}
-              {listPost}
+                ))}
+              {/* {listPost} */}
               {/* <Post listImage={SlideImage} desc={dummy_desc} />
               <Post listImage={SlideImage} desc={dummy_desc} />
               <Post listImage={SlideImage} desc={dummy_desc} />
@@ -124,6 +124,7 @@ export default function Home({ cookie }: Props) {
 }
 
 const getPosts = async (cookie: string) => {
+  let stateFetched = true;
   const res = await axios
     .get("http://localhost:5000/api/v1/post/timeline?page=1&limit=1", {
       headers: {
@@ -131,7 +132,13 @@ const getPosts = async (cookie: string) => {
         Authorization: "Bearer " + cookie,
       },
     })
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch(() => {
+      stateFetched = false;
+    });
+  if (!stateFetched) {
+    throw new Error("Token invalid");
+  }
   return res;
 };
 
@@ -139,12 +146,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const listCookie = cookie.parse(context.req.headers.cookie as string);
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery("posts", () =>
-    getPosts(listCookie["6gR265$m_t0k3n"])
-  );
+  await queryClient
+    .prefetchQuery("posts", () => getPosts(listCookie["6gR265$m_t0k3n"]))
+    .catch(() => {
+      console.log("Can't get list post");
+      throw new Error();
+    });
   return {
     props: {
-      requireAuth: true,
       dehydratedState: dehydrate(queryClient),
       cookie: listCookie["6gR265$m_t0k3n"],
     },

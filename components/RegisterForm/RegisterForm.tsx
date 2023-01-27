@@ -31,23 +31,21 @@ function reducer(state: userState, action: userAction) {
     switch (type) {
       case "update":
         return { ...payload };
-      case "reset":
-        return {
-          username: "",
-          email: "",
-          password: "",
-        };
       default:
         throw new Error("Cannot change user state");
     }
+  } else if (type === "reset") {
+    return {
+      username: "",
+      email: "",
+      password: "",
+    };
   } else {
-    throw Error("Payload empty");
+    throw Error("Payload and type not correct");
   }
 }
 
 export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
-  const { auth, initializing, getRedirect, clearRedirect, user, error } =
-    useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const { mode, toggleMode } = useContext(ThemeContext);
   const [uState, dispatch] = useReducer(reducer, {
@@ -62,13 +60,13 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const respone = await axios
+    await axios
       .post(
         "http://localhost:5000/api/v1/user/register",
         {
           username: uState.username,
           password: uState.password,
-          email: uState.username,
+          email: uState.email,
         },
         {
           headers: {
@@ -79,7 +77,6 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
       .catch((respone) => {
         console.log(respone);
       });
-    const registerStatus = await auth.signUp(respone);
     dispatch({ type: "reset" });
     setShowRegister(false);
   };
@@ -157,10 +154,10 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
           <button type="submit" className="register-btn">
             Sign up
           </button>
-          <p>
+          {/* <p>
             People who use our service may have uploaded your contact
             information to Instagram. Learn More
-          </p>
+          </p> */}
           <p>
             By signing up, you agree to our Terms , Privacy Policy and Cookies
             Policy .
