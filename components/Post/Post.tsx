@@ -71,8 +71,6 @@ export default function Post({ listImage, desc }: Props) {
             <StoryAvatar
               src="https://i.ibb.co/YXL10VM/animelody.png"
               haveSeenBefore={true}
-              height={32}
-              width={32}
             />
           </div>
           <div className="post__header__text">

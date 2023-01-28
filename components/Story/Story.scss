@@ -54,6 +54,10 @@
       align-items: center;
       cursor: pointer;
     }
+    &__avatar {
+      width: calc-to-rem(66);
+      height: calc-to-rem(66);
+    }
     &--user-name {
       text-overflow: ellipsis;
       padding-block-start: calc-to-rem(6);

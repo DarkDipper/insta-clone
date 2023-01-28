@@ -5,7 +5,7 @@ import Story from "@yourapp/components/Story";
 import Post from "@yourapp/components/Post";
 import Widget from "@yourapp/components/Widget";
 import axios from "axios";
-import cookie from "cookie";
+import { getCookie, CookieValueTypes } from "cookies-next";
 import { QueryClient, UseQueryResult, dehydrate, useQuery } from "react-query";
 import Loading from "@yourapp/components/Loading";
 
@@ -14,10 +14,6 @@ type postFetch = {
   Posts: [];
 };
 
-type Props = {
-  requireAuth: boolean;
-  cookie: string;
-};
 const SlideImage = [
   {
     path: "https://i.imgur.com/ALNi1oZ.png",
@@ -57,11 +53,11 @@ const SlideImage = [
 ];
 const dummy_desc =
   "Lorem ipsum dolor sit, amet consectetur adipisicing elit.Architecto ad at numquam unde tempora amet veniam voluptate,praesentium cum quam ut delectus laudantium nesciunt nihil totam,dignissimos quos illo quibusdam eveniet soluta similique. Nesciuntiusto perspiciatis nam eum corporis natus?";
-export default function Home({ cookie }: Props) {
+export default function Home() {
   const { data, status, isFetching }: UseQueryResult<postFetch, Error> =
     useQuery({
       queryKey: "posts",
-      queryFn: async () => await getPosts(cookie),
+      queryFn: async () => await getPosts(getCookie("6gR265$m_t0k3n")),
     });
   const listPost =
     data &&
@@ -84,7 +80,6 @@ export default function Home({ cookie }: Props) {
   }
   return (
     <div className="main-page">
-      {/* Sidebar */}
       <SideBar />
       <div className="main-page__center">
         <div className="main-page__center__wrapper">
@@ -123,7 +118,7 @@ export default function Home({ cookie }: Props) {
   );
 }
 
-const getPosts = async (cookie: string) => {
+const getPosts = async (cookie: CookieValueTypes) => {
   let stateFetched = true;
   const res = await axios
     .get("http://localhost:5000/api/v1/post/timeline?page=1&limit=1", {
@@ -142,12 +137,14 @@ const getPosts = async (cookie: string) => {
   return res;
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const listCookie = cookie.parse(context.req.headers.cookie as string);
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  // const listCookie = cookie.parse(context.req.headers.cookie as string);
+  const tokenCookie = getCookie("6gR265$m_t0k3n", { req, res });
+  // console.log(tokenCookie);
   const queryClient = new QueryClient();
-
+  // console.log("Render in server");
   await queryClient
-    .prefetchQuery("posts", () => getPosts(listCookie["6gR265$m_t0k3n"]))
+    .prefetchQuery("posts", () => getPosts(tokenCookie))
     .catch(() => {
       console.log("Can't get list post");
       throw new Error();
@@ -155,7 +152,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      cookie: listCookie["6gR265$m_t0k3n"],
     },
   };
 };

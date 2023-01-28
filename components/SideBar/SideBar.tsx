@@ -17,6 +17,7 @@ import SearchBar from "../SearchBar";
 import Modal from "../Modal";
 import Share from "../Share";
 import { Dancing_Script } from "@next/font/google";
+import { useRouter } from "next/router";
 const dancingScript = Dancing_Script({
   style: ["normal"],
   subsets: ["latin"],
@@ -25,6 +26,7 @@ const dancingScript = Dancing_Script({
 export default function SideBar() {
   const [hide, setHide] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  const route = useRouter();
   const {
     externalComponentRef: buttonSearchRef,
     ref: searchBarRef,
@@ -44,6 +46,8 @@ export default function SideBar() {
       redDot: false,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
+        console.log("You navigate to HOme");
+        route.push("/");
       },
     },
     {
@@ -102,17 +106,12 @@ export default function SideBar() {
       },
     },
     {
-      Icon: (
-        <Avatar
-          src="https://i.ibb.co/G3yfYFN/Monokuma.png"
-          height={24}
-          width={24}
-        />
-      ),
+      Icon: <Avatar src="https://i.ibb.co/G3yfYFN/Monokuma.png" />,
       title: "Profile",
       redDot: false,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
+        route.push(`/Trung`);
       },
     },
   ];

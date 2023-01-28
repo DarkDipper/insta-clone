@@ -6,6 +6,8 @@
     height: calc-to-rem(56);
     &__avatar {
       margin-inline-end: calc-to-rem(22);
+      width: calc-to-rem(60);
+      height: calc-to-rem(60);
     }
     &__name {
       flex-grow: 1;
@@ -62,6 +64,10 @@
         padding-block: calc-to-rem(8);
         display: flex;
         align-items: center;
+        &__avatar {
+          width: calc-to-rem(42);
+          height: calc-to-rem(42);
+        }
         &__description {
           flex-grow: 1;
           margin-inline-start: calc-to-rem(12);

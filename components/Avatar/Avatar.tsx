@@ -1,28 +1,17 @@
-import useBlur from "@yourapp/hooks/useBlurHash";
 import Image from "next/image";
+import CustomImage from "../CustomImage";
 
 type Props = {
   src?: string;
-  width?: number;
-  height?: number;
 };
 export default function Avatar({
   src = "https://i.imgur.com/uITbeDy.png",
-  width,
-  height,
 }: Props) {
-  const blurURL = useBlur(`${width}`, `${height}`);
   return (
-    <div
-      className="avatar"
-      style={{
-        width: width,
-        height: height,
-      }}
-    >
+    <div className="avatar">
       <Image
         placeholder="blur"
-        blurDataURL={blurURL}
+        blurDataURL="https://i.imgur.com/uITbeDy.png"
         src={src}
         alt="avatar"
         sizes="100%"

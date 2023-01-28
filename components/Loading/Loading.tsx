@@ -13,7 +13,9 @@ export default function Loading() {
         }}
         transition={{ duration: 3.2, repeat: Infinity }}
       >
-        <Avatar src="/instagram.png" width={100} height={100} />
+        <div className="logo">
+          <Avatar src="/instagram.png" />
+        </div>
       </motion.div>
       <motion.div
         className="border-2"
@@ -26,9 +28,7 @@ export default function Loading() {
           duration: 3.2,
           repeat: Infinity,
         }}
-        style={{
-          
-        }}
+        style={{}}
       ></motion.div>
     </div>
   );

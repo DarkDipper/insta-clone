@@ -40,7 +40,9 @@ function ModalPost({ SlideImage, modalPostRef }: Props) {
       </div>
       <div className="modal-post__right">
         <header className="modal-post__right__header">
-          <Avatar width={32} height={32} />
+          <div className="modal-post__right__header__avatar">
+            <Avatar />
+          </div>
           <p className="modal-post__right__header__user-name">vietnamoi</p>
         </header>
         <main className="modal-post__right__main">

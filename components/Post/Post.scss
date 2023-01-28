@@ -12,7 +12,10 @@
     height: calc-to-rem(56);
     border-bottom: 1px solid $border;
     &__avatar {
+      position: relative;
       padding-inline-start: calc-to-rem(8);
+      width: calc-to-rem(48);
+      height: calc-to-rem(48);
     }
     &__text {
       flex-grow: 2;

@@ -12,7 +12,7 @@
   overflow: hidden;
   border-inline-end: 0.8px solid #282828;
   z-index: 9999;
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 768px) {
     & {
       // background: darkgray;s
       width: calc-to-rem(48);

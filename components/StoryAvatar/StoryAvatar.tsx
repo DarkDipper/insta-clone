@@ -1,19 +1,11 @@
-import useBlur from "@yourapp/hooks/useBlurHash";
 import Avatar from "../Avatar";
 
 type Props = {
   src: string;
   haveSeenBefore: boolean;
-  width?: number;
-  height?: number;
 };
 
-export default function StoryAvatar({
-  src,
-  haveSeenBefore,
-  width = 56,
-  height = 56,
-}: Props) {
+export default function StoryAvatar({ src, haveSeenBefore }: Props) {
   return (
     <div className="story-avatar">
       <div
@@ -22,7 +14,7 @@ export default function StoryAvatar({
         }`}
       >
         <div className="story-avatar--white-border">
-          <Avatar src={src} height={height} width={width} />
+          <Avatar src={src} />
         </div>
       </div>
     </div>

@@ -6,11 +6,7 @@ function Widget() {
   const SuggestItem = () => (
     <div className="suggestion-board__main__suggest-item">
       <div className="suggestion-board__main__suggest-item__avatar">
-        <Avatar
-          src="https://i.ibb.co/YXL10VM/animelody.png"
-          width={32}
-          height={32}
-        />
+        <Avatar src="https://i.ibb.co/YXL10VM/animelody.png" />
       </div>
       <div className="suggestion-board__main__suggest-item__description">
         <p className="suggestion-board__main__suggest-item__description__user-name">
@@ -30,11 +26,7 @@ function Widget() {
     <div className="widget">
       <div className="main-account">
         <div className="main-account__avatar">
-          <Avatar
-            src="https://i.ibb.co/YXL10VM/animelody.png"
-            width={56}
-            height={56}
-          />
+          <Avatar src="https://i.ibb.co/YXL10VM/animelody.png" />
         </div>
         <div className="main-account__name">
           <p className="main-account__name__user-name">phong_huynh_2022</p>

@@ -2,6 +2,7 @@
 
 @import "functions";
 @import "variables";
+@import "mediaQuery";
 // @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 // @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 // @import url("https://fonts.cdnfonts.com/css/segoe-ui-4");
@@ -24,6 +25,7 @@
 @import "components/ModalPost/ModalPost.scss";
 @import "components/Comment/Comment.scss";
 @import "components/Share/Share.scss";
+@import "components/MiniPost/MiniPost.scss";
 
 // Pages
 @import "./styles/style-pages/CheckinPage.scss";

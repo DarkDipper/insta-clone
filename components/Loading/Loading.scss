@@ -20,6 +20,10 @@
     border-radius: calc-to-rem(10);
     border: calc-to-rem(5) solid #00b9d8;
   }
+  .logo {
+    width: calc-to-rem(100);
+    height: calc-to-rem(100);
+  }
 }
 .dark {
   .loading-page {

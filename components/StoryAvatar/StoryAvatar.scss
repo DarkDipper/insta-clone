@@ -1,22 +1,40 @@
 .story-avatar {
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 100%;
   &--gradient-border {
-    padding: calc-to-rem(4);
+    width: calc(100% - calc-to-rem(6));
+    height: calc(100% - calc-to-rem(6));
+    padding: calc-to-rem(3);
     border-radius: 50%;
     background: linear-gradient(to top right, #00ef92, #00b9d8);
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
   &--gray-border {
     // padding: 4px;
     border-radius: 50%;
-    border: calc-to-rem(2) solid gray;
+    width: calc(100% - calc-to-rem(4));
+    height: calc(100% - calc-to-rem(4));
+    padding: calc-to-rem(2);
+    background: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
   &--white-border {
     padding: calc-to-rem(2);
     border-radius: 50%;
     background: white;
+    width: calc(100% - calc-to-rem(4));
+    height: calc(100% - calc-to-rem(4));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 }

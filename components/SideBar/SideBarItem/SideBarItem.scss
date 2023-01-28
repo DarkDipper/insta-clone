@@ -21,6 +21,8 @@
     &--icon {
       position: relative;
       // font-size: calc-to-rem(24);
+      height: calc-to-rem(24);
+      width: calc-to-rem(24);
       &.red-dot::after {
         position: absolute;
         right: -10%;

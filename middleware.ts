@@ -1,7 +1,5 @@
 // middleware.ts
 import { type NextRequest, NextResponse } from "next/server";
-import axios from "axios";
-import fetchAdapter from "@vespaiach/axios-fetch-adapter";
 // This function can be marked `async` if using `await` inside
 type authRes = {
   status: boolean;
@@ -12,7 +10,6 @@ type authRes = {
 export async function middleware(request: NextRequest) {
   try {
     const token = request.cookies.get("6gR265$m_t0k3n")?.value;
-    const test = false;
     const { status, user, message }: authRes = await fetch(
       "http://localhost:5000/api/v1/user/auth",
       {
@@ -38,5 +35,5 @@ export async function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/", "/profile"],
+  matcher: ["/"],
 };

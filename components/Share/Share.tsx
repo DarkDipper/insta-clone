@@ -12,13 +12,12 @@ import { useMutation, useQueryClient } from "react-query";
 import { MdPhotoCamera } from "react-icons/md";
 import { IoIosAddCircle, IoIosTrash } from "react-icons/io";
 import axios from "axios";
-import useAuth from "@yourapp/hooks/useAuth";
+import { getCookie } from "cookies-next";
 import Loading from "../Loading";
 type Props = {
   handleClose: Dispatch<SetStateAction<boolean>>;
 };
 function Share({ handleClose }: Props) {
-  const { user } = useAuth();
   const [listImage, setListImage] = useState<{ path: string }[]>([
     // "https://i.ibb.co/c1YQvN6/defaultpost.jpg",
     // "https://i.ibb.co/nkYrxTW/loginpage3.png",
@@ -39,7 +38,7 @@ function Share({ handleClose }: Props) {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: "Bearer " + user?.token,
+            Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
           },
         }
       );
@@ -164,7 +163,9 @@ function Share({ handleClose }: Props) {
             </div>
             <div className="share-post__main__right">
               <div className="user">
-                <Avatar />
+                <div className="user__avatar">
+                  <Avatar />
+                </div>
                 <p className="user__name">Phong_huynh_2022</p>
               </div>
               <textarea

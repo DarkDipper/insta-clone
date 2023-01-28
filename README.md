@@ -7,7 +7,9 @@
 - [x] Modal Post component
 - [x] Post UI
 - [x] Widget UI
-- [ ] Profile UI
+- [ ] [Profile UI]
+  - -> Yes -> Profile user
+  - -> No -> 404Page
 - [ ] Chat UI
 - [ ] Explore UI
 - [ ] Setting UI
@@ -23,7 +25,7 @@
 - [ ] Share post can take breakline in Description
 - [x] Loading state of image
 - [ ] Apply next-theme
-- [ ] Consider middleware netx js
+- [x] Consider middleware netx js
 
 # Bug 🐛
 
@@ -32,7 +34,4 @@
 - [x] Fix break line in post using `white-space: pre-line;`
 - [x] Handle wrong typefile
 - [x] New post list image keep the shape of previous post
-- [ ] So if a user have `user cookie` eventhough it empty it can send request to the server and show the page
-
-usename/password => verify => token/cookie => class auth => home page
-username/password => verify => token/cokie => middleware => home page
+- [x] So if a user have `user cookie` eventhough it empty it can send request to the server and show the page

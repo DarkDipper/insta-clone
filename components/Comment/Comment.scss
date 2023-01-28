@@ -5,6 +5,10 @@
     align-items: center;
     margin-block-end: calc-to-rem(8);
     gap: calc-to-rem(18);
+    &__avatar {
+      width: calc-to-rem(32);
+      height: calc-to-rem(32);
+    }
     &__name {
       font-size: calc-to-rem(14);
       font-weight: 600;

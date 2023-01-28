@@ -4,7 +4,9 @@ function Comment() {
   return (
     <div className="comment-container">
       <div className="comment-container__user">
-        <Avatar height={32} width={32} />
+        <div className="comment-container__user__avatar">
+          <Avatar />
+        </div>
         <p className="comment-container__user__name">vietnamoi</p>
       </div>
       <div className="comment-container__content">

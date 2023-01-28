@@ -93,6 +93,10 @@
       .user {
         display: flex;
         margin-block: calc-to-rem(18) calc-to-rem(14);
+        &__avatar {
+          width: calc-to-rem(26);
+          height: calc-to-rem(26);
+        }
         &__name {
           flex-grow: 1;
           font-size: calc-to-rem(14);

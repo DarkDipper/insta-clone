@@ -1,5 +1,108 @@
 .profile-page {
   min-height: 100vh;
+  &__center {
+    margin-left: auto;
+    @include desktop {
+      width: calc(100vw - calc-to-rem(244));
+    }
+    @include tablet {
+      width: calc(100vw - calc-to-rem(244));
+    }
+    @include mobile {
+      width: calc(100vw - calc-to-rem(72.8));
+    }
+    // height: 1000px;
+    // background: rgba(207, 196, 196, 0.4);
+    // background: black;
+    &__wrapper {
+      // position: relative;
+      // display: flex;
+      margin: 0 auto;
+      max-width: 935px;
+      width: 100%;
+      padding: calc-to-rem(30) calc-to-rem(20) 0;
+      .profile-page__header {
+        display: flex;
+        padding-block-end: calc-to-rem(44);
+        border-bottom: 1px solid $border;
+        // align-items: center;
+        &__wrapper-avatar {
+          flex-grow: 1;
+          .avatar {
+            @include desktop {
+              width: calc-to-rem(110);
+              height: calc-to-rem(110);
+              margin: 0 auto;
+            }
+            @include tablet {
+              width: calc-to-rem(77);
+              height: calc-to-rem(77);
+            }
+            @include mobile {
+              width: calc-to-rem(50);
+              height: calc-to-rem(50);
+            }
+          }
+        }
+        &__wrapper-info {
+          flex-grow: 2;
+          .user-info {
+            display: flex;
+            align-items: center;
+            margin-block-end: calc-to-rem(20);
+            &__name {
+              font-size: calc-to-rem(24);
+              line-height: calc-to-rem(25);
+            }
+            &__edit-btn {
+              background: #efefef;
+              color: #292929;
+              padding: calc-to-rem(7) calc-to-rem(16);
+              border: none;
+              border-radius: calc-to-rem(8);
+              font-size: calc-to-rem(14);
+              line-height: calc-to-rem(18);
+              font-weight: 600;
+              margin-inline-start: calc-to-rem(20);
+            }
+          }
+          .status-info {
+            display: flex;
+            gap: calc-to-rem(40);
+          }
+        }
+      }
+      .profile-page__main {
+        &--no-posts {
+          color: #565454;
+          margin-block-start: calc-to-rem(80);
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          h3 {
+            margin-block-start: calc-to-rem(20);
+            color: white;
+            font-size: calc-to-rem(30);
+            line-height: calc-to-rem(36);
+            font-weight: 800;
+          }
+          h5 {
+            color: white;
+            margin-block-start: calc-to-rem(20);
+            font-size: calc-to-rem(14);
+            line-height: calc-to-rem(18);
+          }
+        }
+        &--list-posts {
+          overflow: hidden;
+          margin-block-start: calc-to-rem(50);
+          display: flex;
+          flex-wrap: wrap;
+          gap: calc-to-rem(25);
+        }
+      }
+    }
+  }
 }
 
 .dark .profile-page {

@@ -4,7 +4,6 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaRegMoon, FaSun } from "react-icons/fa";
 import IconButton from "../IconButton";
 import { ThemeContext } from "../../theme";
-import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { Dancing_Script } from "@next/font/google";
 type Props = {

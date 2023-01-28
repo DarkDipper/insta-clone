@@ -13,10 +13,12 @@ export default function Story() {
     list_temp.push(
       <div key={i} className="story-user">
         <div className="story-user__wrapper">
-          <StoryAvatar
-            src="https://i.ibb.co/YXL10VM/animelody.png"
-            haveSeenBefore={false}
-          />
+          <div className="story-user__avatar">
+            <StoryAvatar
+              src="https://i.ibb.co/YXL10VM/animelody.png"
+              haveSeenBefore={i % 2 === 0 ? true : false}
+            />
+          </div>
           <p className="story-user--user-name">
             Hero Shield fwqfwqfwqffwqfqwfw
           </p>
