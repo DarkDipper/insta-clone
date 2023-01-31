@@ -119,7 +119,7 @@ export default function SideBar() {
     <>
       <div className={`side-bar ${hide ? "hide" : ""}`}>
         <div className="side-bar__top">
-          <Link href="#" className="side-bar__top__title">
+          <Link href="/" className="side-bar__top__title">
             <p
               style={dancingScript.style}
               className="side-bar__top__title--text"

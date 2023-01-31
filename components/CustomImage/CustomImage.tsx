@@ -47,8 +47,16 @@ function CustomImage({ src, imgWidth, imgHeight, blurHash }: Props) {
         position: "relative",
       }}
     >
-      {blurHash && !Loaded && (
-        <Blurhash hash={blurHash} width={"100%"} height={"100%"} />
+      {blurHash && (
+        <Blurhash
+          style={{
+            transition: "opacity ease-in-out 0.5s",
+            opacity: !Loaded ? 1 : 0,
+          }}
+          hash={blurHash}
+          width={"100%"}
+          height={"100%"}
+        />
       )}
       <Image
         src={src}

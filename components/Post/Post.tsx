@@ -119,6 +119,7 @@ export default function Post({ listImage, desc }: Props) {
               userName{" "}
             </span>
             <span
+              // style={{ whiteSpace: "pre-line" }}
               className={`post__footer__paragraph__content${
                 More || desc.length < 100 ? "--show" : ""
               }`}
@@ -149,6 +150,7 @@ export default function Post({ listImage, desc }: Props) {
               <input
                 name="comment"
                 type="text"
+                placeholder="Add a comment..."
                 className="post__footer__comment__form__input-comment"
                 autoComplete="off"
               />

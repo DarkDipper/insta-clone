@@ -94,6 +94,7 @@
         line-height: calc-to-rem(18);
         text-align: justify;
         &--show {
+          white-space: pre-line;
           font-size: calc-to-rem(14);
           line-height: calc-to-rem(18);
           display: block;
