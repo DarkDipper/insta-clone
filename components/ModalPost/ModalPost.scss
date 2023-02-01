@@ -23,6 +23,7 @@
     height: 691px;
     background: black;
     border-left: 1px solid $border;
+    position: relative;
     &__header {
       display: flex;
       align-items: center;
@@ -48,7 +49,7 @@
     }
     &__main {
       color: white;
-      height: calc-to-rem(430);
+      height: calc-to-rem(423);
       padding: calc-to-rem(16);
       overflow: scroll;
       scrollbar-color: darkgray black;
@@ -103,6 +104,11 @@
         overflow-x: auto;
         display: flex;
         align-items: center;
+        &__emoji-picker {
+          position: absolute;
+          bottom: calc-to-rem(50);
+          left: 0;
+        }
         &__emoji-btn {
           border: 0;
           padding: calc-to-rem(8);

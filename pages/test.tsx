@@ -1,34 +1,32 @@
 import { useState } from "react";
-import EmojiPicker, {
-  Theme,
-  EmojiStyle,
-  EmojiClickData,
-  Emoji,
-} from "emoji-picker-react";
-import CustomImage from "../components/CustomImage";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import EmojiPicker, { EmojiObject } from "@yourapp/components/EmojiPicker";
+import { SlEmotsmile } from "react-icons/sl";
 export default function Test() {
+  const [text, setText] = useState("");
+  const [showPicker, setShowPicker] = useState(false);
+  // const handleEmojiSelected = () => {};
   return (
     <main
       style={{
         height: "100vh",
         width: "100vw",
-        background: "black",
+        background: "white",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        color: "black",
       }}
     >
-      <div
-        style={{
-          width: "470px",
-          height: "470px",
-          overflow: "hidden",
-          display: "flex",
-          alignItems: "center",
-        }}
+      {/* {showPicker && <EmojiPicker />}
+      <button
+        className="post__footer__comment__emoji-btn"
+        onClick={(e) => setShowPicker((prev) => !prev)}
       >
-        <CustomImage src="https://i.ibb.co/nkYrxTW/loginpage3.png" />
-      </div>
+        <SlEmotsmile size={24} />
+      </button> */}
     </main>
   );
 }

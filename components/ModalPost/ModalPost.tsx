@@ -7,7 +7,7 @@ import { IoPaperPlane } from "react-icons/io5";
 import { BiBookmark } from "react-icons/bi";
 import { FiHeart } from "react-icons/fi";
 import { SlEmotsmile } from "react-icons/sl";
-
+import EmojiPicker, { EmojiObject } from "../EmojiPicker";
 type Props = {
   SlideImage: {
     path: string;
@@ -19,7 +19,9 @@ type Props = {
 };
 
 function ModalPost({ SlideImage, modalPostRef }: Props) {
-  const [Liked, setLiked] = useState(false);
+  const [Liked, setLiked] = useState<boolean>(false);
+  const [showPicker, setShowPicker] = useState<boolean>(false);
+  const [newComment, setNewComment] = useState<string>("");
   const handleCommentSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const inputElement = e.currentTarget.elements.namedItem(
@@ -32,6 +34,9 @@ function ModalPost({ SlideImage, modalPostRef }: Props) {
   const handleLiked = (e: MouseEvent) => {
     e.preventDefault();
     setLiked((prev) => !prev);
+  };
+  const handleInsertEmoji = ({ native }: EmojiObject) => {
+    setNewComment((prev) => prev + native);
   };
   return (
     <div className="modal-post" ref={modalPostRef}>
@@ -76,7 +81,21 @@ function ModalPost({ SlideImage, modalPostRef }: Props) {
           <div className="modal-post__right__footer__likes">1,270 likes</div>
           <div className="modal-post__right__footer__time">7 hours ago</div>
           <div className="modal-post__right__footer__comment">
-            <button className="modal-post__right__footer__comment__emoji-btn">
+            {showPicker && (
+              <div className="modal-post__right__footer__comment__emoji-picker">
+                <EmojiPicker
+                  onEmojiSelectd={handleInsertEmoji}
+                  handleClose={setShowPicker}
+                />
+              </div>
+            )}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setShowPicker(true);
+              }}
+              className="modal-post__right__footer__comment__emoji-btn"
+            >
               <SlEmotsmile size={24} />
             </button>
             <form
@@ -86,8 +105,13 @@ function ModalPost({ SlideImage, modalPostRef }: Props) {
               <input
                 name="comment"
                 type="text"
+                value={newComment}
                 className="modal-post__right__footer__comment__form__input-comment"
                 autoComplete="off"
+                onChange={(e) => {
+                  e.preventDefault();
+                  setNewComment(e.target.value);
+                }}
               />
               <button
                 type="submit"

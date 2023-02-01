@@ -9,6 +9,7 @@ import { SlEmotsmile } from "react-icons/sl";
 import useComponentVisible from "../../hooks/useComponentVisible";
 import ModalPost from "../ModalPost";
 import Modal from "../Modal";
+import EmojiPicker, { EmojiObject } from "../EmojiPicker";
 type Props = {
   listImage: {
     path: string;
@@ -18,10 +19,13 @@ type Props = {
   }[];
   desc: string;
 };
+
 export default function Post({ listImage, desc }: Props) {
   // const [Height, setHeight] = useState("0");
-  const [More, setMore] = useState(false);
-  const [Liked, setLiked] = useState(false);
+  const [More, setMore] = useState<boolean>(false);
+  const [Liked, setLiked] = useState<boolean>(false);
+  const [showPicker, setShowPicker] = useState<boolean>(false);
+  const [newComment, setNewComment] = useState<string>("");
   const {
     ref: modalPostRef,
     isComponentVisible: modalPostVisible,
@@ -47,6 +51,9 @@ export default function Post({ listImage, desc }: Props) {
   const handleLiked = (e: MouseEvent) => {
     e.preventDefault();
     setLiked((prev) => !prev);
+  };
+  const handleInsertEmoji = ({ native }: EmojiObject) => {
+    setNewComment((prev) => prev + native);
   };
   useEffect(() => {
     if (modalPostVisible) {
@@ -140,7 +147,21 @@ export default function Post({ listImage, desc }: Props) {
           </div>
           <div className="post__footer__time">1 DAY AGO</div>
           <div className="post__footer__comment">
-            <button className="post__footer__comment__emoji-btn">
+            {showPicker && (
+              <div className="post__footer__comment__emoji-picker">
+                <EmojiPicker
+                  onEmojiSelectd={handleInsertEmoji}
+                  handleClose={setShowPicker}
+                />
+              </div>
+            )}
+            <button
+              className="post__footer__comment__emoji-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowPicker(true);
+              }}
+            >
               <SlEmotsmile size={24} />
             </button>
             <form
@@ -149,7 +170,11 @@ export default function Post({ listImage, desc }: Props) {
             >
               <input
                 name="comment"
-                type="text"
+                value={newComment}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setNewComment(e.target.value);
+                }}
                 placeholder="Add a comment..."
                 className="post__footer__comment__form__input-comment"
                 autoComplete="off"

@@ -9,6 +9,16 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@emoji-mart/data@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@emoji-mart/data/-/data-1.1.2.tgz#777c976f8f143df47cbb23a7077c9ca9fe5fc513"
+  integrity sha512-1HP8BxD2azjqWJvxIaWAMyTySeZY0Osr83ukYjltPVkNXeJvTz7yDrPLBtnrD5uqJ3tg4CcLuuBW09wahqL/fg==
+
+"@emoji-mart/react@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@emoji-mart/react/-/react-1.1.1.tgz#ddad52f93a25baf31c5383c3e7e4c6e05554312a"
+  integrity sha512-NMlFNeWgv1//uPsvLxvGQoIerPuVdXwK/EUek8OOkJ6wVOWPUizRBJU0hDqWZCOROVpfBgCemaC3m6jDOXi03g==
+
 "@emotion/is-prop-valid@^0.8.2":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
@@ -244,6 +254,13 @@
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.5.1.tgz#b29aa1f91a59f35e29ff8f7cb24faf1a3a750554"
   integrity sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==
+
+"@types/emoji-mart@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@types/emoji-mart/-/emoji-mart-3.0.9.tgz#2f7ef5d9ec194f28029c46c81a5fc1e5b0efa73c"
+  integrity sha512-qdBo/2Y8MXaJ/2spKjDZocuq79GpnOhkwMHnK2GnVFa8WYFgfA+ei6sil3aeWQPCreOKIx9ogPpR5+7MaOqYAA==
+  dependencies:
+    "@types/react" "*"
 
 "@types/json5@^0.0.29":
   version "0.0.29"
@@ -569,11 +586,6 @@ client-only@0.0.1:
   resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
   integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
 
-clsx@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
-  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
-
 color-convert@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
@@ -722,12 +734,10 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-emoji-picker-react@^4.4.7:
-  version "4.4.7"
-  resolved "https://registry.yarnpkg.com/emoji-picker-react/-/emoji-picker-react-4.4.7.tgz#faff798cf7acad41c5eb6b103c93480e777f2222"
-  integrity sha512-HcB1Fr57W6M+gLLm/W4YhbAnUQqYBUAhZBOHmPlSQODLtsDI8vecyqNIF9RrStZHfZwzUSLlpZMfY07AA6gxmA==
-  dependencies:
-    clsx "^1.2.1"
+emoji-mart@^5.5.2:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/emoji-mart/-/emoji-mart-5.5.2.tgz#3ddbaf053139cf4aa217650078bc1c50ca8381af"
+  integrity sha512-Sqc/nso4cjxhOwWJsp9xkVm8OF5c+mJLZJFoFfzRuKO+yWiN7K8c96xmtughYb0d/fZ8UC6cLIQ/p4BR6Pv3/A==
 
 emoji-regex@^9.2.2:
   version "9.2.2"

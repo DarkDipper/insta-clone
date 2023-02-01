@@ -4,6 +4,7 @@
   width: 470px;
   margin-block-end: calc-to-rem(12);
   transition: all ease-in-out 1s;
+  position: relative;
   &__header {
     display: flex;
     flex-direction: row;
@@ -129,13 +130,19 @@
       color: inherit;
       min-height: calc-to-rem(40);
       max-height: calc-to-rem(80);
-      border-block-start: calc-to-rem(0.8) solid rgb(38, 38, 38);
+      border-block-start: calc-to-rem(1) solid rgb(38, 38, 38);
       padding-block: calc-to-rem(4);
       padding-inline: calc-to-rem(12) calc-to-rem(16);
       overflow-x: auto;
       // text-align: justify;
       display: flex;
       align-items: center;
+      &__emoji-picker {
+        position: absolute;
+        bottom: calc-to-rem(51);
+        left: 0;
+      }
+
       &__emoji-btn {
         border: 0;
         padding: calc-to-rem(8);
@@ -152,6 +159,8 @@
           background: transparent;
           color: inherit;
           flex-grow: 1;
+          // resize: none;
+          height: calc-to-rem(18);
         }
         &__post-comment-btn {
           border: 0;
