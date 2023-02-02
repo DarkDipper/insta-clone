@@ -131,7 +131,7 @@ const getPosts = async (cookie: CookieValueTypes) => {
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const tokenCookie = getCookie("6gR265$m_t0k3n", { req, res });
   const queryClient = new QueryClient();
-  console.log("Render in server");
+  // console.log("Render in server");
   await queryClient
     .prefetchQuery("posts", () => getPosts(tokenCookie))
     .catch(() => {

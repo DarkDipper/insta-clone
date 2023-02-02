@@ -1,6 +1,7 @@
 import { setCookie, getCookie, removeCookies } from "cookies-next";
 import { AxiosResponse } from "axios";
 type User = {
+  _id: string;
   token: string;
   userName: string;
   avatar: string;
@@ -48,8 +49,9 @@ class Auth {
         throw Error("Respone is void");
       }
       if (respone.status === 200) {
-        const { userToken, user_name, avatar } = respone.data;
+        const { userToken, user_name, avatar, _id } = respone.data;
         this.user = {
+          _id: _id,
           token: userToken,
           userName: user_name,
           avatar: avatar,

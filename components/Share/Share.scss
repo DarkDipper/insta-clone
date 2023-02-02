@@ -92,14 +92,15 @@
       overflow: hidden;
       .user {
         display: flex;
-        margin-block: calc-to-rem(18) calc-to-rem(14);
+        align-items: center;
+        margin-block: calc-to-rem(8) calc-to-rem(14);
         &__avatar {
-          width: calc-to-rem(26);
-          height: calc-to-rem(26);
+          width: calc-to-rem(40);
+          height: calc-to-rem(40);
         }
         &__name {
           flex-grow: 1;
-          font-size: calc-to-rem(14);
+          font-size: calc-to-rem(20);
           font-weight: 600;
           line-height: calc-to-rem(24);
           margin-inline-start: calc-to-rem(12);

@@ -29,7 +29,13 @@ function MiniPost({ post }: Props) {
     <>
       {modalPostVisible && (
         <Modal handleClose={setModalPostVisible}>
-          <ModalPost SlideImage={post.list_image} modalPostRef={modalPostRef} />
+          <ModalPost
+            SlideImage={post.list_image}
+            modalPostRef={modalPostRef}
+            desc={post.description}
+            avatar={post.user.profile_picture}
+            userName={post.user.user_name}
+          />
         </Modal>
       )}
       <div
@@ -44,13 +50,18 @@ function MiniPost({ post }: Props) {
           setHover(false);
         }}
       >
-        {!Loaded && (
+        {
           <Blurhash
             hash={post.list_image[0].blurHash}
+            style={{
+              transition: "opacity ease-in-out 0.3s",
+              opacity: !Loaded ? 1 : 0,
+              zIndex: "1",
+            }}
             width={"100%"}
             height={"100%"}
           />
-        )}
+        }
         <div
           className="hover"
           style={{
@@ -97,6 +108,6 @@ type Props = {
       user_name: string;
       profile_picture: string;
     };
-    description?: string;
+    description: string;
   };
 };

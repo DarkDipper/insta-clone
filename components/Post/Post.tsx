@@ -10,6 +10,7 @@ import useComponentVisible from "../../hooks/useComponentVisible";
 import ModalPost from "../ModalPost";
 import Modal from "../Modal";
 import EmojiPicker, { EmojiObject } from "../EmojiPicker";
+import Link from "next/link";
 type Props = {
   listImage: {
     path: string;
@@ -78,20 +79,22 @@ export default function Post({ listImage, desc, avatar, userName }: Props) {
       )}
       <div className="post">
         <header className="post__header">
-          <div className="post__header__avatar">
-            <StoryAvatar src={avatar} haveSeenBefore={true} />
-          </div>
-          <div className="post__header__text">
-            <p className="post__header__text__user-name">{userName}</p>
-            <p className="post__header__text__sub-title">Sub title</p>
-          </div>
-          <button className="post__header__more-btn">
+          <Link href={`/${userName}`} className="post__header__wrapper">
+            <div className="post__header__avatar">
+              <StoryAvatar src={avatar} haveSeenBefore={true} />
+            </div>
+            <div className="post__header__text">
+              <p className="post__header__text__user-name">{userName}</p>
+              <p className="post__header__text__sub-title">Sub title</p>
+            </div>
+          </Link>
+          {/* <button className="post__header__more-btn">
             <FiMoreHorizontal
               width={40}
               height={40}
               className="post__header__more-btn__svg"
             />
-          </button>
+          </button> */}
         </header>
         <main className="post__content">
           <ImageSlider
@@ -129,13 +132,13 @@ export default function Post({ listImage, desc, avatar, userName }: Props) {
             <span
               // style={{ whiteSpace: "pre-line" }}
               className={`post__footer__paragraph__content${
-                More || desc.length < 100 ? "--show" : ""
+                More || desc.length < 30 ? "--show" : ""
               }`}
             >
               {desc}
             </span>
           </div>
-          {!More && desc.length > 100 && (
+          {!More && desc.length > 30 && (
             <div onClick={handleMore} className="post__footer__view-more">
               more
             </div>

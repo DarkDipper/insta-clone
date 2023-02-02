@@ -49,7 +49,7 @@ function AuthProvider({ children }: { children: JSX.Element }) {
   useEffect(() => {
     dispatch({ type: "LOGIN_START", payload: undefined });
     auth.resolveUser((user, error) => {
-      console.log("auth state changed", user);
+      // console.log("auth state changed", user);
       if (user) {
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
         console.log("Finished authorize");

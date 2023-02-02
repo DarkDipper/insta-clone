@@ -1,44 +1,71 @@
+import { MouseEvent } from "react";
 import Avatar from "@yourapp/components/Avatar";
 import SideBar from "@yourapp/components/SideBar";
 import { getCookie } from "cookies-next";
 import { GetServerSideProps } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdSad } from "react-icons/io";
 import MiniPost from "@yourapp/components/MiniPost";
-type Props = {
-  userInfo: {
-    email: string;
-    user_name: string;
-    role: string;
-    profile_picture: string;
-    followers: any[];
-    following: any[];
-    gender?: string;
-    jwtToken?: string;
-  };
-  listPosts: {
-    _id: string;
-    comment: string[];
-    list_image: {
-      _id: string;
-      path: string;
-      width: number;
-      height: number;
-      blurHash: string;
-    }[];
-    likes: string[];
-    user: {
-      _id: string;
-      user_name: string;
-      profile_picture: string;
-    };
-    description?: string;
-  }[];
-};
+import useAuth from "@yourapp/hooks/useAuth";
+import axios from "axios";
+import Modal from "@yourapp/components/Modal";
+import EditProfileModal from "@yourapp/components/EditProfileModal";
 function Profile({ userInfo, listPosts }: Props) {
-  const [Posts, setPosts] = useState(listPosts.length);
+  const { user } = useAuth();
+  const [Posts, setPosts] = useState(0);
+  const [Follower, setFollower] = useState(0);
+  const [Following, setFollowing] = useState(0);
+  const [Followed, setFollowed] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const handleFollow = async (e: MouseEvent) => {
+    e.preventDefault();
+    try {
+      if (Followed) {
+        await axios.put(
+          `http://localhost:5000/api/v1/user/${userInfo.user_name}/unfollow`,
+          {},
+          {
+            headers: { Authorization: "Bearer " + user?.token },
+          }
+        );
+        setFollower((prev) => prev - 1);
+      } else {
+        await axios.put(
+          `http://localhost:5000/api/v1/user/${userInfo.user_name}/follow`,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + user?.token,
+            },
+          }
+        );
+        setFollower((prev) => prev + 1);
+      }
+      setFollowed(!Followed);
+    } catch (e) {}
+  };
+  useEffect(() => {
+    console.log(userInfo.following);
+    setFollowed(userInfo.followers.includes(user?._id));
+    setFollower(userInfo.followers.length);
+    setFollowing(userInfo.following.length);
+    setPosts(listPosts.length);
+  }, [userInfo.following, userInfo._id]);
+  useEffect(() => {
+    if (editModal) {
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "scroll";
+    }
+  }, [editModal]);
   return (
     <div className="profile-page">
+      {editModal && (
+        <Modal handleClose={setEditModal}>
+          <EditProfileModal />
+        </Modal>
+      )}
       <SideBar />
       <div className="profile-page__center">
         <div className="profile-page__center__wrapper">
@@ -51,18 +78,31 @@ function Profile({ userInfo, listPosts }: Props) {
             <div className="profile-page__header__wrapper-info">
               <div className="user-info">
                 <h2 className="user-info__name">{userInfo.user_name}</h2>
-                <button type="button" className="user-info__edit-btn">
-                  Edit profile
-                </button>
+                {userInfo.user_name === user?.userName ? (
+                  <button
+                    type="button"
+                    className="user-info__edit-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setEditModal(true);
+                    }}
+                  >
+                    Edit profile
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="user-info__follow-btn"
+                    onClick={handleFollow}
+                  >
+                    {Followed ? "Followed" : "Follow"}
+                  </button>
+                )}
               </div>
               <div className="status-info">
                 <span className="info-posts">{Posts} Posts</span>
-                <span className="info-follower">
-                  {userInfo.followers.length} Followers
-                </span>
-                <span className="info-following">
-                  {userInfo.following.length} Following
-                </span>
+                <span className="info-follower">{Follower} Followers</span>
+                <span className="info-following">{Following} Following</span>
               </div>
             </div>
           </header>
@@ -134,7 +174,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return {
       props: {
         requireAuth: true,
-        userInfo: user._doc,
+        userInfo: user,
         listPosts: posts,
       },
     };
@@ -143,4 +183,34 @@ export const getServerSideProps: GetServerSideProps = async ({
       notFound: true,
     };
   }
+};
+type Props = {
+  userInfo: {
+    _id: string;
+    email: string;
+    user_name: string;
+    role: string;
+    profile_picture: string;
+    followers: any[];
+    following: any[];
+    gender: string;
+  };
+  listPosts: {
+    _id: string;
+    comment: string[];
+    list_image: {
+      _id: string;
+      path: string;
+      width: number;
+      height: number;
+      blurHash: string;
+    }[];
+    likes: string[];
+    user: {
+      _id: string;
+      user_name: string;
+      profile_picture: string;
+    };
+    description: string;
+  }[];
 };

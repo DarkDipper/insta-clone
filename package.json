@@ -28,6 +28,7 @@
     "next": "13.0.6",
     "react": "18.2.0",
     "react-blurhash": "^0.3.0",
+    "react-cropper": "^2.1.8",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-query": "^3.39.2",

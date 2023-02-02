@@ -1,0 +1,44 @@
+.edit-profile-modal {
+  color: inherit;
+  background: #262626;
+  width: calc-to-rem(860);
+  height: calc-to-rem(563);
+  margin: calc-to-rem(20);
+  border-radius: calc-to-rem(12);
+  overflow: hidden;
+  &__header {
+    // display: flex;
+    padding-block: calc-to-rem(9);
+    text-align: center;
+    font-size: calc-to-rem(16);
+    line-height: calc-to-rem(24);
+    font-weight: 600;
+    border-bottom: 1px solid $border;
+  }
+  &__main {
+    overflow: hidden;
+    display: flex;
+    height: calc(100% - 42px);
+    align-items: center;
+    &__left {
+      width: calc-to-rem(520);
+      height: calc-to-rem(520);
+      background: #262626;
+      overflow: hidden;
+      position: relative;
+      .cropper-crop-box,
+      .cropper-view-box {
+        border-radius: 50%;
+      }
+    }
+    &__right {
+      border-left: 1px solid $border;
+      padding: calc-to-rem(10);
+      width: calc-to-rem(340);
+      height: calc(100% - calc-to-rem(20));
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+  }
+}

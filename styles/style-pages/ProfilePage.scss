@@ -64,6 +64,19 @@
               line-height: calc-to-rem(18);
               font-weight: 600;
               margin-inline-start: calc-to-rem(20);
+              cursor: pointer;
+            }
+            &__follow-btn {
+              background: rgb(0, 149, 246);
+              color: whitesmoke;
+              padding: calc-to-rem(7) calc-to-rem(16);
+              border: none;
+              border-radius: calc-to-rem(8);
+              font-size: calc-to-rem(14);
+              line-height: calc-to-rem(18);
+              font-weight: 600;
+              margin-inline-start: calc-to-rem(20);
+              cursor: pointer;
             }
           }
           .status-info {
