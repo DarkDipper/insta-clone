@@ -16,9 +16,19 @@ type Props = {
     blurHash?: string;
   }[];
   modalPostRef: RefObject<HTMLDivElement>;
+  desc: string;
+  avatar: string;
+  userName: string;
 };
-
-function ModalPost({ SlideImage, modalPostRef }: Props) {
+const dummy_text =
+  "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam eius officiis iure voluptas deserunt deleniti! Provident distinctio nostrum quae magnam?";
+function ModalPost({
+  SlideImage,
+  modalPostRef,
+  desc,
+  avatar,
+  userName,
+}: Props) {
   const [Liked, setLiked] = useState<boolean>(false);
   const [showPicker, setShowPicker] = useState<boolean>(false);
   const [newComment, setNewComment] = useState<string>("");
@@ -46,17 +56,32 @@ function ModalPost({ SlideImage, modalPostRef }: Props) {
       <div className="modal-post__right">
         <header className="modal-post__right__header">
           <div className="modal-post__right__header__avatar">
-            <Avatar />
+            <Avatar src={avatar} />
           </div>
-          <p className="modal-post__right__header__user-name">vietnamoi</p>
+          <p className="modal-post__right__header__user-name">{userName}</p>
         </header>
         <main className="modal-post__right__main">
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
-          <Comment />
+          <Comment userName={userName} avatar={avatar} content={desc} />
+          <Comment
+            userName="vietnammoi"
+            avatar="https://i.imgur.com/uITbeDy.png"
+            content={dummy_text}
+          />
+          <Comment
+            userName="vietnammoi"
+            avatar="https://i.imgur.com/uITbeDy.png"
+            content={dummy_text}
+          />
+          <Comment
+            userName="vietnammoi"
+            avatar="https://i.imgur.com/uITbeDy.png"
+            content={dummy_text}
+          />
+          <Comment
+            userName="vietnammoi"
+            avatar="https://i.imgur.com/uITbeDy.png"
+            content={dummy_text}
+          />
         </main>
         <footer className="modal-post__right__footer">
           <div className="modal-post__right__footer__btns">

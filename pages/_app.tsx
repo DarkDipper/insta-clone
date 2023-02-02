@@ -6,7 +6,8 @@ import localFont from "@next/font/local";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useEffect, useState } from "react";
-import Loading from "@yourapp/components/Loading";
+import { AuthProvider } from "@yourapp/Auth/AuthProvider";
+import { AuthGuard } from "@yourapp/Auth/AuthGuard";
 const segoeUI = localFont({
   src: "../public/font/Segoe fonts v1710/segoeui.ttf",
   preload: false,
@@ -14,7 +15,6 @@ const segoeUI = localFont({
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
-  const [loadingState, setLoadingState] = useState(false);
   // useEffect(() => {
   //   setLoadingState(false);
   // }, []);
@@ -25,20 +25,24 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/instagram.ico" />
         <title>Insta clone</title>
       </Head>
-      {!loadingState ? (
-        <QueryClientProvider client={queryClient}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <ThemeProvider>
-              <div className={segoeUI.className}>
-                <Component {...pageProps} />
-              </div>
-            </ThemeProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </Hydrate>
-        </QueryClientProvider>
-      ) : (
-        <Loading />
-      )}
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ThemeProvider>
+            <div className={segoeUI.className}>
+              <AuthProvider>
+                {pageProps.requireAuth ? (
+                  <AuthGuard>
+                    <Component {...pageProps} />
+                  </AuthGuard>
+                ) : (
+                  <Component {...pageProps} />
+                )}
+              </AuthProvider>
+            </div>
+          </ThemeProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Hydrate>
+      </QueryClientProvider>
     </>
   );
 }

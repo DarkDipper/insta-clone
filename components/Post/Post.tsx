@@ -18,10 +18,11 @@ type Props = {
     blurHash?: string;
   }[];
   desc: string;
+  avatar: string;
+  userName: string;
 };
 
-export default function Post({ listImage, desc }: Props) {
-  // const [Height, setHeight] = useState("0");
+export default function Post({ listImage, desc, avatar, userName }: Props) {
   const [More, setMore] = useState<boolean>(false);
   const [Liked, setLiked] = useState<boolean>(false);
   const [showPicker, setShowPicker] = useState<boolean>(false);
@@ -62,26 +63,26 @@ export default function Post({ listImage, desc }: Props) {
       document.documentElement.style.overflow = "scroll";
     }
   }, [modalPostVisible]);
-  // useEffect(() => {
-  //   setHeight("auto");
-  // }, []);
   return (
     <>
       {modalPostVisible && (
         <Modal handleClose={setModalPostVisible}>
-          <ModalPost SlideImage={listImage} modalPostRef={modalPostRef} />
+          <ModalPost
+            SlideImage={listImage}
+            modalPostRef={modalPostRef}
+            avatar={avatar}
+            desc={desc}
+            userName={userName}
+          />
         </Modal>
       )}
       <div className="post">
         <header className="post__header">
           <div className="post__header__avatar">
-            <StoryAvatar
-              src="https://i.ibb.co/YXL10VM/animelody.png"
-              haveSeenBefore={true}
-            />
+            <StoryAvatar src={avatar} haveSeenBefore={true} />
           </div>
           <div className="post__header__text">
-            <p className="post__header__text__user-name">Username</p>
+            <p className="post__header__text__user-name">{userName}</p>
             <p className="post__header__text__sub-title">Sub title</p>
           </div>
           <button className="post__header__more-btn">

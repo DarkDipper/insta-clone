@@ -2,6 +2,8 @@ import { setCookie, getCookie, removeCookies } from "cookies-next";
 import { AxiosResponse } from "axios";
 type User = {
   token: string;
+  userName: string;
+  avatar: string;
 };
 
 // User Callback function
@@ -9,7 +11,7 @@ type UserCB = (user: User | null, error: any) => void;
 
 class Auth {
   user: User | null;
-  error: { message: string } | null;
+  error: string | null;
   cb: UserCB | null;
 
   constructor() {
@@ -23,7 +25,7 @@ class Auth {
       this.cb = null;
     };
   }
-  protected onUserChange(user: User | null, error?: { message: string }) {
+  protected onUserChange(user: User | null, error?: string | null) {
     this.cb && this.cb(user, error);
   }
   async signUp(respone: AxiosResponse | void) {
@@ -46,16 +48,22 @@ class Auth {
         throw Error("Respone is void");
       }
       if (respone.status === 200) {
-        const { userToken } = respone.data;
+        const { userToken, user_name, avatar } = respone.data;
         this.user = {
           token: userToken,
+          userName: user_name,
+          avatar: avatar,
         };
         setCookie("6gR265$m_t0k3n", userToken, {
           sameSite: "none",
           secure: true,
         });
+        setCookie("user", this.user, {
+          sameSite: "none",
+          secure: true,
+        });
         // window.sessionStorage.setItem("user", JSON.stringify(this.user));
-        this.onUserChange(this.user);
+        // this.onUserChange(this.user);
       } else {
         throw Error(`${respone.status}`);
       }
@@ -74,21 +82,33 @@ class Auth {
     this.user = null;
     this.onUserChange(this.user);
   }
-  resolveUser(cb: UserCB) {
-    setTimeout(() => {
-      if (window) {
-        // const signedInUser = window.sessionStorage.getItem("user");
-        const signedInUser = getCookie("6gR265$m_t0k3n");
-
-        if (typeof signedInUser === "string") {
-          this.user = {
-            token: signedInUser,
-          };
-        }
+  async resolveUser(cb: UserCB) {
+    // const signedInUser = window.sessionStorage.getItem("user");
+    const authCookie = getCookie("6gR265$m_t0k3n");
+    const { user, message } = await fetch(
+      "http://localhost:5000/api/v1/user/auth",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + authCookie,
+        },
+        method: "POST",
       }
-      this.onAuthStateChange(cb);
-      this.onUserChange(this.user);
-    }, 0);
+    ).then(async (res) => {
+      if (res.status !== 200) {
+        const { message } = await res.json();
+        return {
+          status: false,
+          user: null,
+          message: message,
+        };
+      }
+      return res.json();
+    });
+    this.user = user;
+    this.error = message;
+    this.onAuthStateChange(cb);
+    this.onUserChange(this.user, this.error);
   }
 }
 

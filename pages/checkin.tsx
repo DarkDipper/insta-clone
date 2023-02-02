@@ -3,7 +3,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
+import useAuth from "@yourapp/hooks/useAuth";
+import Loading from "@yourapp/components/Loading";
 export default function Checkin() {
+  // const { initializing, dispatch } = useAuth();
   const [imgTransition, setImgTransition] = useState(0);
   const [showRegister, setShowRegister] = useState(false);
   useEffect(() => {
@@ -13,10 +16,9 @@ export default function Checkin() {
       } else {
         setImgTransition(0);
       }
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [imgTransition]);
-
   return (
     <div className="login-page">
       <div className="login-page__left">
@@ -60,7 +62,7 @@ export default function Checkin() {
       </div>
       <div className={`login-page__right ${showRegister ? "flip" : ""}`}>
         <LoginForm setShowRegister={setShowRegister} />
-        <RegisterForm setShowRegister={setShowRegister} />
+        {/* <RegisterForm setShowRegister={setShowRegister} /> */}
       </div>
     </div>
   );

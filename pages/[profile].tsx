@@ -98,23 +98,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     res,
   });
   const userName = query["profile"];
-  const { status: tokenStatus } = await fetch(
-    "http://localhost:5000/api/v1/user/auth",
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + tokenCookie,
-      },
-      method: "POST",
-    }
-  ).then(async (res) => {
-    if (!res.ok) {
-      const { message } = await res.json();
-      console.log(`From profile: ${message}`);
-      throw new Error();
-    }
-    return res.json();
-  });
   const { status: userStatus, user } = await fetch(
     `http://localhost:5000/api/v1/user/u/${userName}`,
     {
@@ -147,26 +130,17 @@ export const getServerSideProps: GetServerSideProps = async ({
     }
     return res.json();
   });
-  if (tokenStatus) {
-    if (userStatus) {
-      // console.log(user);
-      return {
-        props: {
-          userInfo: user._doc,
-          listPosts: posts,
-        },
-      };
-    } else {
-      return {
-        notFound: true,
-      };
-    }
+  if (userStatus) {
+    return {
+      props: {
+        requireAuth: true,
+        userInfo: user._doc,
+        listPosts: posts,
+      },
+    };
+  } else {
+    return {
+      notFound: true,
+    };
   }
-  return {
-    redirect: {
-      permanent: false,
-      destination: "/checkin",
-    },
-    props: {},
-  };
 };

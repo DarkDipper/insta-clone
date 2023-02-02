@@ -8,6 +8,7 @@ import axios from "axios";
 import { getCookie, CookieValueTypes } from "cookies-next";
 import { QueryClient, UseQueryResult, dehydrate, useQuery } from "react-query";
 import Loading from "@yourapp/components/Loading";
+import useAuth from "@yourapp/hooks/useAuth";
 
 type postFetch = {
   status: boolean;
@@ -54,25 +55,14 @@ const SlideImage = [
 const dummy_desc =
   "Lorem ipsum dolor sit, amet consectetur adipisicing elit.Architecto ad at numquam unde tempora amet veniam voluptate,praesentium cum quam ut delectus laudantium nesciunt nihil totam,dignissimos quos illo quibusdam eveniet soluta similique. Nesciuntiusto perspiciatis nam eum corporis natus?";
 export default function Home() {
-  const { data, status, isFetching }: UseQueryResult<postFetch, Error> =
-    useQuery({
-      queryKey: "posts",
-      queryFn: async () => await getPosts(getCookie("6gR265$m_t0k3n")),
-    });
-  const listPost =
-    data &&
-    data["Posts"].map((p) => {
-      // console.log(`Post number ${index}`);
-      return (
-        <Post
-          key={p["_id"]}
-          listImage={p["list_image"]}
-          desc={p["description"]}
-        />
-      );
-    });
+  const { user } = useAuth();
+  const { data, status }: UseQueryResult<postFetch, Error> = useQuery({
+    queryKey: "posts",
+    queryFn: async () => await getPosts(getCookie("6gR265$m_t0k3n")),
+  });
   useEffect(() => {
-    console.log(data);
+    console.log(user);
+    // console.log(data);
     console.log("Im in Home");
   }, []);
   if (status === "loading") {
@@ -92,9 +82,10 @@ export default function Home() {
                     key={p["_id"]}
                     listImage={p["list_image"]}
                     desc={p["description"]}
+                    avatar={p["user"]["profile_picture"]}
+                    userName={p["user"]["user_name"]}
                   />
                 ))}
-              {/* {listPost} */}
               {/* <Post listImage={SlideImage} desc={dummy_desc} />
               <Post listImage={SlideImage} desc={dummy_desc} />
               <Post listImage={SlideImage} desc={dummy_desc} />
@@ -138,11 +129,9 @@ const getPosts = async (cookie: CookieValueTypes) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  // const listCookie = cookie.parse(context.req.headers.cookie as string);
   const tokenCookie = getCookie("6gR265$m_t0k3n", { req, res });
-  // console.log(tokenCookie);
   const queryClient = new QueryClient();
-  // console.log("Render in server");
+  console.log("Render in server");
   await queryClient
     .prefetchQuery("posts", () => getPosts(tokenCookie))
     .catch(() => {
@@ -151,6 +140,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     });
   return {
     props: {
+      requireAuth: true,
       dehydratedState: dehydrate(queryClient),
     },
   };

@@ -1,5 +1,18 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import {
+  createContext,
+  useEffect,
+  useState,
+  useReducer,
+  Dispatch,
+} from "react";
+import AuthReducer from "./AuthReducer";
 import { Auth, User } from "./Auth";
+
+const INITIAL_STATE = {
+  user: null,
+  initializing: true,
+  error: null,
+};
 
 const auth = new Auth();
 
@@ -10,10 +23,11 @@ const AuthContext = createContext<
       auth: Auth;
       initializing: boolean;
       user: User | null;
-      error: { message: string } | null;
+      error: string | null;
       setRedirect: (redirect: string) => void;
       getRedirect: () => string | null;
       clearRedirect: () => void;
+      dispatch: Dispatch<any>;
     }
   | undefined
 >(undefined);
@@ -31,33 +45,28 @@ function clearRedirect() {
 }
 
 function AuthProvider({ children }: { children: JSX.Element }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [error, setError] = useState<{ message: string } | null>(null);
-  const [initializing, setInitializing] = useState(true);
-
+  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
   useEffect(() => {
+    dispatch({ type: "LOGIN_START", payload: undefined });
     auth.resolveUser((user, error) => {
       console.log("auth state changed", user);
       if (user) {
-        setUser(user);
-        setError(null);
+        dispatch({ type: "LOGIN_SUCCESS", payload: user });
+        console.log("Finished authorize");
       } else {
-        setUser(null);
-        if (error) {
-          setError(error);
-        }
+        dispatch({ type: "LOGIN_FAILURE", payload: error });
       }
-      setInitializing(false);
     });
   }, []);
   const value = {
     auth,
-    initializing,
-    user,
-    error,
+    initializing: state.initializing,
+    user: state.user,
+    error: state.error,
     setRedirect,
     getRedirect,
     clearRedirect,
+    dispatch,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

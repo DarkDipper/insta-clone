@@ -7,7 +7,7 @@
 - [x] Modal Post component
 - [x] Post UI
 - [x] Widget UI
-- [ ] [Profile UI]
+- [x] [Profile UI]
   - -> Yes -> Profile user
   - -> No -> 404Page
 - [ ] Chat UI

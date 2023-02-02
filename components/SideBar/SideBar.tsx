@@ -18,12 +18,14 @@ import Modal from "../Modal";
 import Share from "../Share";
 import { Dancing_Script } from "@next/font/google";
 import { useRouter } from "next/router";
+import useAuth from "@yourapp/hooks/useAuth";
 const dancingScript = Dancing_Script({
   style: ["normal"],
   subsets: ["latin"],
   preload: false,
 });
 export default function SideBar() {
+  const { user } = useAuth();
   const [hide, setHide] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const route = useRouter();
@@ -106,7 +108,7 @@ export default function SideBar() {
       },
     },
     {
-      Icon: <Avatar src="https://i.ibb.co/G3yfYFN/Monokuma.png" />,
+      Icon: <Avatar src={user?.avatar} />,
       title: "Profile",
       redDot: false,
       handleItem: (e: MouseEvent) => {
