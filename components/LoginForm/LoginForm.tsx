@@ -4,12 +4,11 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaRegMoon, FaSun } from "react-icons/fa";
 import IconButton from "../IconButton";
 import { ThemeContext } from "../../theme";
-import { setCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import useAuth from "@yourapp/hooks/useAuth";
 import axios from "axios";
 import { Dancing_Script } from "@next/font/google";
-import Loading from "../Loading";
+import useTheme from "@yourapp/hooks/useTheme";
 type Props = {
   setShowRegister: (value: boolean) => void;
 };
@@ -24,7 +23,7 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
   const [userName, setUsername] = useState("");
   const [passWord, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { mode, toggleMode } = useContext(ThemeContext);
+  const { mode, toggleMode } = useTheme();
   const router = useRouter();
   const handleShowPassWord = (e: MouseEvent) => {
     e.preventDefault();

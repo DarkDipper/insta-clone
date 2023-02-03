@@ -10,7 +10,7 @@ import {
   BsPlusSquare,
   BsInstagram,
 } from "react-icons/bs";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaRegMoon, FaSun } from "react-icons/fa";
 import { useState, MouseEvent, useEffect } from "react";
 import useComponentVisible from "../../hooks/useComponentVisible";
 import SearchBar from "../SearchBar";
@@ -19,13 +19,15 @@ import Share from "../Share";
 import { Dancing_Script } from "@next/font/google";
 import { useRouter } from "next/router";
 import useAuth from "@yourapp/hooks/useAuth";
+import useTheme from "@yourapp/hooks/useTheme";
 const dancingScript = Dancing_Script({
   style: ["normal"],
   subsets: ["latin"],
   preload: false,
 });
 export default function SideBar() {
-  const { user } = useAuth();
+  const { toggleMode } = useTheme();
+  const { user, auth } = useAuth();
   const [hide, setHide] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const route = useRouter();
@@ -159,6 +161,20 @@ export default function SideBar() {
         searchBarVisible={searchBarVisible}
         searchBarRef={searchBarRef}
       />
+      <div className="side-bar__setting-menu">
+        <button className="side-bar__setting-menu__theme" onClick={toggleMode}>
+          Switch theme <FaRegMoon size={26} />
+        </button>
+        <button
+          className="side-bar__setting-menu__log-out"
+          onClick={(e) => {
+            e.preventDefault();
+            auth.signOut();
+          }}
+        >
+          Log out
+        </button>
+      </div>
       {showShare && (
         <Modal handleClose={setShowShare}>
           <Share
