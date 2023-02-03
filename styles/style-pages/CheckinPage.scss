@@ -3,6 +3,7 @@
   min-height: calc(100vh - 2rem);
   justify-content: center;
   padding-block-start: calc-to-rem(32);
+  align-items: center;
 
   .hide {
     opacity: 0;
@@ -34,18 +35,18 @@
     width: calc-to-rem(392);
     height: calc-to-rem(635);
     transition: transform 0.6s;
-		transform-style: preserve-3d;
-		backface-visibility: hidden;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
   }
-	.flip{
-		transform: rotateY(180deg);
-	}
+  .flip {
+    transform: rotateY(180deg);
+  }
 }
-.dark .login-page{
+.dark .login-page {
   background: #1a1a1a;
   color: white;
 }
-.light .login-page{
+.light .login-page {
   background: white;
   color: black;
 }

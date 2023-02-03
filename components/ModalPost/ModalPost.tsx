@@ -61,7 +61,9 @@ function ModalPost({
           <p className="modal-post__right__header__user-name">{userName}</p>
         </header>
         <main className="modal-post__right__main">
-          <Comment userName={userName} avatar={avatar} content={desc} />
+          {desc.length !== 0 && (
+            <Comment userName={userName} avatar={avatar} content={desc} />
+          )}
           <Comment
             userName="vietnammoi"
             avatar="https://i.imgur.com/uITbeDy.png"

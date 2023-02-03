@@ -13,19 +13,21 @@
 - [ ] Chat UI
 - [ ] Explore UI
 - [ ] Setting UI
+- [ ] 404 page
 - [x] Fix color page
 - [x] Red dot on sidebar item
 - [x] Cut text description of post component
-- [ ] Try catch the fetch
+- [x] Try catch the fetch
 - [x] Slide Image to post component
 - [x] Search panel
-- [ ] Emoji picker package
+- [x] Emoji picker package
 - [x] Comment component
 - [x] Fix main scroll bar
 - [x] Share post can take breakline in Description
 - [x] Loading state of image
 - [ ] Apply next-theme
 - [x] Consider middleware netx js
+- [ ] Log out function
 
 # Bug 🐛
 
@@ -35,3 +37,4 @@
 - [x] Handle wrong typefile
 - [x] New post list image keep the shape of previous post
 - [x] So if a user have `user cookie` eventhough it empty it can send request to the server and show the page
+- [x] **Modal error complexity**

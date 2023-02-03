@@ -63,7 +63,7 @@ function Profile({ userInfo, listPosts }: Props) {
     <div className="profile-page">
       {editModal && (
         <Modal handleClose={setEditModal}>
-          <EditProfileModal />
+          <EditProfileModal userInfo={userInfo} />
         </Modal>
       )}
       <SideBar />
@@ -133,10 +133,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   query,
 }) => {
-  const tokenCookie = getCookie("6gR265$m_t0k3n", {
-    req,
-    res,
-  });
   const userName = query["profile"];
   const { status: userStatus, user } = await fetch(
     `http://localhost:5000/api/v1/user/u/${userName}`,
@@ -154,23 +150,23 @@ export const getServerSideProps: GetServerSideProps = async ({
     }
     return res.json();
   });
-  const { posts } = await fetch(
-    `http://localhost:5000/api/v1/post/u/${userName}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "GET",
-    }
-  ).then(async (res) => {
-    if (!res.ok) {
-      const { message } = await res.json();
-      console.log(`From profile: ${message}`);
-      return { stauts: false };
-    }
-    return res.json();
-  });
   if (userStatus) {
+    const { posts } = await fetch(
+      `http://localhost:5000/api/v1/post/u/${userName}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      }
+    ).then(async (res) => {
+      if (!res.ok) {
+        const { message } = await res.json();
+        console.log(`From profile: ${message}`);
+        return { stauts: false };
+      }
+      return res.json();
+    });
     return {
       props: {
         requireAuth: true,

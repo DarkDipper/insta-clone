@@ -1,10 +1,29 @@
-import { useRef, useState } from "react";
-import Avatar from "../Avatar";
+import { useRef, useState, MouseEvent, useEffect } from "react";
 import { Cropper } from "react-cropper";
 import "cropperjs/dist/cropper.css";
-function EditProfileModal() {
-  const [image, setImage] = useState("https://i.imgur.com/IJLis5s.jpg");
-  const [cropData, setCropData] = useState("#");
+import { RxAvatar } from "react-icons/rx";
+import { IoIosTrash } from "react-icons/io";
+import axios from "axios";
+import { getCookie } from "cookies-next";
+type Props = {
+  userInfo?: {
+    _id: string;
+    email: string;
+    user_name: string;
+    role: string;
+    profile_picture: string;
+    followers: any[];
+    following: any[];
+    gender: string;
+  };
+};
+function EditProfileModal({ userInfo }: Props) {
+  const [avatar, setAvatar] = useState(undefined);
+  const [userName, setUserName] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [gender, setGender] = useState<string>();
+  // const [passWord, setPassword] = useState<string>("");
+  // const [cropData, setCropData] = useState("#");
   const [cropper, setCropper] = useState<Cropper>();
   const imageRef = useRef<HTMLImageElement>(null);
   const upLoadFile = (e: any) => {
@@ -17,63 +36,153 @@ function EditProfileModal() {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      setImage(reader.result as any);
+      setAvatar(reader.result as any);
     };
     reader.readAsDataURL(files[0]);
+    // console.log("OK");
   };
+  const handleUpdate = async (e: MouseEvent) => {
+    e.preventDefault();
+    let avatarBase64: string = "";
+    if (cropper) {
+      avatarBase64 = cropper.getCroppedCanvas().toDataURL().split(",")[1];
+      // console.log(avatarBase64);
+    }
+    await axios.put(
+      `http://localhost:5000/api/v1/user/${userInfo && userInfo._id}`,
+      {
+        avatar: avatarBase64,
+        user_name: userName,
+        gender: gender,
+        email: email,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
+        },
+      }
+    );
+  };
+  useEffect(() => {
+    if (userInfo) {
+      setUserName(userInfo.user_name);
+      setEmail(userInfo.email);
+      setGender(userInfo.gender ? userInfo.gender : "male");
+    }
+  });
   return (
     <div className="edit-profile-modal">
       <h1 className="edit-profile-modal__header">Edit profile</h1>
       <div className="edit-profile-modal__main">
         <div className="edit-profile-modal__main__left">
-          <Cropper
-            style={{ width: "100%", height: "100%" }}
-            initialAspectRatio={1}
-            src={image}
-            ref={imageRef}
-            viewMode={1}
-            dragMode={"move"}
-            guides={false}
-            toggleDragModeOnDblclick={false}
-            movable={true}
-            cropBoxResizable={false}
-            cropBoxMovable={false}
-            // minCropBoxHeight={10}
-            aspectRatio={1}
-            autoCropArea={1}
-            // minCropBoxWidth={10}
-            background={false}
-            responsive={true}
-            checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
-            onInitialized={(instance) => {
-              setCropper(instance);
-            }}
-          />
+          {!avatar ? (
+            <div
+              className="edit-profile-modal__main__left__upload-image"
+              onDrop={upLoadFile}
+              onDragOver={(e) => e.preventDefault()}
+            >
+              <RxAvatar size={200} />
+              <h3>Drag photos to change avatar</h3>
+            </div>
+          ) : (
+            <>
+              <Cropper
+                style={{ width: "100%", height: "100%" }}
+                initialAspectRatio={1}
+                src={avatar}
+                ref={imageRef}
+                viewMode={1}
+                dragMode={"move"}
+                guides={false}
+                toggleDragModeOnDblclick={false}
+                movable={true}
+                cropBoxResizable={false}
+                cropBoxMovable={false}
+                aspectRatio={1}
+                autoCropArea={1}
+                background={false}
+                responsive={true}
+                checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+                onInitialized={(instance) => {
+                  setCropper(instance);
+                }}
+              />
+              <button
+                className="edit-profile-modal__main__left__delete-avatar-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setAvatar(undefined);
+                }}
+              >
+                <IoIosTrash size={30} />
+              </button>
+            </>
+          )}
         </div>
         <div className="edit-profile-modal__main__right">
-          {/* 
-            Avatar
-            username
-            gender
-            email
-            password
-            pawssword again
-          */}
-          <label htmlFor="user-name">User Name</label>
-          <input id="user-name" type="text" />
-          <label htmlFor="gender">Gender</label>
-          <select name="gender" id="cars">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="unknow">Unknow</option>
-          </select>
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" />
-          <label htmlFor="pass-word-1">New password</label>
-          <input id="pass-word-1" type="password" />
-          <label htmlFor="pass-word-2">New password (one more time)</label>
-          <input id="pass-word-2" type="password" />
-          <input type="file" onChange={upLoadFile} />
+          <div className="edit-profile-modal__main__right__user-name">
+            <label htmlFor="user-name">User Name</label>
+            <input
+              value={userName}
+              onChange={(e) => {
+                e.preventDefault();
+                setUserName(e.target.value);
+              }}
+              id="user-name"
+              type="text"
+            />
+          </div>
+          <div className="edit-profile-modal__main__right__email">
+            <label htmlFor="email">Email</label>
+            <input
+              value={email}
+              onChange={(e) => {
+                e.preventDefault();
+                setEmail(e.target.value);
+              }}
+              id="email"
+              type="email"
+            />
+          </div>
+          {/* <div className="edit-profile-modal__main__right__pass-word">
+            <label htmlFor="pass-word">New password</label>
+            <input
+              value={passWord}
+              onChange={(e) => {
+                e.preventDefault();
+                setPassword(e.target.value);
+              }}
+              id="pass-word"
+              type="password"
+            />
+          </div> */}
+          <div className="edit-profile-modal__main__right__gender-avatar">
+            <div className="edit-profile-modal__main__right__gender">
+              <label htmlFor="gender">Gender</label>
+              <select
+                defaultValue={gender}
+                onChange={(e) => {
+                  e.preventDefault();
+                  console.log(e.target.value);
+                  setGender(e.target.value);
+                }}
+                name="gender"
+                id="gender"
+              >
+                {/* <option value="unknow">Unknow</option> */}
+                <option value="male">Male 👦</option>
+                <option value="female">Female 👧</option>
+              </select>
+            </div>
+            <div className="edit-profile-modal__main__right__avatar">
+              <label htmlFor="image-avatar">Choose Avatar</label>
+              <input id="image-avatar" type="file" onChange={upLoadFile} />
+            </div>
+          </div>
+          <button type="submit" className="save-profile" onClick={handleUpdate}>
+            Save change
+          </button>
         </div>
       </div>
     </div>

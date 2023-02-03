@@ -8,8 +8,6 @@ import axios from "axios";
 import { getCookie, CookieValueTypes } from "cookies-next";
 import { QueryClient, UseQueryResult, dehydrate, useQuery } from "react-query";
 import Loading from "@yourapp/components/Loading";
-import useAuth from "@yourapp/hooks/useAuth";
-
 type postFetch = {
   status: boolean;
   Posts: [];
@@ -55,14 +53,13 @@ const SlideImage = [
 const dummy_desc =
   "Lorem ipsum dolor sit, amet consectetur adipisicing elit.Architecto ad at numquam unde tempora amet veniam voluptate,praesentium cum quam ut delectus laudantium nesciunt nihil totam,dignissimos quos illo quibusdam eveniet soluta similique. Nesciuntiusto perspiciatis nam eum corporis natus?";
 export default function Home() {
-  const { user } = useAuth();
   const { data, status }: UseQueryResult<postFetch, Error> = useQuery({
     queryKey: "posts",
     queryFn: async () => await getPosts(getCookie("6gR265$m_t0k3n")),
   });
   useEffect(() => {
-    console.log(user);
-    // console.log(data);
+    // console.log(user);
+    console.log(data);
     console.log("Im in Home");
   }, []);
   if (status === "loading") {
@@ -132,12 +129,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const tokenCookie = getCookie("6gR265$m_t0k3n", { req, res });
   const queryClient = new QueryClient();
   // console.log("Render in server");
-  await queryClient
-    .prefetchQuery("posts", () => getPosts(tokenCookie))
-    .catch(() => {
-      console.log("Can't get list post");
-      throw new Error();
-    });
+  await queryClient.prefetchQuery("posts", () => getPosts(tokenCookie));
   return {
     props: {
       requireAuth: true,
