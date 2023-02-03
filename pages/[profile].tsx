@@ -63,7 +63,7 @@ function Profile({ userInfo, listPosts }: Props) {
     <div className="profile-page">
       {editModal && (
         <Modal handleClose={setEditModal}>
-          <EditProfileModal userInfo={userInfo} />
+          <EditProfileModal userInfo={userInfo} showModal={setEditModal} />
         </Modal>
       )}
       <SideBar />

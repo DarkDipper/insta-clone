@@ -62,7 +62,7 @@ export default function Checkin() {
       </div>
       <div className={`login-page__right ${showRegister ? "flip" : ""}`}>
         <LoginForm setShowRegister={setShowRegister} />
-        {/* <RegisterForm setShowRegister={setShowRegister} /> */}
+        <RegisterForm setShowRegister={setShowRegister} />
       </div>
     </div>
   );

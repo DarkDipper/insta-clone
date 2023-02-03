@@ -26,8 +26,8 @@ class Auth {
       this.cb = null;
     };
   }
-  onUserChange(user: User | null, error?: string | null) {
-    this.cb && this.cb(user, error);
+  onUserChange(error?: string | null) {
+    this.cb && this.cb(this.user, error);
   }
   async signUp(respone: AxiosResponse | void) {
     try {
@@ -110,7 +110,7 @@ class Auth {
     this.user = user;
     this.error = message;
     this.onAuthStateChange(cb);
-    this.onUserChange(this.user, this.error);
+    this.onUserChange(this.error);
   }
 }
 

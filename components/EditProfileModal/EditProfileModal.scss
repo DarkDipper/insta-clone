@@ -135,8 +135,11 @@
           display: none;
         }
       }
-
-      .save-profile {
+      .error-msg {
+        color: #f00024;
+        text-align: center;
+      }
+      .save-profile-btn {
         position: absolute;
         bottom: calc-to-rem(10);
         width: calc(100% - calc-to-rem(20));
