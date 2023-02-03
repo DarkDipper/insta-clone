@@ -30,7 +30,14 @@ export default function SideBar() {
   const { user, auth } = useAuth();
   const [hide, setHide] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  // const [settingMenu, setSettingMenu] = useState(false);
   const route = useRouter();
+  const {
+    externalComponentRef: buttonSettingMenuRef,
+    ref: settingMenuRef,
+    isComponentVisible: settingMenuVisible,
+    setIsComponentVisible: setSettingMenuVisible,
+  } = useComponentVisible(false);
   const {
     externalComponentRef: buttonSearchRef,
     ref: searchBarRef,
@@ -153,7 +160,11 @@ export default function SideBar() {
             Icon={<FaBars size={24} />}
             title="More"
             hide={hide}
-            handleItem={() => {}}
+            ref={buttonSettingMenuRef}
+            handleItem={(e) => {
+              e.preventDefault();
+              setSettingMenuVisible((prev) => !prev);
+            }}
           />
         </div>
       </div>
@@ -161,20 +172,25 @@ export default function SideBar() {
         searchBarVisible={searchBarVisible}
         searchBarRef={searchBarRef}
       />
-      <div className="side-bar__setting-menu">
-        <button className="side-bar__setting-menu__theme" onClick={toggleMode}>
-          Switch theme <FaRegMoon size={26} />
-        </button>
-        <button
-          className="side-bar__setting-menu__log-out"
-          onClick={(e) => {
-            e.preventDefault();
-            auth.signOut();
-          }}
-        >
-          Log out
-        </button>
-      </div>
+      {settingMenuVisible && (
+        <div className="side-bar__setting-menu" ref={settingMenuRef}>
+          <button
+            className="side-bar__setting-menu__theme"
+            onClick={toggleMode}
+          >
+            Switch theme <FaRegMoon size={26} />
+          </button>
+          <button
+            className="side-bar__setting-menu__log-out"
+            onClick={(e) => {
+              e.preventDefault();
+              auth.signOut();
+            }}
+          >
+            Log out
+          </button>
+        </div>
+      )}
       {showShare && (
         <Modal handleClose={setShowShare}>
           <Share

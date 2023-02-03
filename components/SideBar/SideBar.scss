@@ -80,10 +80,15 @@
   &__setting-menu {
     position: fixed;
     bottom: calc-to-rem(66);
-    left: calc-to-rem(18);
-    border-radius: calc-to-rem(12);
+    left: calc-to-rem(14);
+    border-radius: calc-to-rem(6);
     background: #262626;
     width: calc-to-rem(238);
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -o-user-select: none;
     // height: calc-to-rem(308);
     overflow: hidden;
     z-index: 9999;
