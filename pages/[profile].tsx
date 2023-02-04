@@ -19,30 +19,38 @@ function Profile({ userInfo, listPosts }: Props) {
   const [editModal, setEditModal] = useState(false);
   const handleFollow = async (e: MouseEvent) => {
     e.preventDefault();
+    console.log(userInfo.user_name);
     try {
       if (Followed) {
-        await axios.put(
-          `http://localhost:5000/api/v1/user/${userInfo.user_name}/unfollow`,
-          {},
-          {
-            headers: { Authorization: "Bearer " + user?.token },
-          }
-        );
-        setFollower((prev) => prev - 1);
+        await axios
+          .put(
+            `http://localhost:5000/api/v1/user/${userInfo.user_name}/unfollow`,
+            {},
+            {
+              headers: { Authorization: "Bearer " + user?.token },
+            }
+          )
+          .then(() => {
+            setFollower((prev) => prev - 1);
+            setFollowed(false);
+          });
       } else {
-        await axios.put(
-          `http://localhost:5000/api/v1/user/${userInfo.user_name}/follow`,
-          {},
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + user?.token,
-            },
-          }
-        );
-        setFollower((prev) => prev + 1);
+        await axios
+          .put(
+            `http://localhost:5000/api/v1/user/${userInfo.user_name}/follow`,
+            {},
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + user?.token,
+              },
+            }
+          )
+          .then(() => {
+            setFollower((prev) => prev + 1);
+            setFollowed(true);
+          });
       }
-      setFollowed(!Followed);
     } catch (e) {}
   };
   useEffect(() => {
