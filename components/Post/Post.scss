@@ -1,16 +1,27 @@
 .post {
   border-radius: calc-to-rem(8);
-  border: calc-to-rem(1) solid $border;
+  .dark & {
+    border: calc-to-rem(1) solid $border-dark;
+  }
+  .light & {
+    border: calc-to-rem(1) solid $border-light;
+  }
   width: 470px;
   margin-block-end: calc-to-rem(12);
-  transition: all ease-in-out 1s;
+  // transition: all ease-in-out 1s;
   position: relative;
+  overflow: hidden;
   &__header {
     display: flex;
     flex-direction: row;
     align-items: center;
     // justify-content: center;
-    border-bottom: 1px solid $border;
+    .dark & {
+      border-block-end: calc-to-rem(1) solid $border-dark;
+    }
+    .light & {
+      border-block-end: calc-to-rem(1) solid $border-light;
+    }
     &__wrapper {
       height: calc-to-rem(56);
       flex-grow: 1;
@@ -56,9 +67,20 @@
     object-fit: cover;
     object-position: center;
     overflow: hidden;
+    .dark & {
+      border-block-end: calc-to-rem(1) solid $border-dark;
+    }
+    .light & {
+      border-block-end: calc-to-rem(1) solid $border-light;
+    }
   }
   &__footer {
-    border-top: 1px solid $border;
+    // .dark & {
+    //   border-block-end: calc-to-rem(1) solid $border-dark;
+    // }
+    // .light & {
+    //   border-block-end: calc-to-rem(1) solid $border-light;
+    // }
     margin-block-start: calc-to-rem(4);
     &__btns {
       padding-block-end: calc-to-rem(6);
@@ -135,12 +157,19 @@
       font-size: calc-to-rem(10);
       color: rgb(168, 168, 168);
       letter-spacing: calc-to-rem(0.2);
+      text-transform: uppercase;
     }
     &__comment {
       color: inherit;
       min-height: calc-to-rem(40);
       max-height: calc-to-rem(80);
-      border-block-start: calc-to-rem(1) solid rgb(38, 38, 38);
+      .dark & {
+        border-block-start: calc-to-rem(1) solid $border-dark;
+      }
+      .light & {
+        border-block-start: calc-to-rem(1) solid $border-light;
+      }
+      // border-block-start: calc-to-rem(1) solid rgb(38, 38, 38);
       padding-block: calc-to-rem(4);
       padding-inline: calc-to-rem(12) calc-to-rem(16);
       overflow-x: auto;

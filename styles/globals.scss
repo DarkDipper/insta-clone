@@ -43,7 +43,15 @@ body {
   // font-family: "Roboto", sans-serif;
   // font-family: "Segoe UI", sans-serif;
   font-size: calc-to-rem(16);
-  // overflow-y: hidden;
+  position: relative;
+  overflow-x: hidden !important;
   scrollbar-color: darkgray black;
   scrollbar-width: thin;
+  ::-webkit-scrollbar-thumb {
+    background: darkgray;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    background: black;
+  }
 }

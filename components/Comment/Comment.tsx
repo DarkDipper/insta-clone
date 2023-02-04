@@ -1,11 +1,12 @@
 import Avatar from "../Avatar";
-
+import { format } from "timeago.js";
 type Props = {
   content: string;
   avatar: string;
   userName: string;
+  createdAt: string;
 };
-function Comment({ content, avatar, userName }: Props) {
+function Comment({ content, avatar, userName, createdAt }: Props) {
   return (
     <div className="comment-container">
       <div className="comment-container__user">
@@ -16,7 +17,9 @@ function Comment({ content, avatar, userName }: Props) {
       </div>
       <div className="comment-container__content">{content}</div>
       <div className="comment-container__footer">
-        <div className="comment-container__footer__time">1h</div>
+        <div className="comment-container__footer__time">
+          {format(createdAt)}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,13 @@
-import { FormEvent, RefObject, useState, MouseEvent } from "react";
+import {
+  FormEvent,
+  RefObject,
+  useState,
+  MouseEvent,
+  Dispatch,
+  SetStateAction,
+  useRef,
+  useEffect,
+} from "react";
 import Avatar from "../Avatar";
 import ImageSlider from "../ImageSlider";
 import Comment from "../Comment";
@@ -8,92 +17,135 @@ import { BiBookmark } from "react-icons/bi";
 import { FiHeart } from "react-icons/fi";
 import { SlEmotsmile } from "react-icons/sl";
 import EmojiPicker, { EmojiObject } from "../EmojiPicker";
+import useFetchComments from "@yourapp/hooks/useFetchComments";
+import { format } from "timeago.js";
+import useAuth from "@yourapp/hooks/useAuth";
 type Props = {
-  SlideImage: {
-    path: string;
-    width: number;
-    height: number;
-    blurHash?: string;
-  }[];
+  post: {
+    list_image: {
+      path: string;
+      width: number;
+      height: number;
+      blurHash?: string;
+    }[];
+    user: {
+      user_name: string;
+      profile_picture: string;
+    };
+    _id: string;
+    description: string;
+    likes: string[];
+    comment: string[];
+    createdAt: string;
+  };
   modalPostRef: RefObject<HTMLDivElement>;
-  desc: string;
-  avatar: string;
-  userName: string;
+  Liked: {
+    numLike: number;
+    check: boolean;
+    handleLiked: (e: MouseEvent) => void;
+  };
+  NewComment: {
+    textComment: string;
+    setNewComment: Dispatch<SetStateAction<string>>;
+    handleComment: (e: FormEvent<HTMLFormElement>) => void;
+  };
 };
 const dummy_text =
   "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam eius officiis iure voluptas deserunt deleniti! Provident distinctio nostrum quae magnam?";
-function ModalPost({
-  SlideImage,
-  modalPostRef,
-  desc,
-  avatar,
-  userName,
-}: Props) {
-  const [Liked, setLiked] = useState<boolean>(false);
+function ModalPost({ modalPostRef, post, Liked, NewComment }: Props) {
+  const { user } = useAuth();
+  const listComment = useFetchComments(post._id);
+  const [listTempComment, setListTempComment] = useState<
+    {
+      userName: string;
+      avatar: string;
+      content: string;
+      createdAt: string;
+    }[]
+  >([]);
   const [showPicker, setShowPicker] = useState<boolean>(false);
-  const [newComment, setNewComment] = useState<string>("");
-  const handleCommentSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const inputElement = e.currentTarget.elements.namedItem(
-      "comment"
-    ) as HTMLInputElement;
-    console.log(inputElement.value);
-    inputElement.value = "";
-    console.log("You post a comment");
-  };
-  const handleLiked = (e: MouseEvent) => {
-    e.preventDefault();
-    setLiked((prev) => !prev);
+  const viewRef = useRef<HTMLDivElement>(null);
+  const handleCommentSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    await NewComment.handleComment(e);
+    setListTempComment((prev) => {
+      const tempComment = {
+        userName: user?.userName!,
+        avatar: user?.avatar!,
+        content: NewComment.textComment!,
+        createdAt: "",
+      };
+      return [...prev, tempComment];
+    });
   };
   const handleInsertEmoji = ({ native }: EmojiObject) => {
-    setNewComment((prev) => prev + native);
+    NewComment.setNewComment((prev) => prev + native);
   };
+  useEffect(() => {
+    if (viewRef.current) {
+      viewRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [listTempComment]);
   return (
     <div className="modal-post" ref={modalPostRef}>
       <div className="modal-post__left">
-        <ImageSlider listImages={SlideImage} size={636} />
+        <ImageSlider listImages={post.list_image} size={636} />
       </div>
       <div className="modal-post__right">
         <header className="modal-post__right__header">
           <div className="modal-post__right__header__avatar">
-            <Avatar src={avatar} />
+            <Avatar src={post.user.profile_picture} />
           </div>
-          <p className="modal-post__right__header__user-name">{userName}</p>
+          <p className="modal-post__right__header__user-name">
+            {post.user.user_name}
+          </p>
         </header>
         <main className="modal-post__right__main">
-          {desc.length !== 0 && (
-            <Comment userName={userName} avatar={avatar} content={desc} />
+          {post.description.length !== 0 && (
+            <Comment
+              userName={post.user.user_name}
+              avatar={post.user.profile_picture}
+              content={post.description}
+              createdAt={post.createdAt}
+            />
           )}
-          <Comment
+          {/* <Comment
             userName="vietnammoi"
             avatar="https://i.imgur.com/uITbeDy.png"
             content={dummy_text}
-          />
-          <Comment
-            userName="vietnammoi"
-            avatar="https://i.imgur.com/uITbeDy.png"
-            content={dummy_text}
-          />
-          <Comment
-            userName="vietnammoi"
-            avatar="https://i.imgur.com/uITbeDy.png"
-            content={dummy_text}
-          />
-          <Comment
-            userName="vietnammoi"
-            avatar="https://i.imgur.com/uITbeDy.png"
-            content={dummy_text}
-          />
+            createdAt="2023-02-04T14:45:25.019+00:00"
+          /> */}
+          {listComment.map((c) => {
+            return (
+              <Comment
+                key={c["_id"]}
+                userName={c["user"]["user_name"]}
+                avatar={c["user"]["profile_picture"]}
+                content={c["description"]}
+                createdAt={c["createdAt"]}
+              />
+            );
+          })}
+          {listTempComment.map((c) => {
+            return (
+              <Comment
+                userName={c.userName}
+                avatar={c.avatar}
+                content={c.content}
+                createdAt={c.createdAt}
+              />
+            );
+          })}
+          <div ref={viewRef} />
         </main>
         <footer className="modal-post__right__footer">
           <div className="modal-post__right__footer__btns">
             <button
               className={`modal-post__right__footer__btns__like-btn ${
-                Liked && "liked"
+                Liked.check && "liked"
               }`}
-              onClick={handleLiked}
+              onClick={Liked.handleLiked}
             >
-              {!Liked ? <FiHeart size={24} /> : <FaHeart size={24} />}
+              {!Liked.check ? <FiHeart size={24} /> : <FaHeart size={24} />}
             </button>
             <button className="modal-post__right__footer__btns__comment-btn">
               <FaRegComment size={24} />
@@ -105,8 +157,12 @@ function ModalPost({
               <BiBookmark size={24} />
             </button>
           </div>
-          <div className="modal-post__right__footer__likes">1,270 likes</div>
-          <div className="modal-post__right__footer__time">7 hours ago</div>
+          <div className="modal-post__right__footer__likes">
+            {Liked.numLike} likes
+          </div>
+          <div className="modal-post__right__footer__time">
+            {format(post.createdAt)}
+          </div>
           <div className="modal-post__right__footer__comment">
             {showPicker && (
               <div className="modal-post__right__footer__comment__emoji-picker">
@@ -132,21 +188,24 @@ function ModalPost({
               <input
                 name="comment"
                 type="text"
-                value={newComment}
+                value={NewComment.textComment}
+                placeholder="Add a comment..."
                 className="modal-post__right__footer__comment__form__input-comment"
                 autoComplete="off"
                 onChange={(e) => {
                   e.preventDefault();
-                  setNewComment(e.target.value);
+                  NewComment.setNewComment(e.target.value);
                 }}
               />
-              <button
-                type="submit"
-                className="modal-post__right__footer__comment__form__post-comment-btn"
-                disabled={false}
-              >
-                Post
-              </button>
+              {NewComment.textComment.length !== 0 && (
+                <button
+                  type="submit"
+                  className="modal-post__right__footer__comment__form__post-comment-btn"
+                  disabled={false}
+                >
+                  Post
+                </button>
+              )}
             </form>
           </div>
         </footer>

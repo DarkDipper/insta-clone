@@ -46,7 +46,7 @@ function Profile({ userInfo, listPosts }: Props) {
     } catch (e) {}
   };
   useEffect(() => {
-    console.log(userInfo.following);
+    // console.log(userInfo.following);
     setFollowed(userInfo.followers.includes(user?._id));
     setFollower(userInfo.followers.length);
     setFollowing(userInfo.following.length);
@@ -208,5 +208,6 @@ type Props = {
       profile_picture: string;
     };
     description: string;
+    createdAt: string;
   }[];
 };

@@ -11,21 +11,36 @@ import ModalPost from "../ModalPost";
 import Modal from "../Modal";
 import EmojiPicker, { EmojiObject } from "../EmojiPicker";
 import Link from "next/link";
+import axios from "axios";
+import useAuth from "@yourapp/hooks/useAuth";
+import { format } from "timeago.js";
 type Props = {
-  listImage: {
-    path: string;
-    width: number;
-    height: number;
-    blurHash?: string;
-  }[];
-  desc: string;
-  avatar: string;
-  userName: string;
+  post: {
+    list_image: {
+      path: string;
+      width: number;
+      height: number;
+      blurHash?: string;
+    }[];
+    user: {
+      user_name: string;
+      profile_picture: string;
+    };
+    _id: string;
+    description: string;
+    likes: string[];
+    comment: string[];
+    createdAt: string;
+  };
 };
 
-export default function Post({ listImage, desc, avatar, userName }: Props) {
+export default function Post({ post }: Props) {
+  const { user } = useAuth();
   const [More, setMore] = useState<boolean>(false);
-  const [Liked, setLiked] = useState<boolean>(false);
+  const [Liked, setLiked] = useState<boolean>(() => {
+    return post["likes"].includes(user?._id || "");
+  });
+  const [numLike, setNumLike] = useState<number>(post["likes"].length);
   const [showPicker, setShowPicker] = useState<boolean>(false);
   const [newComment, setNewComment] = useState<string>("");
   const {
@@ -33,13 +48,25 @@ export default function Post({ listImage, desc, avatar, userName }: Props) {
     isComponentVisible: modalPostVisible,
     setIsComponentVisible: setModalPostVisible,
   } = useComponentVisible(false);
-  const handleCommentSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleCommentSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const inputElement = e.currentTarget.elements.namedItem(
-      "comment"
-    ) as HTMLInputElement;
-    console.log(inputElement.value);
-    inputElement.value = "";
+    const res = await axios
+      .post(
+        `http://localhost:5000/api/v1/comment/`,
+        {
+          postId: post._id,
+          description: newComment,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + user?.token,
+          },
+        }
+      )
+      .then((res) => res.data);
+    setNewComment("");
+    post.comment.push(res["commentId"]);
     console.log("You post a comment");
   };
   const handleMore = (e: MouseEvent) => {
@@ -50,9 +77,20 @@ export default function Post({ listImage, desc, avatar, userName }: Props) {
     e.preventDefault();
     setModalPostVisible(true);
   };
-  const handleLiked = (e: MouseEvent) => {
+  const handleLiked = async (e: MouseEvent) => {
     e.preventDefault();
     setLiked((prev) => !prev);
+    if (Liked) {
+      setNumLike((prev) => prev - 1);
+    } else {
+      setNumLike((prev) => prev + 1);
+    }
+    await axios.get(`http://localhost:5000/api/v1/post/${post._id}/like`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user?.token,
+      },
+    });
   };
   const handleInsertEmoji = ({ native }: EmojiObject) => {
     setNewComment((prev) => prev + native);
@@ -69,23 +107,34 @@ export default function Post({ listImage, desc, avatar, userName }: Props) {
       {modalPostVisible && (
         <Modal handleClose={setModalPostVisible}>
           <ModalPost
-            SlideImage={listImage}
             modalPostRef={modalPostRef}
-            avatar={avatar}
-            desc={desc}
-            userName={userName}
+            post={post}
+            Liked={{ numLike: numLike, check: Liked, handleLiked: handleLiked }}
+            NewComment={{
+              textComment: newComment,
+              setNewComment: setNewComment,
+              handleComment: handleCommentSubmit,
+            }}
           />
         </Modal>
       )}
       <div className="post">
         <header className="post__header">
-          <Link href={`/${userName}`} className="post__header__wrapper">
+          <Link
+            href={`/${post.user.user_name}`}
+            className="post__header__wrapper"
+          >
             <div className="post__header__avatar">
-              <StoryAvatar src={avatar} haveSeenBefore={true} />
+              <StoryAvatar
+                src={post.user.profile_picture}
+                haveSeenBefore={true}
+              />
             </div>
             <div className="post__header__text">
-              <p className="post__header__text__user-name">{userName}</p>
-              <p className="post__header__text__sub-title">Sub title</p>
+              <p className="post__header__text__user-name">
+                {post.user.user_name}
+              </p>
+              {/* <p className="post__header__text__sub-title">Sub title</p> */}
             </div>
           </Link>
           {/* <button className="post__header__more-btn">
@@ -99,7 +148,7 @@ export default function Post({ listImage, desc, avatar, userName }: Props) {
         <main className="post__content">
           <ImageSlider
             handleModal={handleModalPost}
-            listImages={listImage}
+            listImages={post.list_image}
             size={470}
           />
         </main>
@@ -124,32 +173,34 @@ export default function Post({ listImage, desc, avatar, userName }: Props) {
               <BiBookmark size={24} />
             </button>
           </div>
-          <div className="post__footer__likes">1,270 likes</div>
+          <div className="post__footer__likes">{numLike} likes</div>
           <div className="post__footer__paragraph">
-            <span className="post__footer__paragraph__user-name">
-              userName{" "}
-            </span>
+            {/* <span className="post__footer__paragraph__user-name">
+              {post.user.user_name}
+            </span> */}
             <span
               // style={{ whiteSpace: "pre-line" }}
               className={`post__footer__paragraph__content${
-                More || desc.length < 30 ? "--show" : ""
+                More || post.description.length < 30 ? "--show" : ""
               }`}
             >
-              {desc}
+              {post.description}
             </span>
           </div>
-          {!More && desc.length > 30 && (
+          {!More && post.description.length > 30 && (
             <div onClick={handleMore} className="post__footer__view-more">
               more
             </div>
           )}
-          <div
-            className="post__footer__view-comments"
-            onClick={handleModalPost}
-          >
-            View all 14 comments
-          </div>
-          <div className="post__footer__time">1 DAY AGO</div>
+          {post.comment.length !== 0 && (
+            <div
+              className="post__footer__view-comments"
+              onClick={handleModalPost}
+            >
+              View all {post.comment.length} comments
+            </div>
+          )}
+          <div className="post__footer__time">{format(post.createdAt)}</div>
           <div className="post__footer__comment">
             {showPicker && (
               <div className="post__footer__comment__emoji-picker">
@@ -183,13 +234,15 @@ export default function Post({ listImage, desc, avatar, userName }: Props) {
                 className="post__footer__comment__form__input-comment"
                 autoComplete="off"
               />
-              <button
-                type="submit"
-                className="post__footer__comment__form__post-comment-btn"
-                disabled={false}
-              >
-                Post
-              </button>
+              {newComment.length !== 0 && (
+                <button
+                  type="submit"
+                  className="post__footer__comment__form__post-comment-btn"
+                  disabled={false}
+                >
+                  Post
+                </button>
+              )}
             </form>
           </div>
         </footer>

@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { FormEvent, MouseEvent, useEffect, useState } from "react";
 import Modal from "../Modal";
 import ModalPost from "../ModalPost";
 import { AiFillHeart } from "react-icons/ai";
@@ -6,7 +6,10 @@ import { TbMessageCircle2 } from "react-icons/tb";
 import useComponentVisible from "@yourapp/hooks/useComponentVisible";
 import Image from "next/image";
 import { Blurhash } from "react-blurhash";
+import useAuth from "@yourapp/hooks/useAuth";
+import axios from "axios";
 function MiniPost({ post }: Props) {
+  const { user } = useAuth();
   const [Loaded, setLoaded] = useState(false);
   const [Hover, setHover] = useState(false);
   const {
@@ -17,6 +20,47 @@ function MiniPost({ post }: Props) {
   const handleModalPost = (e: MouseEvent) => {
     e.preventDefault();
     setModalPostVisible(true);
+  };
+  const [Liked, setLiked] = useState<boolean>(() => {
+    return post["likes"].includes(user?._id || "");
+  });
+  const [numLike, setNumLike] = useState<number>(post["likes"].length);
+  const [newComment, setNewComment] = useState<string>("");
+  const handleCommentSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res = await axios
+      .post(
+        `http://localhost:5000/api/v1/comment/`,
+        {
+          postId: post._id,
+          description: newComment,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + user?.token,
+          },
+        }
+      )
+      .then((res) => res.data);
+    setNewComment("");
+    post.comment.push(res["commentId"]);
+    console.log("You post a comment");
+  };
+  const handleLiked = async (e: MouseEvent) => {
+    e.preventDefault();
+    setLiked((prev) => !prev);
+    if (Liked) {
+      setNumLike((prev) => prev - 1);
+    } else {
+      setNumLike((prev) => prev + 1);
+    }
+    await axios.get(`http://localhost:5000/api/v1/post/${post._id}/like`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user?.token,
+      },
+    });
   };
   useEffect(() => {
     if (modalPostVisible) {
@@ -30,11 +74,29 @@ function MiniPost({ post }: Props) {
       {modalPostVisible && (
         <Modal handleClose={setModalPostVisible}>
           <ModalPost
-            SlideImage={post.list_image}
             modalPostRef={modalPostRef}
-            desc={post.description}
-            avatar={post.user.profile_picture}
-            userName={post.user.user_name}
+            post={{
+              list_image: post.list_image,
+              user: {
+                user_name: post.user.user_name,
+                profile_picture: post.user.profile_picture,
+              },
+              _id: post._id,
+              likes: post.likes,
+              description: post.description,
+              comment: post.comment,
+              createdAt: post.createdAt,
+            }}
+            Liked={{
+              numLike: numLike,
+              check: Liked,
+              handleLiked: handleLiked,
+            }}
+            NewComment={{
+              textComment: newComment,
+              setNewComment: setNewComment,
+              handleComment: handleCommentSubmit,
+            }}
           />
         </Modal>
       )}
@@ -69,7 +131,7 @@ function MiniPost({ post }: Props) {
           }}
         >
           <div className="liked">
-            <span>{post.likes.length}</span> <AiFillHeart />
+            <span>{numLike}</span> <AiFillHeart />
           </div>
           <div className="comments">
             <span>{post.comment.length}</span> <TbMessageCircle2 />
@@ -109,5 +171,6 @@ type Props = {
       profile_picture: string;
     };
     description: string;
+    createdAt: string;
   };
 };

@@ -24,7 +24,12 @@
       .profile-page__header {
         display: flex;
         padding-block-end: calc-to-rem(44);
-        border-bottom: 1px solid $border;
+        .dark & {
+          border-bottom: 1px solid $border-dark;
+        }
+        .light & {
+          border-bottom: 1px solid $border-light;
+        }
         // align-items: center;
         &__wrapper-avatar {
           flex-grow: 1;
@@ -94,13 +99,13 @@
           flex-direction: column;
           h3 {
             margin-block-start: calc-to-rem(20);
-            color: white;
+            color: inherit;
             font-size: calc-to-rem(30);
             line-height: calc-to-rem(36);
             font-weight: 800;
           }
           h5 {
-            color: white;
+            color: inherit;
             margin-block-start: calc-to-rem(20);
             font-size: calc-to-rem(14);
             line-height: calc-to-rem(18);

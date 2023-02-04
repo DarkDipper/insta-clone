@@ -49,10 +49,13 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
           },
         }
       )
-      .catch((respone) => {
-        console.log(respone);
+      .catch((error) => {
+        // console.log(error);
         dispatch &&
-          dispatch({ type: "LOGIN_FAILURE", payload: respone.data["message"] });
+          dispatch({
+            type: "LOGIN_FAILURE",
+            payload: error.response?.data.message,
+          });
         setStatus(false);
       });
     if (respone === undefined) {

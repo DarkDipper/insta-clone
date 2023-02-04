@@ -24,7 +24,7 @@ function Widget() {
   }
   return (
     <div className="widget">
-      <div className="main-account">
+      {/* <div className="main-account">
         <div className="main-account__avatar">
           <Avatar src="https://i.ibb.co/YXL10VM/animelody.png" />
         </div>
@@ -33,11 +33,11 @@ function Widget() {
           <p className="main-account__name__real-name">Phong Huỳnh</p>
         </div>
         <button className="main-account__switch-account">Switch</button>
-      </div>
+      </div> */}
       <div className="suggestion-board">
         <header className="suggestion-board__header">
           <p className="suggestion-board__header__text">Suggestion For You</p>
-          <button className="suggestion-board__header__see-all">See All</button>
+          {/* <button className="suggestion-board__header__see-all">See All</button> */}
         </header>
         <main className="suggestion-board__main">{listSuggest}</main>
       </div>

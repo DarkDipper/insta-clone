@@ -6,12 +6,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid $border;
+  .dark & {
+    border: 1px solid $border-dark;
+    // color: $text-dark;
+  }
+  .light & {
+    border: 1px solid $border-light;
+    color: $text-dark;
+  }
   border-radius: calc-to-rem(12);
   cursor: pointer;
   overflow: hidden;
   transition: opacity ease-in-out 0.3s;
   .hover {
+    color: inherit;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -25,6 +33,7 @@
     gap: calc-to-rem(20);
     .liked,
     .comments {
+      color: inherit;
       display: flex;
       align-items: center;
       gap: calc-to-rem(10);

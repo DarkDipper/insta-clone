@@ -90,7 +90,7 @@ function EditProfileModal({ userInfo, showModal }: Props) {
         showModal(false);
       })
       .catch((error) => {
-        console.log(error.response?.data);
+        // console.log(error.response?.data);
         if (error.response?.data) {
           setError(error.response?.data.message);
         }

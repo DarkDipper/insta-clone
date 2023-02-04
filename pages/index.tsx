@@ -71,30 +71,10 @@ export default function Home() {
       <div className="main-page__center">
         <div className="main-page__center__wrapper">
           <div className="main-page__center__wrapper__left">
-            <Story />
+            {/* <Story /> */}
             <div className="list-post">
               {data &&
-                data["Posts"].map((p, index) => (
-                  <Post
-                    key={p["_id"]}
-                    listImage={p["list_image"]}
-                    desc={p["description"]}
-                    avatar={p["user"]["profile_picture"]}
-                    userName={p["user"]["user_name"]}
-                  />
-                ))}
-              {/* <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} />
-              <Post listImage={SlideImage} desc={dummy_desc} /> */}
+                data["Posts"].map((p, i) => <Post key={p["_id"]} post={p} />)}
             </div>
           </div>
           <div className="main-page__center__wrapper__right">

@@ -1,9 +1,11 @@
 .main-page {
   min-height: 100vh;
-  display: flex;
+  // display: flex;
+  overflow: hidden;
   // justify-content: space-between;
   &__center {
     margin-left: auto;
+    // width: calc(100vw - calc-to-rem(244));
     width: calc(100vw - calc-to-rem(244));
     // height: 1000px;
     // background: rgba(207, 196, 196, 0.4);
@@ -12,6 +14,7 @@
       position: relative;
       display: flex;
       margin: 0 auto;
+      // overflow: hidden;
       width: 820px;
       gap: calc-to-rem(32);
       &__left {

@@ -1,11 +1,16 @@
 .search-bar {
   position: fixed;
-  background: #000000;
+  background: inherit;
   height: 100vh;
   width: calc-to-rem(0);
   margin-inline-start: calc-to-rem(72);
   z-index: 2;
-  border: 1px solid $border;
+  .dark & {
+    border: 1px solid $border-dark;
+  }
+  .light & {
+    border: 1px solid $border-light;
+  }
   border-block: none;
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
@@ -17,7 +22,12 @@
   &__header {
     padding-block-end: calc-to-rem(24);
     padding-inline: calc-to-rem(24) calc-to-rem(14);
-    border-bottom: 1px solid $border;
+    .dark & {
+      border-bottom: 1px solid $border-dark;
+    }
+    .light & {
+      border-bottom: 1px solid $border-light;
+    }
     &__title {
       padding-block: calc-to-rem(36);
       margin-block: calc-to-rem(8);
@@ -33,8 +43,13 @@
         padding-block: calc-to-rem(3);
         padding-inline: calc-to-rem(16);
         border-radius: calc-to-rem(8);
-        background: rgb(239, 239, 239);
-        color: rgb(38, 38, 38);
+        .dark & {
+          background: rgb(239, 239, 239);
+          color: rgb(38, 38, 38);
+        }
+        .light & {
+          background: #efefef;
+        }
         font-size: calc-to-rem(16);
         line-height: cacl-to-rem(22);
         border: none;

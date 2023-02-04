@@ -8,6 +8,7 @@ type Props = {
 };
 
 function SearchBar({ searchBarRef, searchBarVisible }: Props) {
+  const [searchText, setSearchText] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -21,13 +22,26 @@ function SearchBar({ searchBarRef, searchBarVisible }: Props) {
           <div className="search-bar__header__input">
             <input
               ref={searchInputRef}
+              value={searchText}
+              onChange={(e) => {
+                e.preventDefault();
+                setSearchText(e.target.value);
+              }}
               type="search"
               name="search"
               id="search"
             />
-            <button className="search-bar__header__input__close-icon">
-              <AiFillCloseCircle size={20} />
-            </button>
+            {searchText.length !== 0 && (
+              <button
+                className="search-bar__header__input__close-icon"
+                onClick={(e) => {
+                  e.preventDefault;
+                  setSearchText("");
+                }}
+              >
+                <AiFillCloseCircle size={20} />
+              </button>
+            )}
           </div>
         </header>
         <main className="search-bar__results"></main>

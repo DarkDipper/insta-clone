@@ -45,6 +45,7 @@ function reducer(state: userState, action: userAction) {
 }
 
 export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
+  const [errorMsg, setErrorMsg] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { mode, toggleMode } = useContext(ThemeContext);
   const [uState, dispatch] = useReducer(reducer, {
@@ -73,11 +74,14 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
           },
         }
       )
-      .catch((respone) => {
-        console.log(respone);
+      .then(() => {
+        dispatch({ type: "reset" });
+        setShowRegister(false);
+      })
+      .catch((error) => {
+        console.log(error.response?.data.message);
+        setErrorMsg(error.response?.data.message);
       });
-    dispatch({ type: "reset" });
-    setShowRegister(false);
   };
   return (
     <div className={"register-container"}>
@@ -157,10 +161,7 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
             People who use our service may have uploaded your contact
             information to Instagram. Learn More
           </p> */}
-          <p>
-            By signing up, you agree to our Terms , Privacy Policy and Cookies
-            Policy .
-          </p>
+          <p>{errorMsg}</p>
         </form>
       </div>
       <div className="register-container__botom">

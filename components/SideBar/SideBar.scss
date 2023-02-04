@@ -10,8 +10,17 @@
   padding: calc-to-rem(8) calc-to-rem(12);
   transition: all ease 0.3s;
   overflow: hidden;
-  border-inline-end: 0.8px solid #282828;
   z-index: 9999;
+  .dark & {
+    border-inline-end: 0.8px solid #282828;
+    color: white;
+    background: #000000;
+  }
+  .light & {
+    border-inline-end: 0.8px solid $border-light;
+    color: black;
+    background: white;
+  }
   @include mobile {
     width: calc-to-rem(48);
     .side-bar__top {
@@ -51,6 +60,7 @@
       padding: calc-to-rem(25) calc-to-rem(12) calc-to-rem(16);
       transition: all ease 0.3s;
       text-decoration: none;
+      color: inherit;
       &--text {
         font-size: calc-to-rem(35);
         font-family: "Dancing Script", cursive;
@@ -63,9 +73,9 @@
         font-size: calc-to-rem(0);
         transition: all ease 0.3s;
       }
-      .dark & {
-        color: white;
-      }
+      // .dark & {
+      //   color: white;
+      // }
     }
     &__menu {
       display: flex;
@@ -82,7 +92,6 @@
     bottom: calc-to-rem(66);
     left: calc-to-rem(14);
     border-radius: calc-to-rem(6);
-    background: #262626;
     width: calc-to-rem(238);
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -92,6 +101,14 @@
     // height: calc-to-rem(308);
     overflow: hidden;
     z-index: 9999;
+    .dark & {
+      background: #262626;
+      color: inherit;
+    }
+    .light & {
+      background: #fafafa;
+      color: inherit;
+    }
     &__log-out,
     &__theme {
       color: inherit;
@@ -109,8 +126,11 @@
         border-bottom: 1px solid #807777;
       }
       cursor: pointer;
-      &:hover {
+      .dark &:hover {
         background: #121212;
+      }
+      .light &:hover {
+        background: whitesmoke;
       }
     }
   }

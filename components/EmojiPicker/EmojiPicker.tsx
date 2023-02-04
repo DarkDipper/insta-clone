@@ -1,5 +1,6 @@
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import useTheme from "@yourapp/hooks/useTheme";
 import { useState, Dispatch, SetStateAction } from "react";
 export type EmojiObject = {
   id: string;
@@ -15,6 +16,7 @@ type Props = {
 };
 function EmojiPicker({ onEmojiSelectd, handleClose }: Props) {
   const [firstAppeard, setFirstAppeard] = useState<boolean>(true);
+  const { mode } = useTheme();
   return (
     <Picker
       data={data}
@@ -27,7 +29,7 @@ function EmojiPicker({ onEmojiSelectd, handleClose }: Props) {
           setFirstAppeard(false);
         }
       }}
-      theme="dark"
+      theme={mode}
       navPosition="bottom"
       previewPosition="none"
       skinTonePosition="none"
