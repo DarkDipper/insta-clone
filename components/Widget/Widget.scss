@@ -106,6 +106,8 @@
       display: flex;
       align-items: center;
       gap: calc-to-rem(32);
+      text-decoration: none;
+      color: white;
     }
     &__text {
       font-size: calc-to-rem(12);

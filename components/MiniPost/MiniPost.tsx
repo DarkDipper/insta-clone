@@ -30,7 +30,7 @@ function MiniPost({ post }: Props) {
     e.preventDefault();
     const res = await axios
       .post(
-        `http://localhost:5000/api/v1/comment/`,
+        `https://insta-clone-backend-rust.vercel.app/api/v1/comment/`,
         {
           postId: post._id,
           description: newComment,
@@ -55,12 +55,15 @@ function MiniPost({ post }: Props) {
     } else {
       setNumLike((prev) => prev + 1);
     }
-    await axios.get(`http://localhost:5000/api/v1/post/${post._id}/like`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + user?.token,
-      },
-    });
+    await axios.get(
+      `https://insta-clone-backend-rust.vercel.app/api/v1/post/${post._id}/like`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + user?.token,
+        },
+      }
+    );
   };
   useEffect(() => {
     if (modalPostVisible) {

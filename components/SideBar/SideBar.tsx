@@ -46,7 +46,7 @@ export default function SideBar() {
   } = useComponentVisible(false);
   useEffect(() => {
     if (!searchBarVisible) {
-      console.log("UseEffect active");
+      // console.log("UseEffect active");
       setHide(false);
     }
   }, [searchBarVisible, setHide]);
@@ -57,7 +57,7 @@ export default function SideBar() {
       redDot: false,
       handleItem: (e: MouseEvent) => {
         e.preventDefault();
-        console.log("You navigate to HOme");
+        // console.log("You navigate to HOme");
         route.push("/");
       },
     },
@@ -75,38 +75,38 @@ export default function SideBar() {
       },
       ref: buttonSearchRef,
     },
-    // {
-    //   Icon: <ImCompass2 size={24} />,
-    //   title: "Explore",
-    //   redDot: true,
-    //   handleItem: (e: MouseEvent) => {
-    //     e.preventDefault();
-    //   },
-    // },
-    // {
-    //   Icon: <BsCollectionPlay size={24} />,
-    //   title: "Reels",
-    //   redDot: false,
-    //   handleItem: (e: MouseEvent) => {
-    //     e.preventDefault();
-    //   },
-    // },
-    // {
-    //   Icon: <IoPaperPlane size={24} />,
-    //   title: "Message",
-    //   redDot: true,
-    //   handleItem: (e: MouseEvent) => {
-    //     e.preventDefault();
-    //   },
-    // },
-    // {
-    //   Icon: <BsBellFill size={24} />,
-    //   title: "Notification",
-    //   redDot: true,
-    //   handleItem: (e: MouseEvent) => {
-    //     e.preventDefault();
-    //   },
-    // },
+    {
+      Icon: <ImCompass2 size={24} />,
+      title: "Explore",
+      redDot: true,
+      handleItem: (e: MouseEvent) => {
+        e.preventDefault();
+      },
+    },
+    {
+      Icon: <BsCollectionPlay size={24} />,
+      title: "Reels",
+      redDot: false,
+      handleItem: (e: MouseEvent) => {
+        e.preventDefault();
+      },
+    },
+    {
+      Icon: <IoPaperPlane size={24} />,
+      title: "Message",
+      redDot: true,
+      handleItem: (e: MouseEvent) => {
+        e.preventDefault();
+      },
+    },
+    {
+      Icon: <BsBellFill size={24} />,
+      title: "Notification",
+      redDot: true,
+      handleItem: (e: MouseEvent) => {
+        e.preventDefault();
+      },
+    },
     {
       Icon: <BsPlusSquare size={24} />,
       title: "Create",

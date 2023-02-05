@@ -52,7 +52,7 @@ function AuthProvider({ children }: { children: JSX.Element }) {
       // console.log("auth state changed", user);
       if (user) {
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
-        console.log("Finished authorize");
+        // console.log("Finished authorize");
       } else {
         dispatch({ type: "LOGIN_FAILURE", payload: error });
       }

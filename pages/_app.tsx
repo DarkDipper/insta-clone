@@ -27,9 +27,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <ThemeProvider>
-            <div className={segoeUI.className}>
-              <AuthProvider>
+          <div className={segoeUI.className}>
+            <AuthProvider>
+              <ThemeProvider>
                 {pageProps.requireAuth ? (
                   <AuthGuard>
                     <Component {...pageProps} />
@@ -37,9 +37,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 ) : (
                   <Component {...pageProps} />
                 )}
-              </AuthProvider>
-            </div>
-          </ThemeProvider>
+              </ThemeProvider>
+            </AuthProvider>
+          </div>
           {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </Hydrate>
       </QueryClientProvider>

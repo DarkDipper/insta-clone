@@ -64,7 +64,7 @@ function EditProfileModal({ userInfo, showModal }: Props) {
     setStateLoading(true);
     await axios
       .put(
-        `http://localhost:5000/api/v1/user/${userInfo._id}`,
+        `https://insta-clone-backend-rust.vercel.app/api/v1/user/${userInfo._id}`,
         {
           avatar: avatarBase64,
           user_name: userName,

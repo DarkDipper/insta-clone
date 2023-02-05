@@ -35,7 +35,7 @@ function Share({ handleClose, userName, avatar }: Props) {
   const shareRequest = useMutation(
     (formRquest: FormData) => {
       return axios.post(
-        "http://localhost:5000/api/v1/post/create",
+        "https://insta-clone-backend-rust.vercel.app/api/v1/post/create",
         formRquest,
         {
           headers: {
@@ -48,6 +48,9 @@ function Share({ handleClose, userName, avatar }: Props) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["posts"]);
+      },
+      onError: (error) => {
+        console.log(error);
       },
     }
   );

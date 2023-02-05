@@ -12,14 +12,17 @@ function Widget() {
   useEffect(() => {
     const fetchUserSuggest = async () => {
       await axios
-        .get("http://localhost:5000/api/v1/user/suggestUser", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
-          },
-        })
+        .get(
+          "https://insta-clone-backend-rust.vercel.app/api/v1/user/suggestUser",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
+            },
+          }
+        )
         .then((res) => {
-          console.log(res.data["userSuggest"]);
+          // console.log(res.data["userSuggest"]);
           setUserSuggest(res.data["userSuggest"]);
         });
     };
@@ -54,9 +57,11 @@ function Widget() {
       </div>
       <div className="copy-right">
         <div className="copy-right__socials-icon">
-          <BsGithub size={20} />
-          <BsLinkedin size={20} />
-          <BsFacebook size={20} />
+          <Link href={"https://github.com/DarkDipper"}>
+            <BsGithub size={20} color="white" />
+          </Link>
+          {/* <BsLinkedin size={20} />
+          <BsFacebook size={20} /> */}
         </div>
         <p className="copy-right__text">&#169; 2023 Insta clone from Dipper</p>
       </div>

@@ -5,6 +5,7 @@ type User = {
   token: string;
   userName: string;
   avatar: string;
+  theme: string;
 };
 
 // User Callback function
@@ -49,12 +50,13 @@ class Auth {
         throw Error("Respone is void");
       }
       if (respone.status === 200) {
-        const { userToken, user_name, avatar, _id } = respone.data;
+        const { userToken, user_name, avatar, _id, theme } = respone.data;
         this.user = {
           _id: _id,
           token: userToken,
           userName: user_name,
           avatar: avatar,
+          theme: theme,
         };
         setCookie("6gR265$m_t0k3n", userToken, {
           sameSite: "none",
@@ -88,7 +90,7 @@ class Auth {
     // const signedInUser = window.sessionStorage.getItem("user");
     const authCookie = getCookie("6gR265$m_t0k3n");
     const { user, message } = await fetch(
-      "http://localhost:5000/api/v1/user/auth",
+      "https://insta-clone-backend-rust.vercel.app/api/v1/user/auth",
       {
         headers: {
           "Content-Type": "application/json",
