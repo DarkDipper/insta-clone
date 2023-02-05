@@ -7,8 +7,10 @@
   z-index: 2;
   .dark & {
     border: 1px solid $border-dark;
+    color: $text-dark;
   }
   .light & {
+    color: $text-light;
     border: 1px solid $border-light;
   }
   border-block: none;
@@ -67,9 +69,36 @@
     }
   }
   &__results {
+    color: inherit;
     overflow: hidden;
     padding-inline: calc-to-rem(24) calc-to-rem(14);
     margin-block-start: calc-to-rem(18);
     text-align: justify;
+    display: flex;
+    flex-direction: column;
+    gap: calc-to-rem(10);
+    .user-search {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      gap: calc-to-rem(20);
+      width: calc(100% - calc-to-rem(24));
+      height: calc-to-rem(60);
+      border-radius: calc-to-rem(10);
+      padding: calc-to-rem(10) calc-to-rem(12);
+      transition: background ease-in-out 0.5s;
+      &:hover {
+        background: #a9a9a945;
+      }
+      &-avatar {
+        height: calc-to-rem(50);
+        width: calc-to-rem(50);
+      }
+      p {
+        color: inherit;
+        font-size: calc-to-rem(18);
+      }
+    }
   }
 }

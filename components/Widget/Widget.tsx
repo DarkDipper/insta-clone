@@ -1,27 +1,34 @@
 import { BsFacebook, BsGithub, BsLinkedin } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 import Avatar from "../Avatar";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { getCookie } from "cookies-next";
+import SuggestItem from "./SuggestItem";
 
 function Widget() {
-  const SuggestItem = () => (
-    <div className="suggestion-board__main__suggest-item">
-      <div className="suggestion-board__main__suggest-item__avatar">
-        <Avatar src="https://i.ibb.co/YXL10VM/animelody.png" />
-      </div>
-      <div className="suggestion-board__main__suggest-item__description">
-        <p className="suggestion-board__main__suggest-item__description__user-name">
-          theuselessboy
-        </p>
-      </div>
-      <button className="suggestion-board__main__suggest-item__follow">
-        Follow
-      </button>
-    </div>
-  );
-  const listSuggest = [];
-  for (let i = 0; i <= 4; i++) {
-    listSuggest.push(<SuggestItem key={i} />);
-  }
+  const [userSuggest, setUserSuggest] = useState([]);
+  useEffect(() => {
+    const fetchUserSuggest = async () => {
+      await axios
+        .get("http://localhost:5000/api/v1/user/suggestUser", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
+          },
+        })
+        .then((res) => {
+          console.log(res.data["userSuggest"]);
+          setUserSuggest(res.data["userSuggest"]);
+        });
+    };
+    fetchUserSuggest();
+  }, []);
+  // const listSuggest = [];
+  // for (let i = 0; i <= 4; i++) {
+  //   listSuggest.push(<SuggestItem key={i} />);
+  // }
   return (
     <div className="widget">
       {/* <div className="main-account">
@@ -39,7 +46,11 @@ function Widget() {
           <p className="suggestion-board__header__text">Suggestion For You</p>
           {/* <button className="suggestion-board__header__see-all">See All</button> */}
         </header>
-        <main className="suggestion-board__main">{listSuggest}</main>
+        <main className="suggestion-board__main">
+          {userSuggest.map((u) => (
+            <SuggestItem key={u["_id"]} user={u} />
+          ))}
+        </main>
       </div>
       <div className="copy-right">
         <div className="copy-right__socials-icon">

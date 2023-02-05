@@ -1,4 +1,10 @@
 .widget {
+  .dark & {
+    color: $text-dark;
+  }
+  .light & {
+    color: $text-light;
+  }
   .main-account {
     margin-block: calc-to-rem(22);
     display: flex;
@@ -37,6 +43,7 @@
     }
   }
   .suggestion-board {
+    color: inherit;
     margin-block-end: calc-to-rem(22);
     &__header {
       display: flex;
@@ -60,7 +67,10 @@
       }
     }
     &__main {
+      color: inherit;
       &__suggest-item {
+        text-decoration: none;
+        color: inherit;
         padding-block: calc-to-rem(8);
         display: flex;
         align-items: center;

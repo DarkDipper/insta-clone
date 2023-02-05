@@ -1,16 +1,46 @@
-import { useState, useRef, RefObject } from "react";
+import { useState, useRef, RefObject, useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import useComponentVisible from "../../hooks/useComponentVisible";
+import useDebounce from "@yourapp/hooks/useDebounce";
+import axios from "axios";
+import Avatar from "../Avatar";
+import Link from "next/link";
 
 type Props = {
   searchBarRef: RefObject<HTMLDivElement>;
   searchBarVisible: boolean;
 };
-
+type userQueryObj = {
+  _id: string;
+  user_name: string;
+  profile_picture: string;
+}[];
 function SearchBar({ searchBarRef, searchBarVisible }: Props) {
   const [searchText, setSearchText] = useState("");
+  const searchQuery = useDebounce(searchText, 1000);
   const searchInputRef = useRef<HTMLInputElement>(null);
-
+  const [usersSearch, setusersSearch] = useState<userQueryObj>([]);
+  useEffect(() => {
+    let source = axios.CancelToken.source();
+    const getSearch = async () => {
+      try {
+        if (searchQuery.length >= 1) {
+          const searchresult = await axios.get(
+            "http://localhost:5000/api/v1/user/searchUser",
+            {
+              params: { search: searchQuery },
+              cancelToken: source.token,
+            }
+          );
+          setusersSearch(searchresult.data["users"]);
+        }
+      } catch (error) {}
+    };
+    getSearch();
+    return () => {
+      source.cancel;
+    };
+  }, [searchQuery]);
   return (
     <>
       <div
@@ -44,7 +74,22 @@ function SearchBar({ searchBarRef, searchBarVisible }: Props) {
             )}
           </div>
         </header>
-        <main className="search-bar__results"></main>
+        <main className="search-bar__results">
+          {usersSearch.map((user) => {
+            return (
+              <Link
+                href={`/${user.user_name}`}
+                className="user-search"
+                key={user._id}
+              >
+                <div className="user-search-avatar">
+                  <Avatar src={user.profile_picture} />
+                </div>
+                <p>{user.user_name}</p>
+              </Link>
+            );
+          })}
+        </main>
       </div>
     </>
   );
