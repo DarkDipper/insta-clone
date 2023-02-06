@@ -20,17 +20,17 @@ import { Dancing_Script } from "@next/font/google";
 import { useRouter } from "next/router";
 import useAuth from "@yourapp/hooks/useAuth";
 import useTheme from "@yourapp/hooks/useTheme";
+import axios from "axios";
 const dancingScript = Dancing_Script({
   style: ["normal"],
   subsets: ["latin"],
   preload: false,
 });
 export default function SideBar() {
-  const { toggleMode } = useTheme();
+  const { mode, toggleMode } = useTheme();
   const { user, auth } = useAuth();
   const [hide, setHide] = useState(false);
   const [showShare, setShowShare] = useState(false);
-  // const [settingMenu, setSettingMenu] = useState(false);
   const route = useRouter();
   const {
     externalComponentRef: buttonSettingMenuRef,
@@ -44,6 +44,23 @@ export default function SideBar() {
     isComponentVisible: searchBarVisible,
     setIsComponentVisible: setSearchBarVisible,
   } = useComponentVisible(false);
+  const submitTheme = async (e: MouseEvent) => {
+    e.preventDefault();
+    const changeTheme = mode === "dark" ? "light" : "dark";
+    toggleMode();
+    await axios.post(
+      "http://localhost:5000/api/v1/user/changeTheme",
+      {
+        theme: changeTheme,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + user?.token,
+        },
+      }
+    );
+  };
   useEffect(() => {
     if (!searchBarVisible) {
       // console.log("UseEffect active");
@@ -176,7 +193,7 @@ export default function SideBar() {
         <div className="side-bar__setting-menu" ref={settingMenuRef}>
           <button
             className="side-bar__setting-menu__theme"
-            onClick={toggleMode}
+            onClick={submitTheme}
           >
             Switch theme <FaRegMoon size={26} />
           </button>
