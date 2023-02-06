@@ -62,7 +62,7 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
     e.preventDefault();
     await axios
       .post(
-        "https://insta-clone-backend-rust.vercel.app/api/v1/user/register",
+        "https://insta-clone-backend-dipper.onrender.com/api/v1/user/register",
         {
           username: uState.username,
           password: uState.password,

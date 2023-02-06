@@ -45,7 +45,7 @@ const getPosts = async (cookie: CookieValueTypes) => {
   let stateFetched = true;
   const res = await axios
     .get(
-      "https://insta-clone-backend-rust.vercel.app/api/v1/post/timeline?page=1&limit=1",
+      "https://insta-clone-backend-dipper.onrender.com/api/v1/post/timeline?page=1&limit=1",
       {
         headers: {
           "Content-Type": "application/json",

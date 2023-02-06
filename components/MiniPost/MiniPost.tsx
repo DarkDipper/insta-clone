@@ -30,7 +30,7 @@ function MiniPost({ post }: Props) {
     e.preventDefault();
     const res = await axios
       .post(
-        `https://insta-clone-backend-rust.vercel.app/api/v1/comment/`,
+        `https://insta-clone-backend-dipper.onrender.com/api/v1/comment/`,
         {
           postId: post._id,
           description: newComment,
@@ -56,7 +56,7 @@ function MiniPost({ post }: Props) {
       setNumLike((prev) => prev + 1);
     }
     await axios.get(
-      `https://insta-clone-backend-rust.vercel.app/api/v1/post/${post._id}/like`,
+      `https://insta-clone-backend-dipper.onrender.com/api/v1/post/${post._id}/like`,
       {
         headers: {
           "Content-Type": "application/json",

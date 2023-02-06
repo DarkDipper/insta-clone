@@ -13,7 +13,7 @@ function Widget() {
     const fetchUserSuggest = async () => {
       await axios
         .get(
-          "https://insta-clone-backend-rust.vercel.app/api/v1/user/suggestUser",
+          "https://insta-clone-backend-dipper.onrender.com/api/v1/user/suggestUser",
           {
             headers: {
               "Content-Type": "application/json",

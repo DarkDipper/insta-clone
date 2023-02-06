@@ -20,7 +20,7 @@ function SuggestItem({ user }: Props) {
       if (Followed) {
         await axios
           .put(
-            `https://insta-clone-backend-rust.vercel.app/api/v1/user/${user.user_name}/unfollow`,
+            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${user.user_name}/unfollow`,
             {},
             {
               headers: { Authorization: "Bearer " + userAuth?.token },
@@ -32,7 +32,7 @@ function SuggestItem({ user }: Props) {
       } else {
         await axios
           .put(
-            `https://insta-clone-backend-rust.vercel.app/api/v1/user/${user.user_name}/follow`,
+            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${user.user_name}/follow`,
             {},
             {
               headers: {

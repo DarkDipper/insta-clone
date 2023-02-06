@@ -7,7 +7,7 @@ function useFetchComments(postId: string) {
     const fetchComment = async () => {
       await axios
         .get(
-          `https://insta-clone-backend-rust.vercel.app/api/v1/comment/${postId}`
+          `https://insta-clone-backend-dipper.onrender.com/api/v1/comment/${postId}`
         )
         .then((res) => {
           // console.log(res.data);

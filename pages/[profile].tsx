@@ -24,7 +24,7 @@ function Profile({ userInfo, listPosts }: Props) {
       if (Followed) {
         await axios
           .put(
-            `https://insta-clone-backend-rust.vercel.app/api/v1/user/${userInfo.user_name}/unfollow`,
+            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${userInfo.user_name}/unfollow`,
             {},
             {
               headers: { Authorization: "Bearer " + user?.token },
@@ -37,7 +37,7 @@ function Profile({ userInfo, listPosts }: Props) {
       } else {
         await axios
           .put(
-            `https://insta-clone-backend-rust.vercel.app/api/v1/user/${userInfo.user_name}/follow`,
+            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${userInfo.user_name}/follow`,
             {},
             {
               headers: {
@@ -143,7 +143,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const userName = query["profile"];
   const { status: userStatus, user } = await fetch(
-    `https://insta-clone-backend-rust.vercel.app/api/v1/user/u/${userName}`,
+    `https://insta-clone-backend-dipper.onrender.com/api/v1/user/u/${userName}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -160,7 +160,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   });
   if (userStatus) {
     const { posts } = await fetch(
-      `https://insta-clone-backend-rust.vercel.app/api/v1/post/u/${userName}`,
+      `https://insta-clone-backend-dipper.onrender.com/api/v1/post/u/${userName}`,
       {
         headers: {
           "Content-Type": "application/json",

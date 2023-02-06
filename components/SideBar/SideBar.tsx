@@ -49,7 +49,7 @@ export default function SideBar() {
     const changeTheme = mode === "dark" ? "light" : "dark";
     toggleMode();
     await axios.post(
-      "http://localhost:5000/api/v1/user/changeTheme",
+      "https://insta-clone-backend-dipper.onrender.com/api/v1/user/changeTheme",
       {
         theme: changeTheme,
       },
