@@ -37,7 +37,7 @@ function CustomImage({ src, imgWidth, imgHeight, blurHash }: Props) {
         setHeight("100%");
       }
     }
-  }, []);
+  }, [imgHeight, imgWidth]);
   return (
     <div
       style={{

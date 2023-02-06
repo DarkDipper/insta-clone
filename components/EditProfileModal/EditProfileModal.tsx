@@ -107,7 +107,7 @@ function EditProfileModal({ userInfo, showModal }: Props) {
     } else {
       setGender("male");
     }
-  }, []);
+  }, [userInfo.email, userInfo.gender, userInfo.user_name]);
   return (
     <div className="edit-profile-modal">
       {!stateLoading ? (

@@ -89,7 +89,7 @@ function Share({ handleClose, userName, avatar }: Props) {
         URL.revokeObjectURL(imgUrl.path);
       }
     };
-  }, [selectedFile]);
+  }, [selectedFile,listImage]);
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
 

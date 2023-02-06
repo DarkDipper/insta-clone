@@ -48,7 +48,7 @@ function ImageSlider({ listImages, size, handleModal, setShareIndex }: props) {
         setCurrentIndex(currentIndex - 1);
       }
     }
-  }, [listImages]);
+  }, [listImages, currentIndex, setShareIndex]);
   return (
     <div className="image-slider-container">
       {currentIndex !== 0 && listImages.length > 1 && (

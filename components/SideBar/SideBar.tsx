@@ -1,4 +1,4 @@
-import Avatar from "../Avatar";
+import Avatar from "@yourapp/components/Avatar";
 import Link from "next/link";
 import SideBarItem from "./SideBarItem";
 import { AiOutlineHome } from "react-icons/ai";

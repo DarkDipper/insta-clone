@@ -59,7 +59,13 @@ function Profile({ userInfo, listPosts }: Props) {
     setFollower(userInfo.followers.length);
     setFollowing(userInfo.following.length);
     setPosts(listPosts.length);
-  }, [userInfo.following, userInfo._id]);
+  }, [
+    userInfo.following,
+    userInfo._id,
+    listPosts.length,
+    user?._id,
+    userInfo.followers,
+  ]);
   useEffect(() => {
     if (editModal) {
       document.documentElement.style.overflow = "hidden";

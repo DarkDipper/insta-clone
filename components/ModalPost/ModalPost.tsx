@@ -125,16 +125,6 @@ function ModalPost({ modalPostRef, post, Liked, NewComment }: Props) {
               />
             );
           })}
-          {listTempComment.map((c) => {
-            return (
-              <Comment
-                userName={c.userName}
-                avatar={c.avatar}
-                content={c.content}
-                createdAt={c.createdAt}
-              />
-            );
-          })}
           <div ref={viewRef} />
         </main>
         <footer className="modal-post__right__footer">
