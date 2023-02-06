@@ -33,9 +33,9 @@
 @import "./style-pages/HomePage.scss";
 @import "./style-pages/ProfilePage.scss";
 // Config
-@import "resetScss";
-@import "functions";
-@import "variables";
+@import "./resetSCSS.scss";
+@import "./functions.scss";
+@import "./variables.scss";
 
 // Global
 html,

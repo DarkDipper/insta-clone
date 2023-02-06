@@ -19,7 +19,7 @@ function useFetchComments(postId: string) {
     };
     fetchComment();
     console.log("Fetch post success");
-  }, []);
+  }, [postId]);
   return comments;
 }
 
