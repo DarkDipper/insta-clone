@@ -29,7 +29,7 @@ type Props = {
   showModal: Dispatch<SetStateAction<boolean>>;
 };
 function EditProfileModal({ userInfo, showModal }: Props) {
-  const { auth } = useAuth();
+  const { auth, user } = useAuth();
   const [stateLoading, setStateLoading] = useState(false);
   const [error, setError] = useState("");
   const [avatar, setAvatar] = useState(undefined);
@@ -85,6 +85,7 @@ function EditProfileModal({ userInfo, showModal }: Props) {
           token: res.data["user"].token,
           userName: res.data["user"].userName,
           avatar: res.data["user"].avatar,
+          theme: user?.theme!,
         };
         auth.onUserChange();
         showModal(false);
