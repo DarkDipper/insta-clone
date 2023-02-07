@@ -35,7 +35,7 @@ function Share({ handleClose, userName, avatar }: Props) {
   const shareRequest = useMutation(
     (formRquest: FormData) => {
       return axios.post(
-        "https://insta-clone-backend-dipper.onrender.com/api/v1/post/create",
+        "http://localhost:5000/api/v1/post/create",
         formRquest,
         {
           headers: {
@@ -89,7 +89,7 @@ function Share({ handleClose, userName, avatar }: Props) {
         URL.revokeObjectURL(imgUrl.path);
       }
     };
-  }, [selectedFile,listImage]);
+  }, [selectedFile, listImage]);
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
 

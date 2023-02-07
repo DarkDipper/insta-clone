@@ -7,6 +7,7 @@ import axios from "axios";
 import { getCookie, CookieValueTypes } from "cookies-next";
 import { QueryClient, UseQueryResult, dehydrate, useQuery } from "react-query";
 import Loading from "@yourapp/components/Loading";
+import { useEffect } from "react";
 type postFetch = {
   status: boolean;
   Posts: [];
@@ -17,6 +18,10 @@ export default function Home() {
     queryKey: "posts",
     queryFn: async () => await getPosts(getCookie("6gR265$m_t0k3n")),
   });
+  useEffect(() => {
+    console.log(status);
+    console.log(data);
+  }, [data, status]);
   if (status === "loading") {
     return <Loading />;
   }
@@ -44,15 +49,12 @@ export default function Home() {
 const getPosts = async (cookie: CookieValueTypes) => {
   let stateFetched = true;
   const res = await axios
-    .get(
-      "https://insta-clone-backend-dipper.onrender.com/api/v1/post/timeline?page=1&limit=1",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + cookie,
-        },
-      }
-    )
+    .get("http://localhost:5000/api/v1/post/timeline?page=1&limit=1", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookie,
+      },
+    })
     .then((res) => res.data)
     .catch(() => {
       stateFetched = false;
@@ -64,14 +66,14 @@ const getPosts = async (cookie: CookieValueTypes) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const tokenCookie = getCookie("6gR265$m_t0k3n", { req, res });
+  // const tokenCookie = getCookie("6gR265$m_t0k3n", { req, res });
   const queryClient = new QueryClient();
   // console.log("Render in server");
-  await queryClient.prefetchQuery("posts", () => getPosts(tokenCookie));
+  // await queryClient.prefetchQuery("posts", () => getPosts(tokenCookie));
   return {
     props: {
       requireAuth: true,
-      dehydratedState: dehydrate(queryClient),
+      // dehydratedState: dehydrate(queryClient),
     },
   };
 };

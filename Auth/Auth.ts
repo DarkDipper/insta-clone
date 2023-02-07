@@ -90,7 +90,7 @@ class Auth {
     // const signedInUser = window.sessionStorage.getItem("user");
     const authCookie = getCookie("6gR265$m_t0k3n");
     const { user, message } = await fetch(
-      "https://insta-clone-backend-dipper.onrender.com/api/v1/user/auth",
+      "http://localhost:5000/api/v1/user/auth",
       {
         headers: {
           "Content-Type": "application/json",

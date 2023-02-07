@@ -30,7 +30,7 @@ function MiniPost({ post }: Props) {
     e.preventDefault();
     const res = await axios
       .post(
-        `https://insta-clone-backend-dipper.onrender.com/api/v1/comment/`,
+        `http://localhost:5000/api/v1/comment/`,
         {
           postId: post._id,
           description: newComment,
@@ -55,15 +55,12 @@ function MiniPost({ post }: Props) {
     } else {
       setNumLike((prev) => prev + 1);
     }
-    await axios.get(
-      `https://insta-clone-backend-dipper.onrender.com/api/v1/post/${post._id}/like`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + user?.token,
-        },
-      }
-    );
+    await axios.get(`http://localhost:5000/api/v1/post/${post._id}/like`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user?.token,
+      },
+    });
   };
   useEffect(() => {
     if (modalPostVisible) {

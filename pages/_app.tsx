@@ -3,11 +3,13 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import ThemeProvider from "../theme";
 import localFont from "@next/font/local";
-import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useEffect, useState } from "react";
 import { AuthProvider } from "@yourapp/Auth/AuthProvider";
 import { AuthGuard } from "@yourapp/Auth/AuthGuard";
+import { useRouter } from "next/router";
+import Loading from "@yourapp/components/Loading";
 const segoeUI = localFont({
   src: "../public/font/Segoe fonts v1710/segoeui.ttf",
   preload: false,
@@ -15,9 +17,24 @@ const segoeUI = localFont({
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
-  // useEffect(() => {
-  //   setLoadingState(false);
-  // }, []);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const handleStart = () => {
+      setLoading(true);
+    };
+
+    const handleComplete = () => {
+      setLoading(false);
+    };
+
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleComplete);
+    return () => {
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleComplete);
+    };
+  }, [router.events]);
   return (
     <>
       <Head>
@@ -26,22 +43,22 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Insta clone</title>
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <div className={segoeUI.className}>
-            <AuthProvider>
-              <ThemeProvider>
-                {pageProps.requireAuth ? (
-                  <AuthGuard>
-                    <Component {...pageProps} />
-                  </AuthGuard>
-                ) : (
-                  <Component {...pageProps} />
-                )}
-              </ThemeProvider>
-            </AuthProvider>
-          </div>
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        </Hydrate>
+        <div className={segoeUI.className}>
+          <AuthProvider>
+            <ThemeProvider>
+              {pageProps.requireAuth ? (
+                <AuthGuard>
+                  {loading ? <Loading /> : <Component {...pageProps} />}
+                </AuthGuard>
+              ) : loading ? (
+                <Loading />
+              ) : (
+                <Component {...pageProps} />
+              )}
+            </ThemeProvider>
+          </AuthProvider>
+        </div>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );

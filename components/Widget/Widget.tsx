@@ -12,15 +12,12 @@ function Widget() {
   useEffect(() => {
     const fetchUserSuggest = async () => {
       await axios
-        .get(
-          "https://insta-clone-backend-dipper.onrender.com/api/v1/user/suggestUser",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
-            },
-          }
-        )
+        .get("http://localhost:5000/api/v1/user/suggestUser", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
+          },
+        })
         .then((res) => {
           // console.log(res.data["userSuggest"]);
           setUserSuggest(res.data["userSuggest"]);

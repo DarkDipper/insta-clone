@@ -38,7 +38,7 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
     dispatch && dispatch({ type: "LOGIN_START" });
     const respone = await axios
       .post(
-        "https://insta-clone-backend-dipper.onrender.com/api/v1/user/login",
+        "http://localhost:5000/api/v1/user/login",
         {
           username: userName,
           password: passWord,
