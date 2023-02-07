@@ -20,6 +20,9 @@
   }
 
   &__left {
+    @include mobile {
+      display: none;
+    }
     position: relative;
     .image-login {
       img {
@@ -36,7 +39,6 @@
     height: calc-to-rem(635);
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    // backface-visibility: hidden;
   }
   .flip {
     transform: rotateY(180deg);

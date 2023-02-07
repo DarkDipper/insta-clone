@@ -26,8 +26,11 @@
 - [x] Share post can take breakline in Description
 - [x] Loading state of image
 - [ ] Apply next-theme
-- [x] Consider middleware netx js
-- [ ] Log out function
+- [x] Consider middleware
+- [x] Log out function
+- [ ] Real time chat
+- [ ] Story UI
+- [ ] Responsive
 
 # Bug 🐛
 
