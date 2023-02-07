@@ -98,8 +98,6 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
           <div className="username-input">
             <input
               type="text"
-              name="username"
-              id="username"
               placeholder="Username"
               value={userName}
               onChange={(e) => {
@@ -110,8 +108,6 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
           <div className="password-input">
             <input
               type={showPassword ? "text" : "password"}
-              name="password"
-              id="password"
               placeholder="Password"
               value={passWord}
               onChange={(e) => {
@@ -136,7 +132,7 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
           {!status && (
             <p className="login-error">Username or password not correct</p>
           )}
-          <Link href="#">Forgot password ?</Link>
+          {/* <Link href="#">Forgot password ?</Link> */}
         </form>
       </div>
       <div className="login-container__botom">

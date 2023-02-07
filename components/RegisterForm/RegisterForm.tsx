@@ -100,8 +100,6 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
           <div className="username-input">
             <input
               type="text"
-              name="username"
-              id="username"
               placeholder="Username"
               value={uState.username}
               onChange={(e) => {
@@ -115,8 +113,6 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
           <div className="email-input">
             <input
               type="text"
-              name="email"
-              id="email"
               placeholder="Email"
               value={uState.email}
               onChange={(e) => {
@@ -130,8 +126,6 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
           <div className="password-input">
             <input
               type={showPassword ? "text" : "password"}
-              name="password"
-              id="password"
               placeholder="Password"
               value={uState.password}
               onChange={(e) => {
