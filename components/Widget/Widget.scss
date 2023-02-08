@@ -87,7 +87,7 @@
         }
         &__follow {
           font-family: inherit;
-          color: rgb(0, 149, 246);
+          color: $main-color-button;
           border: none;
           background: transparent;
           font-size: calc-to-rem(14);

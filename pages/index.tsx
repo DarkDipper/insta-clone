@@ -51,12 +51,15 @@ export default function Home() {
 const getPosts = async (cookie: CookieValueTypes) => {
   let stateFetched = true;
   const res = await axios
-    .get("http://localhost:5000/api/v1/post/timeline?page=1&limit=1", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + cookie,
-      },
-    })
+    .get(
+      "https://insta-clone-backend-dipper.onrender.com/api/v1/post/timeline?page=1&limit=1",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + cookie,
+        },
+      }
+    )
     .then((res) => res.data)
     .catch(() => {
       stateFetched = false;

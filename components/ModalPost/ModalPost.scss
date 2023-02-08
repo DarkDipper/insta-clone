@@ -4,6 +4,7 @@
   max-width: calc(100% - 64px - 64px);
   @include desktop {
     display: flex;
+    overflow: hidden;
   }
   border: 1px solid;
   border-radius: calc-to-rem(12);
@@ -187,7 +188,7 @@
             border: 0;
             padding: calc-to-rem(8);
             background: transparent;
-            color: rgb(0, 149, 246);
+            color: $main-color-button;
             line-height: calc-to-rem(18);
             font-weight: bold;
             cursor: pointer;

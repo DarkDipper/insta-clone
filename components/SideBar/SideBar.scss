@@ -1,25 +1,23 @@
 .side-bar {
   position: fixed;
-  background: #000000;
-  // background: yellowgreen;
   width: calc-to-rem(220);
   height: calc(100vh - calc-to-rem(16));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: calc-to-rem(8) calc-to-rem(12);
-  transition: all ease 0.3s;
+  // transition: background ease 0.3s;
   overflow: hidden;
   z-index: 9999;
   .dark & {
-    border-inline-end: 0.8px solid #282828;
-    color: white;
-    background: #000000;
+    border-inline-end: 0.8px solid $border-dark;
+    color: $text-dark;
+    background: $side-bar-background-dark;
   }
   .light & {
     border-inline-end: 0.8px solid $border-light;
-    color: black;
-    background: white;
+    color: $text-light;
+    background: $background-light;
   }
   @include tablet {
     width: calc-to-rem(48);
@@ -50,7 +48,6 @@
     }
   }
   &.hide {
-    // background: darkgray;s
     width: calc-to-rem(48);
     .side-bar__top {
       .side-bar__top__title {
@@ -116,7 +113,7 @@
     overflow: hidden;
     z-index: 9999;
     .dark & {
-      background: #262626;
+      background: $side-bar-background-dark;
       color: inherit;
     }
     .light & {

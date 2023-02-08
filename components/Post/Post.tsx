@@ -54,7 +54,7 @@ export default function Post({ post }: Props) {
     e.preventDefault();
     const res = await axios
       .post(
-        `http://localhost:5000/api/v1/comment/`,
+        `https://insta-clone-backend-dipper.onrender.com/api/v1/comment/`,
         {
           postId: post._id,
           description: newComment,
@@ -87,12 +87,15 @@ export default function Post({ post }: Props) {
     } else {
       setNumLike((prev) => prev + 1);
     }
-    await axios.get(`http://localhost:5000/api/v1/post/${post._id}/like`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + user?.token,
-      },
-    });
+    await axios.get(
+      `https://insta-clone-backend-dipper.onrender.com/api/v1/post/${post._id}/like`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + user?.token,
+        },
+      }
+    );
   };
   const handleInsertEmoji = ({ native }: EmojiObject) => {
     setNewComment((prev) => prev + native);

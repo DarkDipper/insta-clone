@@ -45,10 +45,10 @@
   }
 }
 .dark .login-page {
-  background: #1a1a1a;
-  color: white;
+  background: $background-dark;
+  color: $text-dark;
 }
 .light .login-page {
-  background: white;
-  color: black;
+  background: $background-light;
+  color: $text-light;
 }

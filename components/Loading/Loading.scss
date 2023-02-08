@@ -27,8 +27,8 @@
 }
 .dark {
   .loading-page {
-    background: black;
-    color: white;
+    background: $main-background-dark;
+    color: $text-dark;
   }
 }
 .white {

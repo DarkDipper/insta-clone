@@ -1,18 +1,10 @@
 .search-bar {
   position: fixed;
-  background: inherit;
+  background: $side-bar-background-dark;
   height: 100vh;
   width: calc-to-rem(0);
   margin-inline-start: calc-to-rem(72);
   z-index: 2;
-  .dark & {
-    border: 1px solid $border-dark;
-    color: $text-dark;
-  }
-  .light & {
-    color: $text-light;
-    border: 1px solid $border-light;
-  }
   border-block: none;
   border-top-right-radius: 16px;
   border-bottom-right-radius: 16px;
@@ -20,6 +12,14 @@
   overflow: hidden;
   &.show {
     width: calc-to-rem(390);
+    .dark & {
+      border: 1px solid $border-dark;
+      color: $text-dark;
+      .light & {
+        color: $text-light;
+        border: 1px solid $border-light;
+      }
+    }
   }
   &__header {
     padding-block-end: calc-to-rem(24);

@@ -26,7 +26,7 @@ function SearchBar({ searchBarRef, searchBarVisible }: Props) {
       try {
         if (searchQuery.length >= 1) {
           const searchresult = await axios.get(
-            "http://localhost:5000/api/v1/user/searchUser",
+            "https://insta-clone-backend-dipper.onrender.com/api/v1/user/searchUser",
             {
               params: { search: searchQuery },
               cancelToken: source.token,

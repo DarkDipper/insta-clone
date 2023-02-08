@@ -172,7 +172,7 @@
           padding: calc-to-rem(9);
           width: 100%;
           margin-block-end: calc-to-rem(12);
-          background: rgb(0, 149, 246);
+          background: $main-color-button;
           color: white;
           line-height: calc-to-rem(18);
           font-weight: bold;
@@ -198,7 +198,7 @@
         border: 0;
         padding: calc-to-rem(8);
         margin-block-end: calc-to-rem(12);
-        background: rgb(0, 149, 246);
+        background: $main-color-button;
         color: white;
         line-height: calc-to-rem(18);
         font-weight: bold;

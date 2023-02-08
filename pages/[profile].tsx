@@ -24,7 +24,9 @@ function Profile() {
     ["user-info", userName],
     async () => {
       const res = await axios
-        .get(`http://localhost:5000/api/v1/user/u/${userName}`)
+        .get(
+          `https://insta-clone-backend-dipper.onrender.com/api/v1/user/u/${userName}`
+        )
         .then((res) => {
           return res.data["user"];
         })
@@ -35,7 +37,9 @@ function Profile() {
   const { data: listPosts, refetch }: UseQueryResult<listPosts, Error> =
     useQuery(["mini-posts", userName], async () => {
       const res = await axios
-        .get(`http://localhost:5000/api/v1/post/u/${userName}`)
+        .get(
+          `https://insta-clone-backend-dipper.onrender.com/api/v1/post/u/${userName}`
+        )
         .then((res) => {
           return res.data["posts"];
         });
@@ -53,7 +57,7 @@ function Profile() {
       if (Followed) {
         await axios
           .put(
-            `http://localhost:5000/api/v1/user/${
+            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${
               userInfo && userInfo.user_name
             }/unfollow`,
             {},
@@ -68,7 +72,7 @@ function Profile() {
       } else {
         await axios
           .put(
-            `http://localhost:5000/api/v1/user/${
+            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${
               userInfo && userInfo.user_name
             }/follow`,
             {},

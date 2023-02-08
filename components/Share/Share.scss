@@ -86,7 +86,7 @@
           margin-block-end: calc-to-rem(12);
         }
         label {
-          background: rgb(0, 149, 246);
+          background: $main-color-button;
           padding: calc-to-rem(7) calc-to-rem(16);
           color: white;
           border-radius: calc-to-rem(8);
@@ -163,7 +163,7 @@
           padding: calc-to-rem(8);
           margin-block-end: calc-to-rem(12);
           width: 100%;
-          background: rgb(0, 149, 246);
+          background: $main-color-button;
           color: white;
           line-height: calc-to-rem(18);
           font-weight: bold;

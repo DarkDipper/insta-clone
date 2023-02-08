@@ -8,7 +8,7 @@
   }
   width: 100%;
   margin-block-end: calc-to-rem(12);
-  // transition: all ease-in-out 1s;
+  transition: all ease-in-out 0s;
   position: relative;
   overflow: hidden;
   &__header {
@@ -217,7 +217,7 @@
           border: 0;
           padding: calc-to-rem(8);
           background: transparent;
-          color: rgb(0, 149, 246);
+          color: $main-color-button;
           line-height: calc-to-rem(18);
           font-weight: bold;
           cursor: pointer;

@@ -6,7 +6,9 @@ function useFetchComments(postId: string) {
   useEffect(() => {
     const fetchComment = async () => {
       await axios
-        .get(`http://localhost:5000/api/v1/comment/${postId}`)
+        .get(
+          `https://insta-clone-backend-dipper.onrender.com/api/v1/comment/${postId}`
+        )
         .then((res) => {
           // console.log(res.data);
           setComments(res.data["comments"]);

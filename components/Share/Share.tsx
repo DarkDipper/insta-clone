@@ -37,7 +37,7 @@ function Share({ handleClose, userName, avatar }: Props) {
   const shareRequest = useMutation(
     (formRquest: FormData) => {
       return axios.post(
-        "http://localhost:5000/api/v1/post/create",
+        "https://insta-clone-backend-dipper.onrender.com/api/v1/post/create",
         formRquest,
         {
           headers: {
