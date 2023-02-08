@@ -6,7 +6,7 @@
   .light & {
     border: calc-to-rem(1) solid $border-light;
   }
-  width: 470px;
+  width: 100%;
   margin-block-end: calc-to-rem(12);
   // transition: all ease-in-out 1s;
   position: relative;
@@ -35,8 +35,18 @@
     &__avatar {
       position: relative;
       padding-inline-start: calc-to-rem(8);
-      width: calc-to-rem(48);
-      height: calc-to-rem(48);
+      @include desktop {
+        width: calc-to-rem(48);
+        height: calc-to-rem(48);
+      }
+      @include tablet {
+        width: calc-to-rem(40);
+        height: calc-to-rem(40);
+      }
+      @include mobile {
+        width: calc-to-rem(40);
+        height: calc-to-rem(40);
+      }
     }
     &__text {
       flex-grow: 1;
@@ -62,7 +72,15 @@
   }
   &__content {
     position: relative;
-    height: calc-to-rem(470);
+    @include desktop {
+      height: calc-to-rem(470);
+    }
+    @include tablet {
+      height: calc-to-rem(400);
+    }
+    @include mobile {
+      height: calc-to-rem(300);
+    }
     width: 100%;
     object-fit: cover;
     object-position: center;
@@ -75,12 +93,6 @@
     }
   }
   &__footer {
-    // .dark & {
-    //   border-block-end: calc-to-rem(1) solid $border-dark;
-    // }
-    // .light & {
-    //   border-block-end: calc-to-rem(1) solid $border-light;
-    // }
     margin-block-start: calc-to-rem(4);
     &__btns {
       padding-block-end: calc-to-rem(6);

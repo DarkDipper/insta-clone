@@ -1,4 +1,4 @@
-import { setCookie, getCookie, removeCookies } from "cookies-next";
+import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { AxiosResponse } from "axios";
 type User = {
   _id: string;
@@ -82,7 +82,7 @@ class Auth {
   async signOut() {
     console.log("Sign out");
     // window.sessionStorage.removeItem("user");
-    removeCookies("6gR265$m_t0k3n");
+    deleteCookie("6gR265$m_t0k3n");
     this.user = null;
     this.onUserChange(this.user);
   }

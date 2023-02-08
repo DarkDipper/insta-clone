@@ -2,10 +2,13 @@
   max-height: calc(100vh - 40px);
   margin: auto;
   max-width: calc(100% - 64px - 64px);
-  display: flex;
+  @include desktop {
+    display: flex;
+  }
   border: 1px solid;
   border-radius: calc-to-rem(12);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   .dark & {
     background: $background-dark;
     border-color: $border-dark;
@@ -19,18 +22,36 @@
   // width: 100%;
   &__left {
     border-radius: 4px 0 0 4px;
-    width: 636px;
-    height: 691px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     background: inherit;
+    @include desktop {
+      width: calc-to-rem(636);
+      height: 691px;
+    }
+    @include tablet {
+      border-block-end: 1px solid;
+      border-radius: 0;
+      border-color: inherit;
+      width: 100%;
+      height: auto;
+    }
+    @include mobile {
+      border-block-end: 1px solid;
+      border-radius: 0;
+      border-color: inherit;
+      width: 100%;
+      height: auto;
+    }
   }
   &__right {
     border-radius: 0 4px 4px 0;
-    width: 500px;
-    height: 691px;
+    @include desktop {
+      width: calc-to-rem(500);
+      height: 691px;
+    }
     background: inherit;
     .dark & {
       border-left: 1px solid $border-dark;
@@ -69,7 +90,12 @@
     }
     &__main {
       color: inherit;
-      height: calc-to-rem(423);
+      @include desktop {
+        height: calc-to-rem(423);
+      }
+      @include tablet {
+        height: calc-to-rem(300);
+      }
       padding: calc-to-rem(16);
       overflow-y: scroll;
       overflow-x: hidden;

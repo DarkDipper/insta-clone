@@ -6,29 +6,41 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import SuggestItem from "./SuggestItem";
-
+import { UseQueryResult, useQuery } from "react-query";
+import Skeleton from "react-loading-skeleton";
 function Widget() {
-  const [userSuggest, setUserSuggest] = useState([]);
-  useEffect(() => {
-    const fetchUserSuggest = async () => {
-      await axios
-        .get("http://localhost:5000/api/v1/user/suggestUser", {
+  const { data, status }: UseQueryResult<[], Error> = useQuery(
+    "userSuggest",
+    async () => {
+      const res = await axios.get(
+        "http://localhost:5000/api/v1/user/suggestUser",
+        {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
           },
-        })
-        .then((res) => {
-          // console.log(res.data["userSuggest"]);
-          setUserSuggest(res.data["userSuggest"]);
-        });
-    };
-    fetchUserSuggest();
-  }, []);
-  // const listSuggest = [];
-  // for (let i = 0; i <= 4; i++) {
-  //   listSuggest.push(<SuggestItem key={i} />);
-  // }
+        }
+      );
+      return res.data["userSuggest"];
+    }
+  );
+  const skeletonList = [];
+  for (let i = 0; i < 5; i++) {
+    skeletonList.push(
+      <div
+        key={i}
+        style={{
+          display: "flex",
+          gap: "0.75rem",
+          height: "100%",
+          paddingBlock: "0.5rem",
+        }}
+      >
+        <Skeleton baseColor="darkgray" circle={true} height={40} width={40} />
+        <Skeleton baseColor="darkgray" height={40} width={200} />
+      </div>
+    );
+  }
   return (
     <div className="widget">
       {/* <div className="main-account">
@@ -47,9 +59,12 @@ function Widget() {
           {/* <button className="suggestion-board__header__see-all">See All</button> */}
         </header>
         <main className="suggestion-board__main">
-          {userSuggest.map((u) => (
-            <SuggestItem key={u["_id"]} user={u} />
-          ))}
+          {status === "loading"
+            ? skeletonList
+            : data &&
+              data.map((u) => {
+                return <SuggestItem key={u["_id"]} user={u} />;
+              })}
         </main>
       </div>
       <div className="copy-right">

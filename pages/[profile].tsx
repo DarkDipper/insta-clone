@@ -10,8 +10,38 @@ import useAuth from "@yourapp/hooks/useAuth";
 import axios from "axios";
 import Modal from "@yourapp/components/Modal";
 import EditProfileModal from "@yourapp/components/EditProfileModal";
-function Profile({ userInfo, listPosts }: Props) {
+import Error from "next/error";
+import { UseQueryResult, useQuery } from "react-query";
+import { useRouter } from "next/router";
+function Profile() {
+  const router = useRouter();
+  const userName = router.query["profile"];
   const { user } = useAuth();
+  const {
+    data: userInfo,
+    isLoading: checkUser,
+  }: UseQueryResult<userInfo, Error> = useQuery(
+    ["user-info", userName],
+    async () => {
+      const res = await axios
+        .get(`http://localhost:5000/api/v1/user/u/${userName}`)
+        .then((res) => {
+          return res.data["user"];
+        })
+        .catch(() => undefined);
+      return res;
+    }
+  );
+  const { data: listPosts, refetch }: UseQueryResult<listPosts, Error> =
+    useQuery(["mini-posts", userName], async () => {
+      const res = await axios
+        .get(`http://localhost:5000/api/v1/post/u/${userName}`)
+        .then((res) => {
+          return res.data["posts"];
+        });
+      return res;
+    });
+
   const [Posts, setPosts] = useState(0);
   const [Follower, setFollower] = useState(0);
   const [Following, setFollowing] = useState(0);
@@ -19,12 +49,13 @@ function Profile({ userInfo, listPosts }: Props) {
   const [editModal, setEditModal] = useState(false);
   const handleFollow = async (e: MouseEvent) => {
     e.preventDefault();
-    console.log(userInfo.user_name);
     try {
       if (Followed) {
         await axios
           .put(
-            `http://localhost:5000/api/v1/user/${userInfo.user_name}/unfollow`,
+            `http://localhost:5000/api/v1/user/${
+              userInfo && userInfo.user_name
+            }/unfollow`,
             {},
             {
               headers: { Authorization: "Bearer " + user?.token },
@@ -37,7 +68,9 @@ function Profile({ userInfo, listPosts }: Props) {
       } else {
         await axios
           .put(
-            `http://localhost:5000/api/v1/user/${userInfo.user_name}/follow`,
+            `http://localhost:5000/api/v1/user/${
+              userInfo && userInfo.user_name
+            }/follow`,
             {},
             {
               headers: {
@@ -54,18 +87,13 @@ function Profile({ userInfo, listPosts }: Props) {
     } catch (e) {}
   };
   useEffect(() => {
-    // console.log(userInfo.following);
-    setFollowed(userInfo.followers.includes(user?._id));
-    setFollower(userInfo.followers.length);
-    setFollowing(userInfo.following.length);
-    setPosts(listPosts.length);
-  }, [
-    userInfo.following,
-    userInfo._id,
-    listPosts.length,
-    user?._id,
-    userInfo.followers,
-  ]);
+    if (userInfo && listPosts) {
+      setFollowed(userInfo.followers.includes(user?._id));
+      setFollower(userInfo.followers.length);
+      setFollowing(userInfo.following.length);
+      setPosts(listPosts.length);
+    }
+  }, [userInfo, listPosts, user?._id, refetch]);
   useEffect(() => {
     if (editModal) {
       document.documentElement.style.overflow = "hidden";
@@ -73,6 +101,13 @@ function Profile({ userInfo, listPosts }: Props) {
       document.documentElement.style.overflow = "scroll";
     }
   }, [editModal]);
+
+  if (!userInfo && !checkUser) {
+    return <Error statusCode={404} />;
+  } else if (checkUser) {
+    return <div className="loading">Loading...</div>;
+  }
+
   return (
     <div className="profile-page">
       {editModal && (
@@ -124,14 +159,29 @@ function Profile({ userInfo, listPosts }: Props) {
             {Posts === 0 ? (
               <div className="profile-page__main--no-posts">
                 <IoMdSad size={100} />
-                <h3>You have no posts</h3>
-                <h5>Share your first post, it will appear on your profile.</h5>
+                {userInfo.user_name === user?.userName ? (
+                  <>
+                    <h3>You have no posts</h3>
+                    <h5>
+                      Share your first post, it will appear on your profile.
+                    </h5>
+                  </>
+                ) : (
+                  <>
+                    <h3>{userInfo.user_name} have no posts</h3>
+                    <h5>
+                      Tell {userInfo.user_name} to share first post, so you can
+                      see it here.
+                    </h5>
+                  </>
+                )}
               </div>
             ) : (
               <div className="profile-page__main--list-posts">
-                {listPosts.map((p, index) => {
-                  return <MiniPost post={p} key={p._id} />;
-                })}
+                {listPosts &&
+                  listPosts.map((p, index) => {
+                    return <MiniPost post={p} key={p._id} />;
+                  })}
               </div>
             )}
           </main>
@@ -141,87 +191,40 @@ function Profile({ userInfo, listPosts }: Props) {
   );
 }
 export default Profile;
-
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  res,
-  query,
-}) => {
-  const userName = query["profile"];
-  const { status: userStatus, user } = await fetch(
-    `http://localhost:5000/api/v1/user/u/${userName}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "GET",
-    }
-  ).then(async (res) => {
-    if (!res.ok) {
-      const { message } = await res.json();
-      console.log(`From profile: ${message}`);
-      return { stauts: false };
-    }
-    return res.json();
-  });
-  if (userStatus) {
-    const { posts } = await fetch(
-      `http://localhost:5000/api/v1/post/u/${userName}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-      }
-    ).then(async (res) => {
-      if (!res.ok) {
-        const { message } = await res.json();
-        console.log(`From profile: ${message}`);
-        return { stauts: false };
-      }
-      return res.json();
-    });
-    return {
-      props: {
-        requireAuth: true,
-        userInfo: user,
-        listPosts: posts,
-      },
-    };
-  } else {
-    return {
-      notFound: true,
-    };
-  }
-};
-type Props = {
-  userInfo: {
-    _id: string;
-    email: string;
-    user_name: string;
-    role: string;
-    profile_picture: string;
-    followers: any[];
-    following: any[];
-    gender: string;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      requireAuth: true,
+    },
   };
-  listPosts: {
+};
+
+type listPosts = {
+  _id: string;
+  comment: string[];
+  list_image: {
     _id: string;
-    comment: string[];
-    list_image: {
-      _id: string;
-      path: string;
-      width: number;
-      height: number;
-      blurHash: string;
-    }[];
-    likes: string[];
-    user: {
-      _id: string;
-      user_name: string;
-      profile_picture: string;
-    };
-    description: string;
-    createdAt: string;
+    path: string;
+    width: number;
+    height: number;
+    blurHash: string;
   }[];
+  likes: string[];
+  user: {
+    _id: string;
+    user_name: string;
+    profile_picture: string;
+  };
+  description: string;
+  createdAt: string;
+}[];
+type userInfo = {
+  _id: string;
+  email: string;
+  user_name: string;
+  role: string;
+  profile_picture: string;
+  followers: any[];
+  following: any[];
+  gender: string;
 };

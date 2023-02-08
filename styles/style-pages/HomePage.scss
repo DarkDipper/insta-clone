@@ -7,15 +7,26 @@
     margin-left: auto;
     // width: calc(100vw - calc-to-rem(244));
     width: calc(100vw - calc-to-rem(244));
-    // height: 1000px;
-    // background: rgba(207, 196, 196, 0.4);
-    // background: black;
+    @include tablet {
+      width: calc(100vw - calc-to-rem(73));
+    }
+    @include mobile {
+      width: calc(100vw - calc-to-rem(73));
+    }
     &__wrapper {
       position: relative;
       display: flex;
       margin: 0 auto;
       // overflow: hidden;
-      width: 820px;
+      @include desktop {
+        width: calc-to-rem(820);
+      }
+      @include tablet {
+        width: calc-to-rem(470);
+      }
+      @include mobile {
+        width: 100%;
+      }
       gap: calc-to-rem(32);
       &__left {
         max-width: calc-to-rem(470);
@@ -31,6 +42,12 @@
         border-radius: 10px;
         width: calc-to-rem(319);
         height: 500px;
+        @include tablet {
+          display: none;
+        }
+        @include mobile {
+          display: none;
+        }
       }
     }
   }

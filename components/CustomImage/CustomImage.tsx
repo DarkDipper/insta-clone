@@ -64,7 +64,7 @@ function CustomImage({ src, imgWidth, imgHeight, blurHash }: Props) {
         alt=""
         fill
         draggable="false"
-        sizes="100%"
+        sizes="(min-width: 1024) 100%, (min-width: 768) 100%, 100%"
         loading="lazy"
         placeholder={blurHash ? "blur" : "empty"}
         blurDataURL={blurHash ? blurHash : undefined}

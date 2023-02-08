@@ -16,6 +16,7 @@
     }
   }
   &__content {
+    text-align: justify;
     margin-block-end: calc-to-rem(10);
     margin-inline-start: calc-to-rem(50);
     font-size: calc-to-rem(14);

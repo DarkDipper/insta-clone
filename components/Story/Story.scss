@@ -5,7 +5,15 @@
   position: relative;
   border-radius: calc-to-rem(8);
   border: 1px solid $border-dark;
-  height: calc-to-rem(85);
+  @include desktop {
+    height: calc-to-rem(85);
+  }
+  @include tablet {
+    height: calc-to-rem(70);
+  }
+  @include mobile {
+    height: calc-to-rem(60);
+  }
   width: 100%;
   white-space: nowrap;
   margin-block-start: calc-to-rem(14);
@@ -55,8 +63,18 @@
       cursor: pointer;
     }
     &__avatar {
-      width: calc-to-rem(66);
-      height: calc-to-rem(66);
+      @include desktop {
+        width: calc-to-rem(66);
+        height: calc-to-rem(66);
+      }
+      @include tablet {
+        width: calc-to-rem(56);
+        height: calc-to-rem(56);
+      }
+      @include mobile {
+        width: calc-to-rem(46);
+        height: calc-to-rem(46);
+      }
     }
     &--user-name {
       text-overflow: ellipsis;

@@ -21,6 +21,20 @@
     color: black;
     background: white;
   }
+  @include tablet {
+    width: calc-to-rem(48);
+    .side-bar__top {
+      .side-bar__top__title {
+        &--text {
+          opacity: 0;
+        }
+        &--icon {
+          font-size: calc-to-rem(24);
+          padding-inline-start: calc-to-rem(6.4);
+        }
+      }
+    }
+  }
   @include mobile {
     width: calc-to-rem(48);
     .side-bar__top {
@@ -69,7 +83,7 @@
       &--icon {
         position: absolute;
         bottom: calc-to-rem(16);
-        left: calc-to-rem(6.4);
+        left: calc-to-rem(3);
         font-size: calc-to-rem(0);
         transition: all ease 0.3s;
       }

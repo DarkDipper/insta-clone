@@ -6,10 +6,10 @@
       width: calc(100vw - calc-to-rem(244));
     }
     @include tablet {
-      width: calc(100vw - calc-to-rem(244));
+      width: calc(100vw - calc-to-rem(73));
     }
     @include mobile {
-      width: calc(100vw - calc-to-rem(72.8));
+      width: calc(100vw - calc-to-rem(73));
     }
     // height: 1000px;
     // background: rgba(207, 196, 196, 0.4);
@@ -20,10 +20,21 @@
       margin: 0 auto;
       max-width: 935px;
       width: 100%;
-      padding: calc-to-rem(30) calc-to-rem(20) 0;
+      padding-block: calc-to-rem(20);
+      @include desktop {
+        padding-inline-start: calc-to-rem(30);
+      }
+      @include tablet {
+        width: calc-to-rem(612);
+      }
+      @include mobile {
+        width: calc(100% - calc-to-rem(188));
+        margin: 0 auto;
+      }
       .profile-page__header {
         display: flex;
         padding-block-end: calc-to-rem(44);
+        justify-content: center;
         .dark & {
           border-bottom: 1px solid $border-dark;
         }
@@ -33,6 +44,9 @@
         // align-items: center;
         &__wrapper-avatar {
           flex-grow: 1;
+          @include mobile {
+            display: none;
+          }
           .avatar {
             @include desktop {
               width: calc-to-rem(110);
@@ -51,10 +65,17 @@
         }
         &__wrapper-info {
           flex-grow: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
           .user-info {
             display: flex;
-            align-items: center;
             margin-block-end: calc-to-rem(20);
+            @include mobile {
+              width: 100%;
+              justify-content: flex-start;
+              // justify-content: space-between;
+            }
             &__name {
               font-size: calc-to-rem(24);
               line-height: calc-to-rem(25);
@@ -86,6 +107,13 @@
           }
           .status-info {
             display: flex;
+            @include mobile {
+              width: 100%;
+              gap: 0;
+              flex-direction: column;
+              justify-content: space-between;
+              gap: calc-to-rem(20);
+            }
             gap: calc-to-rem(40);
           }
         }
@@ -116,7 +144,10 @@
           margin-block-start: calc-to-rem(50);
           display: flex;
           flex-wrap: wrap;
-          gap: calc-to-rem(25);
+          @include mobile {
+            justify-content: center;
+          }
+          gap: calc-to-rem(20);
         }
       }
     }

@@ -5,9 +5,6 @@
   .light & {
     color: $text-light;
   }
-  @include mobile {
-    display: none;
-  }
   .main-account {
     margin-block: calc-to-rem(22);
     display: flex;

@@ -10,6 +10,7 @@ import { AuthProvider } from "@yourapp/Auth/AuthProvider";
 import { AuthGuard } from "@yourapp/Auth/AuthGuard";
 import { useRouter } from "next/router";
 import Loading from "@yourapp/components/Loading";
+import "react-loading-skeleton/dist/skeleton.css";
 const segoeUI = localFont({
   src: "../public/font/Segoe fonts v1710/segoeui.ttf",
   preload: false,

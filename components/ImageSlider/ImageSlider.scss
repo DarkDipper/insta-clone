@@ -33,8 +33,8 @@
     transition: all ease-in-out 0.3s;
     overflow: hidden;
     .image {
-      // width: 470px;
-      // height: 470px;
+      height: 100%;
+      width: 100%;
       position: relative;
       object-fit: contain;
       object-position: center;

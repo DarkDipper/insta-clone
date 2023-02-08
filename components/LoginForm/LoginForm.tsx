@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { useState, MouseEvent, useContext, FormEvent, Dispatch } from "react";
+import { useState, MouseEvent, FormEvent } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaRegMoon, FaSun } from "react-icons/fa";
 import IconButton from "../IconButton";
-import { ThemeContext } from "../../theme";
 import { useRouter } from "next/router";
 import useAuth from "@yourapp/hooks/useAuth";
 import axios from "axios";

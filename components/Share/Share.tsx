@@ -14,6 +14,7 @@ import { IoIosAddCircle, IoIosTrash } from "react-icons/io";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import Loading from "../Loading";
+import useWindowDimensions from "@yourapp/hooks/useWindowDimensions";
 type Props = {
   userName?: string;
   avatar?: string;
@@ -27,6 +28,7 @@ function Share({ handleClose, userName, avatar }: Props) {
     // "https://i.ibb.co/G3yfYFN/Monokuma.png",
     // "https://i.ibb.co/Ctx4kbM/avatar.jpg",
   ]);
+  const { width } = useWindowDimensions();
   const [selectedFile, setSelectedFile] = useState<File[]>([]);
   const [shareIndex, setShareIndex] = useState<number>(0);
   const [Desc, setDesc] = useState("");
@@ -48,6 +50,7 @@ function Share({ handleClose, userName, avatar }: Props) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["posts"]);
+        queryClient.invalidateQueries(["mini-posts"]);
       },
       onError: (error) => {
         console.log(error);
@@ -78,18 +81,19 @@ function Share({ handleClose, userName, avatar }: Props) {
     if (!selectedFile) {
       return;
     }
-    setListImage([]);
+    let listImageTemp: { path: string }[] = [];
     for (const file of selectedFile) {
       const objectUrl = URL.createObjectURL(file);
-      setListImage((prev) => [...prev, { path: objectUrl }]);
+      listImageTemp.push({ path: objectUrl });
     }
+    setListImage(listImageTemp);
     // free memory when ever this component is unmounted
     return () => {
-      for (const imgUrl of listImage) {
+      for (const imgUrl of listImageTemp) {
         URL.revokeObjectURL(imgUrl.path);
       }
     };
-  }, [selectedFile, listImage]);
+  }, [selectedFile]);
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
 
@@ -143,7 +147,7 @@ function Share({ handleClose, userName, avatar }: Props) {
                   </div>
                   <ImageSlider
                     listImages={listImage}
-                    size={520}
+                    size={width >= 1024 ? 520 : width - 40}
                     setShareIndex={setShareIndex}
                   />
                 </div>

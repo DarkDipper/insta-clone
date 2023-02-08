@@ -1,30 +1,26 @@
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import SideBar from "@yourapp/components/SideBar";
 import Story from "@yourapp/components/Story";
 import Post from "@yourapp/components/Post";
 import Widget from "@yourapp/components/Widget";
 import axios from "axios";
 import { getCookie, CookieValueTypes } from "cookies-next";
-import { QueryClient, UseQueryResult, dehydrate, useQuery } from "react-query";
-import Loading from "@yourapp/components/Loading";
-import { useEffect } from "react";
+import { UseQueryResult, useQuery } from "react-query";
+import Skeleton from "react-loading-skeleton";
 type postFetch = {
   status: boolean;
   Posts: [];
 };
 
 export default function Home() {
-  const { data, status }: UseQueryResult<postFetch, Error> = useQuery({
+  const { data, isLoading }: UseQueryResult<postFetch, Error> = useQuery({
     queryKey: "posts",
     queryFn: async () => await getPosts(getCookie("6gR265$m_t0k3n")),
   });
-  useEffect(() => {
-    console.log(status);
-    console.log(data);
-  }, [data, status]);
-  if (status === "loading") {
-    return <Loading />;
-  }
+  // useEffect(() => {
+  //   console.log(status);
+  //   console.log(data);
+  // }, [data, status]);
   return (
     <div className="main-page">
       <SideBar />
@@ -33,8 +29,14 @@ export default function Home() {
           <div className="main-page__center__wrapper__left">
             <Story />
             <div className="list-post">
-              {data &&
-                data["Posts"].map((p, i) => <Post key={p["_id"]} post={p} />)}
+              {isLoading ? (
+                <div className="list-post__skeleton">
+                  <h1>Loading...</h1>
+                </div>
+              ) : (
+                data &&
+                data["Posts"].map((p) => <Post key={p["_id"]} post={p} />)
+              )}
             </div>
           </div>
           <div className="main-page__center__wrapper__right">
@@ -65,15 +67,10 @@ const getPosts = async (cookie: CookieValueTypes) => {
   return res;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  // const tokenCookie = getCookie("6gR265$m_t0k3n", { req, res });
-  const queryClient = new QueryClient();
-  // console.log("Render in server");
-  // await queryClient.prefetchQuery("posts", () => getPosts(tokenCookie));
+export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       requireAuth: true,
-      // dehydratedState: dehydrate(queryClient),
     },
   };
 };

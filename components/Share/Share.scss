@@ -11,12 +11,12 @@
     background: $background-light;
     border-color: $border-light;
   }
+  overflow: hidden;
   width: calc-to-rem(860);
   height: calc-to-rem(563);
   margin: calc-to-rem(20);
   border-radius: calc-to-rem(12);
   // border: 1px solid $border-dark;
-  overflow: hidden;
   &__header {
     // display: flex;
     padding-block: calc-to-rem(9);
@@ -28,13 +28,21 @@
     border-color: inherit;
   }
   &__main {
-    overflow: hidden;
-    display: flex;
+    @include desktop {
+      overflow: hidden;
+      display: flex;
+    }
+    overflow: scroll;
     height: calc(100% - 42px);
     border-color: inherit;
     &__left {
-      width: calc-to-rem(520);
+      @include desktop {
+        width: calc-to-rem(520);
+      }
       height: calc-to-rem(520);
+      @include mobile {
+        height: calc-to-rem(450);
+      }
       background: inherit;
       overflow: hidden;
       position: relative;
@@ -94,13 +102,23 @@
       }
     }
     &__right {
-      border-left: 1px solid red;
+      border-left: 1px solid;
       border-color: inherit;
       padding: calc-to-rem(10);
-      width: calc-to-rem(340);
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      @include desktop {
+        width: calc-to-rem(340);
+      }
+      @include tablet {
+        border-block-start: 1px solid;
+        border-color: inherit;
+      }
+      @include mobile {
+        border-block-start: 1px solid;
+        border-color: inherit;
+      }
       .user {
         display: flex;
         align-items: center;

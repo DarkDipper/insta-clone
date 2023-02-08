@@ -24,14 +24,34 @@
     border-color: inherit;
   }
   &__main {
-    overflow: hidden;
-    display: flex;
+    overflow: scroll;
+    @include desktop {
+      overflow: hidden;
+      display: flex;
+    }
+    @include tablet {
+      overflow: hidden;
+      display: flex;
+    }
+    @include mobile {
+      overflow-x: hidden;
+    }
     height: calc(100% - 42px);
     align-items: center;
     border-color: inherit;
     &__left {
-      width: calc-to-rem(520);
-      height: calc-to-rem(520);
+      @include desktop {
+        width: calc-to-rem(520);
+        height: calc-to-rem(520);
+      }
+      @include tablet {
+        width: 520px;
+        height: 100%;
+      }
+      @include mobile {
+        width: 100%;
+        height: calc-to-rem(300);
+      }
       background: inherit;
       overflow: hidden;
       position: relative;
@@ -82,6 +102,21 @@
       }
     }
     &__right {
+      @include tablet {
+        width: 400px;
+        height: 100%;
+
+        &__user-name {
+          padding-block-start: calc-to-rem(20);
+        }
+      }
+      @include mobile {
+        border-top: 1px solid;
+        border-color: inherit;
+        width: calc(100% - calc-to-rem(20));
+        height: calc-to-rem(400);
+        overflow-x: hidden;
+      }
       border-left: 1px solid;
       border-color: inherit;
       padding: calc-to-rem(10);
@@ -112,13 +147,17 @@
         }
       }
       &__gender-avatar {
-        display: flex;
+        @include desktop {
+          display: flex;
+        }
         width: 100%;
         justify-content: space-between;
       }
       &__gender {
         select {
-          width: 145%;
+          @include desktop {
+            width: 145%;
+          }
         }
       }
       &__avatar {
@@ -150,6 +189,9 @@
         text-align: center;
       }
       .save-profile-btn {
+        @include mobile {
+          width: calc(100% - calc-to-rem(20));
+        }
         position: absolute;
         bottom: calc-to-rem(10);
         width: calc(100% - calc-to-rem(20));
@@ -161,6 +203,7 @@
         line-height: calc-to-rem(18);
         font-weight: bold;
         cursor: pointer;
+        font-size: calc-to-rem(18);
         border-radius: calc-to-rem(12);
         &:disabled {
           color: rgb(179, 219, 255);

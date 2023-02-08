@@ -142,7 +142,7 @@ function EditProfileModal({ userInfo, showModal }: Props) {
                     autoCropArea={1}
                     background={false}
                     responsive={true}
-                    checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+                    checkOrientation={false}
                     onInitialized={(instance) => {
                       setCropper(instance);
                     }}

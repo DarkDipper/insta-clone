@@ -20,6 +20,7 @@ import EmojiPicker, { EmojiObject } from "../EmojiPicker";
 import useFetchComments from "@yourapp/hooks/useFetchComments";
 import { format } from "timeago.js";
 import useAuth from "@yourapp/hooks/useAuth";
+import useWindowDimensions from "@yourapp/hooks/useWindowDimensions";
 type Props = {
   post: {
     list_image: {
@@ -54,6 +55,7 @@ const dummy_text =
   "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam eius officiis iure voluptas deserunt deleniti! Provident distinctio nostrum quae magnam?";
 function ModalPost({ modalPostRef, post, Liked, NewComment }: Props) {
   const { user } = useAuth();
+  const { width } = useWindowDimensions();
   const listComment = useFetchComments(post._id);
   const [listTempComment, setListTempComment] = useState<
     {
@@ -88,7 +90,10 @@ function ModalPost({ modalPostRef, post, Liked, NewComment }: Props) {
   return (
     <div className="modal-post" ref={modalPostRef}>
       <div className="modal-post__left">
-        <ImageSlider listImages={post.list_image} size={636} />
+        <ImageSlider
+          listImages={post.list_image}
+          size={width >= 1024 ? 636 : width - 128}
+        />
       </div>
       <div className="modal-post__right">
         <header className="modal-post__right__header">

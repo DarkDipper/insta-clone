@@ -1,10 +1,7 @@
-import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
-import useAuth from "@yourapp/hooks/useAuth";
-import Loading from "@yourapp/components/Loading";
 export default function Checkin() {
   // const { initializing, dispatch } = useAuth();
   const [imgTransition, setImgTransition] = useState(0);
@@ -27,6 +24,7 @@ export default function Checkin() {
           width={465}
           height={635}
           alt=""
+          loading={"eager"}
           className="image-login-background"
         />
         <div className="image-login">
@@ -36,6 +34,7 @@ export default function Checkin() {
             width={250}
             height={541}
             alt=""
+            loading={"eager"}
           />
           <Image
             className={imgTransition === 1 ? "show" : "hide"}
@@ -43,6 +42,7 @@ export default function Checkin() {
             width={250}
             height={541}
             alt=""
+            loading={"eager"}
           />
           <Image
             className={imgTransition === 2 ? "show" : "hide"}
@@ -50,6 +50,7 @@ export default function Checkin() {
             width={250}
             height={541}
             alt=""
+            loading={"eager"}
           />
           <Image
             className={imgTransition === 3 ? "show" : "hide"}
@@ -57,6 +58,7 @@ export default function Checkin() {
             width={250}
             height={541}
             alt=""
+            loading={"eager"}
           />
         </div>
       </div>

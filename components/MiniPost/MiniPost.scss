@@ -28,11 +28,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
+    z-index: 1;
     font-size: calc-to-rem(26);
     gap: calc-to-rem(20);
     .liked,
     .comments {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -o-user-select: none;
       color: inherit;
       display: flex;
       align-items: center;

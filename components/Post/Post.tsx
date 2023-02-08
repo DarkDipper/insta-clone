@@ -13,6 +13,7 @@ import EmojiPicker, { EmojiObject } from "../EmojiPicker";
 import Link from "next/link";
 import axios from "axios";
 import useAuth from "@yourapp/hooks/useAuth";
+import useWindowDimensions from "@yourapp/hooks/useWindowDimensions";
 import { format } from "timeago.js";
 type Props = {
   post: {
@@ -36,6 +37,7 @@ type Props = {
 
 export default function Post({ post }: Props) {
   const { user } = useAuth();
+  const { width } = useWindowDimensions();
   const [More, setMore] = useState<boolean>(false);
   const [Liked, setLiked] = useState<boolean>(() => {
     return post["likes"].includes(user?._id || "");
@@ -149,7 +151,7 @@ export default function Post({ post }: Props) {
           <ImageSlider
             handleModal={handleModalPost}
             listImages={post.list_image}
-            size={470}
+            size={width >= 470 + 48 ? 470 : width - 48}
           />
         </main>
         <footer className="post__footer">
