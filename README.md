@@ -1,4 +1,16 @@
-# Todo list 📃
+# Insta Clone using MERN stack
+
+## Screenshots 📷
+
+![Login](./images/Login.png)
+![SignUp](./images/SignUp.png)
+![Home](./images/HomePage.png)
+![ModalPost](./images/ModalPost.png)
+![SharePost](images/SharePost.png)
+![ProfilePage](images/ProfilePage.png)
+![ModalEditProfile](images/ModalEdit.png)
+
+## Todo list 📃
 
 - [x] Story UI
 - [x] Custom Image component
@@ -32,7 +44,7 @@
 - [ ] Story UI
 - [ ] Responsive
 
-# Bug 🐛
+## Bug 🐛
 
 - [x] Custom Image with height value of 0
 - [x] Font segoe UI

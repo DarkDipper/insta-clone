@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </ThemeProvider>
           </AuthProvider>
         </div>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </>
   );
