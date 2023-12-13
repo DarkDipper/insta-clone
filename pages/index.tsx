@@ -3,7 +3,7 @@ import SideBar from "@yourapp/components/SideBar";
 import Story from "@yourapp/components/Story";
 import Post from "@yourapp/components/Post";
 import Widget from "@yourapp/components/Widget";
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 import { getCookie, CookieValueTypes } from "cookies-next";
 import { UseQueryResult, useQuery } from "react-query";
 import Skeleton from "react-loading-skeleton";
@@ -51,15 +51,12 @@ export default function Home() {
 const getPosts = async (cookie: CookieValueTypes) => {
   let stateFetched = true;
   const res = await axios
-    .get(
-      "https://insta-clone-backend-dipper.onrender.com/api/v1/post/timeline?page=1&limit=1",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + cookie,
-        },
-      }
-    )
+    .get("/post/timeline?page=1&limit=1", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + cookie,
+      },
+    })
     .then((res) => res.data)
     .catch(() => {
       stateFetched = false;

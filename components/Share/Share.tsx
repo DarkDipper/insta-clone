@@ -11,7 +11,7 @@ import {
 import { useMutation, useQueryClient } from "react-query";
 import { MdPhotoCamera } from "react-icons/md";
 import { IoIosAddCircle, IoIosTrash } from "react-icons/io";
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 import { getCookie } from "cookies-next";
 import Loading from "../Loading";
 import useWindowDimensions from "@yourapp/hooks/useWindowDimensions";
@@ -36,16 +36,12 @@ function Share({ handleClose, userName, avatar }: Props) {
   const queryClient = useQueryClient();
   const shareRequest = useMutation(
     (formRquest: FormData) => {
-      return axios.post(
-        "https://insta-clone-backend-dipper.onrender.com/api/v1/post/create",
-        formRquest,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
-          },
-        }
-      );
+      return axios.post("/post/create", formRquest, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
+        },
+      });
     },
     {
       onSuccess: () => {

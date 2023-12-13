@@ -20,7 +20,7 @@ import { Dancing_Script } from "@next/font/google";
 import { useRouter } from "next/router";
 import useAuth from "@yourapp/hooks/useAuth";
 import useTheme from "@yourapp/hooks/useTheme";
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 const dancingScript = Dancing_Script({
   style: ["normal"],
   subsets: ["latin"],
@@ -49,7 +49,7 @@ export default function SideBar() {
     const changeTheme = mode === "dark" ? "light" : "dark";
     toggleMode();
     await axios.post(
-      "https://insta-clone-backend-dipper.onrender.com/api/v1/user/changeTheme",
+      "/user/changeTheme",
       {
         theme: changeTheme,
       },

@@ -1,6 +1,6 @@
 import Avatar from "@yourapp/components/Avatar";
 import useAuth from "@yourapp/hooks/useAuth";
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 import Link from "next/link";
 import { useState, MouseEvent } from "react";
 type Props = {
@@ -20,7 +20,7 @@ function SuggestItem({ user }: Props) {
       if (Followed) {
         await axios
           .put(
-            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${user.user_name}/unfollow`,
+            `/user/${user.user_name}/unfollow`,
             {},
             {
               headers: { Authorization: "Bearer " + userAuth?.token },
@@ -32,7 +32,7 @@ function SuggestItem({ user }: Props) {
       } else {
         await axios
           .put(
-            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${user.user_name}/follow`,
+            `/user/${user.user_name}/follow`,
             {},
             {
               headers: {

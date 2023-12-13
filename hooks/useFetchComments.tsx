@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 import { useEffect, useState } from "react";
 
 function useFetchComments(postId: string) {
@@ -6,9 +6,7 @@ function useFetchComments(postId: string) {
   useEffect(() => {
     const fetchComment = async () => {
       await axios
-        .get(
-          `https://insta-clone-backend-dipper.onrender.com/api/v1/comment/${postId}`
-        )
+        .get(`/comment/${postId}`)
         .then((res) => {
           // console.log(res.data);
           setComments(res.data["comments"]);

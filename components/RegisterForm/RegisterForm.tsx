@@ -4,7 +4,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FaRegMoon, FaSun } from "react-icons/fa";
 import IconButton from "../IconButton";
 import { ThemeContext } from "../../theme";
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 import { Dancing_Script } from "@next/font/google";
 type Props = {
   setShowRegister: (value: boolean) => void;
@@ -62,7 +62,7 @@ export default function RegisterForm({ setShowRegister }: Props): JSX.Element {
     e.preventDefault();
     await axios
       .post(
-        "https://insta-clone-backend-dipper.onrender.com/api/v1/user/register",
+        "/user/register",
         {
           username: uState.username,
           password: uState.password,

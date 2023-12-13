@@ -11,7 +11,7 @@ import ModalPost from "../ModalPost";
 import Modal from "../Modal";
 import EmojiPicker, { EmojiObject } from "../EmojiPicker";
 import Link from "next/link";
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 import useAuth from "@yourapp/hooks/useAuth";
 import useWindowDimensions from "@yourapp/hooks/useWindowDimensions";
 import { format } from "timeago.js";
@@ -54,7 +54,7 @@ export default function Post({ post }: Props) {
     e.preventDefault();
     const res = await axios
       .post(
-        `https://insta-clone-backend-dipper.onrender.com/api/v1/comment/`,
+        `/comment/`,
         {
           postId: post._id,
           description: newComment,
@@ -87,15 +87,12 @@ export default function Post({ post }: Props) {
     } else {
       setNumLike((prev) => prev + 1);
     }
-    await axios.get(
-      `https://insta-clone-backend-dipper.onrender.com/api/v1/post/${post._id}/like`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + user?.token,
-        },
-      }
-    );
+    await axios.get(`/post/${post._id}/like`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + user?.token,
+      },
+    });
   };
   const handleInsertEmoji = ({ native }: EmojiObject) => {
     setNewComment((prev) => prev + native);

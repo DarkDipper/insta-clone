@@ -3,7 +3,7 @@ import { RxDotFilled } from "react-icons/rx";
 import Avatar from "../Avatar";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 import { getCookie } from "cookies-next";
 import SuggestItem from "./SuggestItem";
 import { UseQueryResult, useQuery } from "react-query";
@@ -12,15 +12,12 @@ function Widget() {
   const { data, status }: UseQueryResult<[], Error> = useQuery(
     "userSuggest",
     async () => {
-      const res = await axios.get(
-        "https://insta-clone-backend-dipper.onrender.com/api/v1/user/suggestUser",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
-          },
-        }
-      );
+      const res = await axios.get("/user/suggestUser", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + getCookie("6gR265$m_t0k3n"),
+        },
+      });
       return res.data["userSuggest"];
     }
   );

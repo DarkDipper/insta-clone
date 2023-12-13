@@ -1,6 +1,6 @@
 .search-bar {
   position: fixed;
-  background: $side-bar-background-dark;
+  background: $side-bar-background-light;
   height: 100vh;
   width: calc-to-rem(0);
   margin-inline-start: calc-to-rem(72);
@@ -15,10 +15,10 @@
     .dark & {
       border: 1px solid $border-dark;
       color: $text-dark;
-      .light & {
-        color: $text-light;
-        border: 1px solid $border-light;
-      }
+    }
+    .light & {
+      color: $text-light;
+      border: 1px solid $border-light;
     }
   }
   &__header {
@@ -101,4 +101,7 @@
       }
     }
   }
+}
+.dark .search-bar {
+  background: $side-bar-background-dark;
 }

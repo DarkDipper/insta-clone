@@ -5,7 +5,7 @@ import { FaRegMoon, FaSun } from "react-icons/fa";
 import IconButton from "../IconButton";
 import { useRouter } from "next/router";
 import useAuth from "@yourapp/hooks/useAuth";
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 import { Dancing_Script } from "@next/font/google";
 import useTheme from "@yourapp/hooks/useTheme";
 type Props = {
@@ -37,7 +37,7 @@ export default function LoginForm({ setShowRegister }: Props): JSX.Element {
     dispatch && dispatch({ type: "LOGIN_START" });
     const respone = await axios
       .post(
-        "https://insta-clone-backend-dipper.onrender.com/api/v1/user/login",
+        "/user/login",
         {
           username: userName,
           password: passWord,

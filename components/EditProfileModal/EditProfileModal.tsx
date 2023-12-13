@@ -10,7 +10,8 @@ import { Cropper } from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { RxAvatar } from "react-icons/rx";
 import { IoIosTrash } from "react-icons/io";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
+import axios from "@yourapp/utils/axios";
 import { getCookie } from "cookies-next";
 import Router from "next/router";
 import Loading from "../Loading";
@@ -64,7 +65,7 @@ function EditProfileModal({ userInfo, showModal }: Props) {
     setStateLoading(true);
     await axios
       .put(
-        `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${userInfo._id}`,
+        `/user/${userInfo._id}`,
         {
           avatar: avatarBase64,
           user_name: userName,

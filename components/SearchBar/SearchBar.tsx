@@ -2,7 +2,7 @@ import { useState, useRef, RefObject, useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import useComponentVisible from "../../hooks/useComponentVisible";
 import useDebounce from "@yourapp/hooks/useDebounce";
-import axios from "axios";
+import axios, { cancelToken } from "@yourapp/utils/axios";
 import Avatar from "../Avatar";
 import Link from "next/link";
 
@@ -21,17 +21,14 @@ function SearchBar({ searchBarRef, searchBarVisible }: Props) {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [usersSearch, setusersSearch] = useState<userQueryObj>([]);
   useEffect(() => {
-    let source = axios.CancelToken.source();
+    let source = cancelToken.source();
     const getSearch = async () => {
       try {
         if (searchQuery.length >= 1) {
-          const searchresult = await axios.get(
-            "https://insta-clone-backend-dipper.onrender.com/api/v1/user/searchUser",
-            {
-              params: { search: searchQuery },
-              cancelToken: source.token,
-            }
-          );
+          const searchresult = await axios.get("/user/searchUser", {
+            params: { search: searchQuery },
+            cancelToken: source.token,
+          });
           setusersSearch(searchresult.data["users"]);
         }
       } catch (error) {}

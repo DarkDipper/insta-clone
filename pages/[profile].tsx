@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { IoMdSad } from "react-icons/io";
 import MiniPost from "@yourapp/components/MiniPost";
 import useAuth from "@yourapp/hooks/useAuth";
-import axios from "axios";
+import axios from "@yourapp/utils/axios";
 import Modal from "@yourapp/components/Modal";
 import EditProfileModal from "@yourapp/components/EditProfileModal";
 import Error from "next/error";
@@ -25,7 +25,7 @@ function Profile() {
     async () => {
       const res = await axios
         .get(
-          `https://insta-clone-backend-dipper.onrender.com/api/v1/user/u/${userName}`
+          `/user/u/${userName}`
         )
         .then((res) => {
           return res.data["user"];
@@ -38,7 +38,7 @@ function Profile() {
     useQuery(["mini-posts", userName], async () => {
       const res = await axios
         .get(
-          `https://insta-clone-backend-dipper.onrender.com/api/v1/post/u/${userName}`
+          `/post/u/${userName}`
         )
         .then((res) => {
           return res.data["posts"];
@@ -57,7 +57,7 @@ function Profile() {
       if (Followed) {
         await axios
           .put(
-            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${
+            `/user/${
               userInfo && userInfo.user_name
             }/unfollow`,
             {},
@@ -72,7 +72,7 @@ function Profile() {
       } else {
         await axios
           .put(
-            `https://insta-clone-backend-dipper.onrender.com/api/v1/user/${
+            `/user/${
               userInfo && userInfo.user_name
             }/follow`,
             {},
